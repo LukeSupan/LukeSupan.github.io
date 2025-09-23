@@ -1,2 +1,3 @@
 # LukeSupan.github.io
-This will be made using React once I complete the large project for POOSD and a small personal test with it.
+This is a very simple HTML/CSS/JavaScript portfolio site.
+This was made for a web development class with these requirements.
