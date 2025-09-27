@@ -11,6 +11,7 @@ body{
     color: #ffffff;
 }
 
+
 nav {
     display: flex;
     gap: 3em;
@@ -45,7 +46,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color:#d1d1d1;
+    color:#ffffff;
     padding: 0em 2em;
     margin-top :-3vh;
 }
