@@ -2,29 +2,38 @@ body{
     background-color: #2f2f2f;
     font-family: monospace;
     margin: 0 auto;
+    padding-top: 10vh;
     text-align: center;
     display: block;
     justify-content: center;
     align-items: center;
+
+    animation: backgroundScroll 120s linear infinite;
 }
 
 #homeTitle {
     font-size: 5em;
     color: #ffffff;
     text-align: center;
-    margin-top: 2.5em;
+    margin-bottom: 0.25em;
 }
 
 nav {
     display: flex;
     gap: 3em;
     justify-content: center;
+    margin-bottom: 1em;
 }
 
 a {
     display: inline-block;
-    font-size: 2em;
+    font-size: 2.5em;
     text-decoration: none;
     color: #ffffff;
-    gap: 6em;
+    transition: color .2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #d1d1d1;
 }
