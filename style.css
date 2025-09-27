@@ -1,24 +1,30 @@
-#homeTitle {
-    font-size: 3.5em;
-    color: #000000;
+body{
+    background-color: #2f2f2f;
+    font-family: monospace;
+    margin: 0 auto;
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+#homeTitle {
+    font-size: 5em;
+    color: #ffffff;
+    text-align: center;
     margin-top: 2.5em;
 }
 
-body{
-    background-color: #ffffff;
-}
-
-#navLinks {
+nav {
     display: flex;
+    gap: 3em;
     justify-content: center;
-    gap: 2em;
 }
 
-#navLinks a {
+a {
+    display: inline-block;
     font-size: 2em;
     text-decoration: none;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #000000;
+    color: #ffffff;
+    gap: 6em;
 }
