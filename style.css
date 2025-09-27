@@ -1,0 +1,24 @@
+#homeTitle {
+    font-size: 3.5em;
+    color: #000000;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 2.5em;
+}
+
+body{
+    background-color: #ffffff;
+}
+
+#navLinks {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+#navLinks a {
+    font-size: 2em;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #000000;
+}
