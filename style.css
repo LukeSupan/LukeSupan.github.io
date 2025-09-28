@@ -254,10 +254,45 @@ main {
     color: #d1d1d1;
 }
 
-/*
+
 @media (max-width: 600px) {
     body {
         padding-top: 3vh;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        gap: 5%;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0.5em 0.5em;
+        font-size: 1em;
+        justify-content: center;
+        background-color: #383838;
+    }
+
+    #headshot {
+        margin-top: 30%;
+        width: 50%;
+        height: auto;
+        border: #ffffff 0.2em solid;
+        margin-bottom: 1em;
+    }
+
+    main {
+        width: 75%;
+        margin: 6em auto 2em auto;
+    }
+
+    #intro {
+        width: 75%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+        flex-wrap: wrap;
     }
 
     nav {
@@ -269,5 +304,40 @@ main {
         text-align: center;
         line-height: 1.2;
     }
+
+    .projectsGrid {
+        margin-top: 8em;
+        grid-template-columns: 1fr;
+        width: 50%;
+        height: auto;
+        padding: 1em;
+    }
+
+    .projectsInGridImage {
+        height: auto;
+        width: 100%;
+        object-fit: cover;
+        border-bottom: 0.2em solid #ffffff;
+    }
+
+    .caption {
+        font-size: 150%;
+        font-weight: bold;
+        padding: 0.5em;
+    }
+
+    .projectExplanation {
+        width: 90%;
+        margin: 5em auto;
+        padding: 1em;
+        font-size: 1em;
+    }
+
+        .projectExplanation h3{
+            font-size: 2.5em;
+            line-height: 1.5em;
+    }
+
+
+
 }
-*/
