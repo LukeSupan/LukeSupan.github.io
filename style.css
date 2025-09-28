@@ -153,27 +153,32 @@ main {
 
 /* || Projects page styles */
 .projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2em;
-  width: 45%;
-  margin: 3em auto;
-  padding: 2em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    width: 45%;
+    margin: 3em auto;
+    padding: 2em;
 }
 
 .projectCard {
-  transition: transform 0.2s;
+    display: block;
+    background: #383838;
+    border-radius: 1em;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.25s ease;
 }
 
 .projectCard:hover {
-  transform: translateY(-0.3em);
+  transform: translateY(-0.4em);
 }
 
 .projectsInGridImage {
-  width: 85%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10%;
+    width: 100%;
+    height: 20em;
+    object-fit: cover;
+    border-bottom: 2px solid #ffffff;
 }
 
 
@@ -182,3 +187,5 @@ main {
   font-weight: bold;
   padding: 1em;
 }
+
+
