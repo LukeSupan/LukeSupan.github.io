@@ -99,7 +99,8 @@ header {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    width: 85em;
+    width: 57%;
+    max-width: 85em;
     gap: 3em;
     margin: 0em auto;
 }
@@ -112,13 +113,15 @@ header {
 }
 
 #headshot {
-    width: 15em;
+    flex: 0 1 12em;
+    max-width: 17%;
     height: auto;
     border: #ffffff 0.2em solid;
 }
 
 main {
-    width: 85em;
+    width: 57%;
+    max-width: 85em;
     margin: 2em auto;
     text-align: left;
     display: flex;
@@ -254,7 +257,7 @@ main {
     color: #d1d1d1;
 }
 
-/*
+
 @media (max-width: 600px) {
     body {
         padding-top: 3vh;
@@ -270,4 +273,3 @@ main {
         line-height: 1.2;
     }
 }
-*/
