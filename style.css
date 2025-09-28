@@ -11,7 +11,6 @@ body{
     color: #ffffff;
 }
 
-
 nav {
     display: flex;
     gap: 3em;
@@ -42,13 +41,16 @@ p {
 }
 
 header {
+    z-index: 1000;
+    position: sticky;
+    top: 0;
     font-size: 2em;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color:#ffffff;
     padding: 0em 2em;
-    margin-top :-3vh;
+    margin-top: -6vh;
 }
 
 /* Splash page styles */
@@ -67,22 +69,18 @@ header {
     margin-left: 1em;
 }
 
-header h1 {
-    margin: 0;
-}
-
 /* || Resume page styles */
 #intro {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 75em;
-    gap: 2em;
-    margin: 0 auto;
+    align-items: flex-end;
+    width: 85em;
+    gap: 3em;
+    margin: 0em auto;
 }
 
 #intro h2 {
-    font-size: 2.5em;
+    font-size: 2.3em;
     margin: 0 auto;
     padding: 0.5em;
     text-align: left;
@@ -91,4 +89,54 @@ header h1 {
 #headshot {
     width: 15em;
     height: auto;
+}
+
+main {
+    width: 85em;
+    margin: 2em auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+
+.resumeSection h2 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #ffffff;
+    border-bottom: 0.1em solid #ffffff;
+    padding-bottom: 0.2em;
+}
+
+.resumeSection h3 {
+    font-size: 1.8em;
+    margin: 0.5em 0;
+    color: #f0f0f0;
+}
+
+.resumeSection p {
+    font-size: 1.4em;
+    padding: 0.2em 0;
+}
+
+.project {
+    margin-bottom: 2em;
+}
+
+.project ul {
+    list-style-type: square;
+    padding-left: 2em;
+    font-size: 1.3em;
+    line-height: 1.6em;
+}
+
+.skillsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1.4em;
+}
+
+.skillsList li {
+    margin: 0.5em 0;
 }
