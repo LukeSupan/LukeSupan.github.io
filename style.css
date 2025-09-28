@@ -341,7 +341,7 @@ main {
     }
 }
 
-@media (max-width: 1660px) {
+@media (min-width: 601px) and (max-width: 1660px) {
     header {
         position: fixed;
         top: 0;
