@@ -190,15 +190,13 @@ main {
 
 
 /* Individual project styles */
-/* PONG Project Page Styles */
-
 .projectExplanation {
     width: 50em;
     margin: 2em auto;
     padding: 1em 2em;
     text-align: left;
     line-height: 1.5em;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 .projectExplanation h3 {
@@ -209,7 +207,7 @@ main {
 
 .projectExplanation img {
     display: block;
-    max-width: 60%;
+    max-width: 95%;
     margin: 2em auto;
     border-radius: 0.5em;
     border: 0.1em solid #ffffff;
