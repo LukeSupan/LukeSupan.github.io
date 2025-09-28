@@ -100,6 +100,16 @@ main {
     gap: 3em;
 }
 
+.project h3 strong {
+  font-weight: bold;
+}
+
+/* Needed to make text normal in my project titles*/
+.project h3 span {
+  font-weight: normal;
+}
+
+
 .resumeSection h2 {
     font-size: 2.5em;
     margin-bottom: 0.5em;
@@ -139,4 +149,36 @@ main {
 
 .skillsList li {
     margin: 0.5em 0;
+}
+
+/* || Projects page styles */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+  width: 45%;
+  margin: 3em auto;
+  padding: 2em;
+}
+
+.projectCard {
+  transition: transform 0.2s;
+}
+
+.projectCard:hover {
+  transform: translateY(-0.3em);
+}
+
+.projectsInGridImage {
+  width: 85%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10%;
+}
+
+
+.caption {
+  font-size: 1.8em;
+  font-weight: bold;
+  padding: 1em;
 }
