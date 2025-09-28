@@ -265,13 +265,15 @@ main {
         top: 0;
         left: 0;
         width: 100%;
-        gap: 5%;
+        height: 6%;
+        gap: 6%;
         margin-top: 0;
         margin-bottom: 0;
-        padding: 0.5em 0.5em;
+        padding: 1em 1em;
         font-size: 1em;
         justify-content: center;
         background-color: #2f2f2f;
+        border-bottom: #ffffff 0.1em solid;
     }
 
     #headshot {
