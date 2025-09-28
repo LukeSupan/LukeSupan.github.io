@@ -89,6 +89,7 @@ header {
 #headshot {
     width: 15em;
     height: auto;
+    border: #ffffff 0.2em solid;
 }
 
 main {
