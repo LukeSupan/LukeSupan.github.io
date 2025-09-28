@@ -192,16 +192,8 @@ main {
 /* Individual project styles */
 /* PONG Project Page Styles */
 
-.projectImage{
-    display: block;
-    max-width: 60%;
-    margin: 2em auto;
-    border-radius: 0.5em;
-    border: 0.1em solid #ffffff33;
-}
-
 .projectExplanation {
-    width: 65em;
+    width: 50em;
     margin: 2em auto;
     padding: 1em 2em;
     text-align: left;
@@ -220,7 +212,7 @@ main {
     max-width: 60%;
     margin: 2em auto;
     border-radius: 0.5em;
-    border: 0.1em solid #ffffff33;
+    border: 0.1em solid #ffffff;
 }
 
 .projectExplanation a {
