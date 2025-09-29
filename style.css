@@ -112,7 +112,7 @@ header {
 }
 
 #headshot {
-    width: 15em;
+    width: 17em;
     height: auto;
     border: #ffffff 0.2em solid;
 }
@@ -229,9 +229,7 @@ main {
     font-size: 1.2em;
 }
 
-
-
-.projectExplanation h3 {
+.projectExplanation h2 {
     font-size: 2.5em;
     margin-bottom: 0.5em;
     margin-left: 0.5em;
