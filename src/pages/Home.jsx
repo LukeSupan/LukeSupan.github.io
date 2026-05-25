@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import beachLuke from "../assets/beachluke.jpg";
+import supan from "../assets/supan.pdf";
 
 // --- Utility Hook ---
 function useInView(options = {}) {
@@ -178,6 +179,8 @@ function scrollTo(id) {
 export default function Home() {
   const [scrollPct, setScrollPct] = useState(0);
   const [navVisible, setNavVisible] = useState(true);
+  const [projectsOpen, setProjectsOpen] = useState(true);
+  const [aboutOpen, setAboutOpen] = useState(true);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -235,7 +238,8 @@ export default function Home() {
             /about
           </button>
           <a
-            href="/resume.pdf"
+            href={supan}
+            target="_blank"
             className="text-sm text-white/65 hover:text-white transition-colors underline underline-offset-4"
           >
             resume.pdf
@@ -246,18 +250,18 @@ export default function Home() {
       {/* --- Title --- */}
       <section
         id="title"
-        className="pt-[80px] sm:pt-[52px] px-6 sm:px-10 pb-16 sm:py-24 min-h-[85vh] flex flex-col justify-center"
+        className="pt-[80px] sm:pt-[52px] px-6 sm:px-10 py-16 sm:py-24 min-h-[85vh] flex flex-col justify-center"
       >
-        {/* On mobile: stacked. On sm+: row with image center-right, centered */}
+        {/* On mobile: stacked. On sm+: row with image to the right, centered */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-12 sm:gap-16">
           {/* Name + tagline */}
           <div className="flex-1 min-w-0">
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-8">
-              &gt; LUKE SUPAN
+              LUKE SUPAN
             </h1>
 
-            {/* Tagline — indented to align under the name text (past the "> ") */}
-            <div className="flex flex-col gap-1 pl-[1.15em] sm:pl-[6.5em]">
+            {/* Tagline */}
+            <div className="flex flex-col gap-1 pl-[1.15em] sm:pl-[0.5em]">
               <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
                 CS grad from UCF, Magna Cum Laude, May 2026.
               </p>
@@ -270,7 +274,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Photo — center-right instead of far right */}
+          {/* Photo */}
           <div className="flex-shrink-0 flex sm:justify-center justify-center relative">
             <div className="absolute inset-0 scale-110" />
             <img
@@ -284,11 +288,25 @@ export default function Home() {
 
       {/* --- Projects --- */}
       <section id="projects" className="px-6 sm:px-10 py-20">
-        <p className="text-3xl text-white mb-8 tracking-widest">
-          &gt; PROJECTS
-        </p>
+        <button
+          onClick={() => setProjectsOpen((v) => !v)}
+          className="flex items-center gap-3 text-3xl text-white mb-8 tracking-widest bg-transparent border-none cursor-pointer hover:text-white/70 transition-colors duration-150 w-full text-left font-mono font-semibold"
+        >
+          <span
+            className={`inline-block transition-transform duration-300 ${projectsOpen ? "rotate-90" : "rotate-0"}`}
+          >
+            &gt;
+          </span>
+          PROJECTS
+        </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 ease-in-out overflow-hidden ${
+            projectsOpen
+              ? "max-h-[9999px] opacity-100"
+              : "max-h-0 opacity-0 mb-0"
+          }`}
+        >
           {PROJECTS.map((project, i) => (
             <ProjectCard key={project.num} project={project} delay={i * 80} />
           ))}
@@ -300,9 +318,23 @@ export default function Home() {
         id="about"
         className="px-6 sm:px-10 py-20 border-b border-white/10"
       >
-        <p className="text-3xl text-white mb-10 tracking-widest">&gt; ABOUT</p>
+        <button
+          onClick={() => setAboutOpen((v) => !v)}
+          className="flex items-center gap-3 text-3xl text-white mb-10 tracking-widest bg-transparent border-none cursor-pointer hover:text-white/70 transition-colors duration-150 w-full text-left font-mono font-semibold"
+        >
+          <span
+            className={`inline-block transition-transform duration-300 ${aboutOpen ? "rotate-90" : "rotate-0"}`}
+          >
+            &gt;
+          </span>
+          ABOUT
+        </button>
 
-        <div className="flex flex-col gap-12 max-w-2xl">
+        <div
+          className={`flex flex-col gap-12 max-w-2xl overflow-hidden transition-all duration-500 ease-in-out ${
+            aboutOpen ? "max-h-[9999px] opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
           {/* Bio */}
           <Reveal>
             <p className="text-lg sm:text-2xl leading-relaxed text-white/80">
