@@ -64,15 +64,15 @@ function ProjectCard({ project, delay }) {
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
             />
           ) : (
-            <span className="text-xs text-white/20 uppercase tracking-widest px-4 text-center">
+            <span className="text-xs text-white/30 uppercase tracking-widest px-4 text-center">
               {project.name}
             </span>
           )}
 
-          <span className="absolute top-2 left-2 text-[11px] text-white/40 font-mono">
+          <span className="absolute top-2 left-2 text-[11px] text-white/55 font-mono">
             {project.num}
           </span>
-          <span className="absolute top-2 right-2 text-[11px] text-white/40 font-mono">
+          <span className="absolute top-2 right-2 text-[11px] text-white/55 font-mono">
             {project.year}
           </span>
         </div>
@@ -82,14 +82,14 @@ function ProjectCard({ project, delay }) {
           <span className="text-base text-white/90 uppercase tracking-wide group-hover:text-white transition-colors duration-150">
             {project.name}
           </span>
-          <p className="text-sm text-white/55 leading-relaxed">
+          <p className="text-sm text-white/70 leading-relaxed">
             {project.description}
           </p>
           <div className="flex flex-wrap gap-1 mt-1">
             {project.stack.map((tech) => (
               <span
                 key={tech}
-                className="text-xs text-white/50 border border-white/15 px-1.5 py-0.5"
+                className="text-xs text-white/65 border border-white/20 px-1.5 py-0.5"
               >
                 {tech}
               </span>
@@ -216,7 +216,7 @@ export default function Home() {
         }`}
       >
         <span
-          className="text-base text-white/50 hover:text-white transition-colors cursor-pointer"
+          className="text-base text-white/65 hover:text-white transition-colors cursor-pointer"
           onClick={() => scrollTo("title")}
         >
           luke_supan
@@ -224,19 +224,19 @@ export default function Home() {
         <div className="flex gap-6 sm:gap-14">
           <button
             onClick={() => scrollTo("projects")}
-            className="text-sm text-white/50 hover:text-white transition-colors cursor-pointer"
+            className="text-sm text-white/65 hover:text-white transition-colors cursor-pointer"
           >
             /projects
           </button>
           <button
             onClick={() => scrollTo("about")}
-            className="text-sm text-white/50 hover:text-white transition-colors cursor-pointer"
+            className="text-sm text-white/65 hover:text-white transition-colors cursor-pointer"
           >
             /about
           </button>
           <a
             href="/resume.pdf"
-            className="text-sm text-white/50 hover:text-white transition-colors underline underline-offset-4"
+            className="text-sm text-white/65 hover:text-white transition-colors underline underline-offset-4"
           >
             resume.pdf
           </a>
@@ -246,9 +246,9 @@ export default function Home() {
       {/* --- Title --- */}
       <section
         id="title"
-        className="pt-[52px] px-6 sm:px-10 py-16 sm:py-24 min-h-[85vh] flex flex-col justify-center"
+        className="pt-[80px] sm:pt-[52px] px-6 sm:px-10 pb-16 sm:py-24 min-h-[85vh] flex flex-col justify-center"
       >
-        {/* On mobile: stacked. On sm+: row with image to the right, centered */}
+        {/* On mobile: stacked. On sm+: row with image center-right, centered */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-12 sm:gap-16">
           {/* Name + tagline */}
           <div className="flex-1 min-w-0">
@@ -270,8 +270,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Photo — larger, center-right */}
-          <div className="flex-shrink-0 flex sm:justify-end justify-center relative">
+          {/* Photo — center-right instead of far right */}
+          <div className="flex-shrink-0 flex sm:justify-center justify-center relative">
             <div className="absolute inset-0 scale-110" />
             <img
               src={beachLuke}
@@ -316,20 +316,23 @@ export default function Home() {
               <br></br>
               I'm now working on learning Roblox Dev alongside creating a job
               application tracker web app.
+              <br></br>
+              <br></br>
+              Open to any SWE positions currently.
             </p>
           </Reveal>
 
           {/* Education */}
           <Reveal delay={60}>
             <div>
-              <p className="text-lg text-white/90 tracking-widest uppercase mb-3">
+              <p className="text-xl text-white/90 tracking-widest uppercase mb-3">
                 Education
               </p>
-              <span className="text-lg text-white/90">
+              <span className="text-2xl text-white/90">
                 University of Central Florida - B.S. Computer Science
               </span>
               <br />
-              <span className="text-sm text-white/50 mt-1 inline-block">
+              <span className="text-base text-white/65 mt-1 inline-block">
                 GPA 3.9 &middot; Magna Cum Laude &middot; May 2026
               </span>
             </div>
@@ -338,20 +341,20 @@ export default function Home() {
           {/* Skills */}
           <Reveal delay={120}>
             <div>
-              <p className="text-sm text-white/50 tracking-widest uppercase mb-4">
+              <p className="text-base text-white/65 tracking-widest uppercase mb-4">
                 Skills
               </p>
               <div className="flex flex-col gap-3">
                 {SKILLS.map((group) => (
                   <div key={group.label} className="flex gap-4 items-start">
-                    <span className="text-xs text-white/35 uppercase tracking-widest w-20 pt-0.5 flex-shrink-0">
+                    <span className="text-sm text-white/50 uppercase tracking-widest w-24 pt-0.5 flex-shrink-0">
                       {group.label}
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {group.items.map((item) => (
                         <span
                           key={item}
-                          className="text-xs text-white/70 border border-white/15 px-2 py-0.5"
+                          className="text-sm text-white/80 border border-white/20 px-2 py-0.5"
                         >
                           {item}
                         </span>
@@ -366,12 +369,13 @@ export default function Home() {
           {/* Currently */}
           <Reveal delay={180}>
             <div>
-              <p className="text-sm text-white/50 tracking-widest uppercase mb-3">
+              <p className="text-base text-white/65 tracking-widest uppercase mb-3">
                 Currently
               </p>
-              <p className="text-lg text-white/75 leading-relaxed">
-                looking for full-time SWE roles. open on location. interested in
-                systems, compilers, and performance-critical software.
+              <p className="text-xl text-white/80 leading-relaxed">
+                Looking for full-time SWE roles in any location.
+                <br></br>
+                Working on Roblox Dev and an application tracker web app.
               </p>
             </div>
           </Reveal>
@@ -385,25 +389,25 @@ export default function Home() {
             href="https://github.com/LukeSupan"
             target="_blank"
             rel="noreferrer"
-            className="text-sm text-white/60 hover:text-white transition-colors"
+            className="text-sm text-white/70 hover:text-white transition-colors"
           >
             github
           </a>
           <a
             href="#"
-            className="text-sm text-white/60 hover:text-white transition-colors"
+            className="text-sm text-white/70 hover:text-white transition-colors"
           >
             linkedin
           </a>
           <a
             href="#"
-            className="text-sm text-white/60 hover:text-white transition-colors"
+            className="text-sm text-white/70 hover:text-white transition-colors"
           >
             handshake
           </a>
           <a
             href="mailto:lukesupan@outlook.com"
-            className="text-sm text-white/60 hover:text-white transition-colors"
+            className="text-sm text-white/70 hover:text-white transition-colors"
           >
             lukesupan@outlook.com
           </a>
@@ -411,12 +415,12 @@ export default function Home() {
 
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="text-base text-white/60 hover:text-white transition-colors cursor-pointer bg-transparent border-none underline"
+          className="text-base text-white/70 hover:text-white transition-colors cursor-pointer bg-transparent border-none underline"
         >
           back to top
         </button>
 
-        <span className="text-sm text-white/60 tracking-widest">
+        <span className="text-sm text-white/70 tracking-widest">
           lukesupan.github.io
         </span>
       </footer>
