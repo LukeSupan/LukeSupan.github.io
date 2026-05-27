@@ -61,7 +61,7 @@ export default function Home() {
           className="flex items-center gap-3 text-3xl text-white mb-8 tracking-widest bg-transparent border-none cursor-pointer hover:text-white/70 transition-colors duration-150 w-full text-left font-mono font-semibold"
         >
           <span
-            className={`inline-block transition-transform duration-300 text-[#7dd3a8] ${projectsOpen ? "rotate-90" : "rotate-0"}`}
+            className={`inline-block transition-transform duration-300 text-white ${projectsOpen ? "rotate-90" : "rotate-0"}`}
           >
             &gt;
           </span>
@@ -87,7 +87,7 @@ export default function Home() {
           className="flex items-center gap-3 text-3xl text-white mb-10 tracking-widest bg-transparent border-none cursor-pointer hover:text-white/70 transition-colors duration-150 w-full text-left font-mono font-semibold"
         >
           <span
-            className={`inline-block transition-transform duration-300 text-[#7dd3a8] ${aboutOpen ? "rotate-90" : "rotate-0"}`}
+            className={`inline-block transition-transform duration-300 text-white ${aboutOpen ? "rotate-90" : "rotate-0"}`}
           >
             &gt;
           </span>
@@ -151,12 +151,12 @@ export default function Home() {
                   {SKILLS.map((group) => (
                     <div
                       key={group.label}
-                      className="flex gap-4 items-baseline border-l-2 border-[#7dd3a8]/25 pl-3"
+                      className="flex gap-4 items-baseline border-l-2 border-white/25 pl-3"
                     >
                       <span className="text-xs text-white/40 uppercase tracking-widest w-20 flex-shrink-0">
                         {group.label}
                       </span>
-                      <span className="text-sm text-[#7dd3a8]/70 leading-relaxed">
+                      <span className="text-sm text-white/70 leading-relaxed">
                         {group.items.join(" / ")}
                       </span>
                     </div>

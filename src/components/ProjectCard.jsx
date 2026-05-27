@@ -20,7 +20,7 @@ export function ProjectCard({ project, delay }) {
               className="w-full h-full object-cover opacity-70 group-hover:opacity-95 group-hover:scale-[1.03] transition-all duration-500"
             />
           ) : (
-            <span className="text-xs text-white/20 uppercase tracking-widest px-4 text-center">
+            <span className="text-s text-white/20 uppercase tracking-widest px-4 text-center">
               {project.name}
             </span>
           )}
@@ -34,7 +34,7 @@ export function ProjectCard({ project, delay }) {
           <p className="text-sm text-white/55 leading-relaxed">
             {project.description}
           </p>
-          <p className="text-xs text-[#7dd3a8]/60 mt-1 tracking-wide">
+          <p className="text-s text-white/60 mt-1 tracking-wide">
             {project.stack.join(" / ")}
           </p>
         </div>
