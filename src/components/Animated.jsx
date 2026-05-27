@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 function useInView(options = {}) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
+  const optionsRef = useRef(options);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -11,11 +12,11 @@ function useInView(options = {}) {
         setInView(true);
         observer.unobserve(entry.target);
       }
-    }, options);
+    }, optionsRef.current);
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [options]);
+  }, []);
 
   return [ref, inView];
 }

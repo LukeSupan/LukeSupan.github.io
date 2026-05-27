@@ -13,7 +13,7 @@ export function ProjectCard({ project, delay }) {
         {/* image area */}
         <div
           className="relative w-full bg-white/5 overflow-hidden flex items-center justify-center"
-          style={{ aspectRatio: "16/7" }}
+          style={{ aspectRatio: "16/9" }}
         >
           {!imgFailed ? (
             <img
@@ -48,7 +48,7 @@ export function ProjectCard({ project, delay }) {
             {project.stack.map((tech) => (
               <span
                 key={tech}
-                className="text-xs text-white/65 border border-white/20 px-1.5 py-0.5"
+                className="text-xs text-[#7dd3a8]/80 border border-[#7dd3a8]/30 px-1.5 py-0.5"
               >
                 {tech}
               </span>

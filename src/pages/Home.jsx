@@ -25,7 +25,7 @@ export default function Home() {
       >
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-start gap-12 sm:gap-16">
           {/* name and mini bio */}
-          <div className="max-w-3xl min-w-0">
+          <div className="max-w-xl min-w-0">
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-8">
               LUKE SUPAN
             </h1>
@@ -44,7 +44,7 @@ export default function Home() {
           </div>
 
           {/* photo */}
-          <div className="flex-1 flex justify-center lg:justify-start min-w-0 max-w-8xl">
+          <div className="flex-1 flex-shrink-0 flex justify-center lg:justify-start min-w-0 min-w-[320px] max-w-8xl">
             <img
               src={team}
               alt="Luke Supan"
@@ -61,11 +61,14 @@ export default function Home() {
           className="flex items-center gap-3 text-3xl text-white mb-8 tracking-widest bg-transparent border-none cursor-pointer hover:text-white/70 transition-colors duration-150 w-full text-left font-mono font-semibold"
         >
           <span
-            className={`inline-block transition-transform duration-300 ${projectsOpen ? "rotate-90" : "rotate-0"}`}
+            className={`inline-block transition-transform duration-300 text-[#7dd3a8] ${projectsOpen ? "rotate-90" : "rotate-0"}`}
           >
             &gt;
           </span>
           PROJECTS
+          <span className="ml-auto text-xs text-[#7dd3a8]/60 tracking-widest font-normal">
+            {projectsOpen ? "[ collapse ]" : "[ expand ]"}
+          </span>
         </button>
 
         <Collapsible open={projectsOpen}>
@@ -87,18 +90,21 @@ export default function Home() {
           className="flex items-center gap-3 text-3xl text-white mb-10 tracking-widest bg-transparent border-none cursor-pointer hover:text-white/70 transition-colors duration-150 w-full text-left font-mono font-semibold"
         >
           <span
-            className={`inline-block transition-transform duration-300 ${aboutOpen ? "rotate-90" : "rotate-0"}`}
+            className={`inline-block transition-transform duration-300 text-[#7dd3a8] ${aboutOpen ? "rotate-90" : "rotate-0"}`}
           >
             &gt;
           </span>
           ABOUT
+          <span className="ml-auto text-xs text-[#7dd3a8]/60 tracking-widest font-normal">
+            {aboutOpen ? "[ collapse ]" : "[ expand ]"}
+          </span>
         </button>
 
         <Collapsible open={aboutOpen}>
           <div className="flex flex-col gap-12 max-w-2xl pb-2">
             {/* bio */}
             <Reveal>
-              <p className="text-lg sm:text-2xl leading-relaxed text-white/80">
+              <p className="text-lg sm:text-xl leading-relaxed text-white/80">
                 I graduated from UCF Magna Cum Laude as a Computer Science major
                 with a 3.9 GPA in May, 2026.
                 <br />
@@ -157,7 +163,7 @@ export default function Home() {
                         {group.items.map((item) => (
                           <span
                             key={item}
-                            className="text-sm text-white/80 border border-white/20 px-2 py-0.5"
+                            className="text-sm text-[#7dd3a8]/80 border border-[#7dd3a8]/30 px-2 py-0.5"
                           >
                             {item}
                           </span>
