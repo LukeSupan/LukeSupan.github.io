@@ -44,7 +44,7 @@ export default function Home() {
           </div>
 
           {/* photo */}
-          <div className="flex-1 flex-shrink-0 flex justify-center lg:justify-start min-w-0 min-w-[320px] max-w-8xl">
+          <div className="flex-1 flex-shrink-0 flex justify-center lg:justify-start min-w-0 max-w-8xl">
             <img
               src={team}
               alt="Luke Supan"
@@ -66,9 +66,6 @@ export default function Home() {
             &gt;
           </span>
           PROJECTS
-          <span className="ml-auto text-xs text-[#7dd3a8]/60 tracking-widest font-normal">
-            {projectsOpen ? "[ collapse ]" : "[ expand ]"}
-          </span>
         </button>
 
         <Collapsible open={projectsOpen}>
@@ -95,9 +92,6 @@ export default function Home() {
             &gt;
           </span>
           ABOUT
-          <span className="ml-auto text-xs text-[#7dd3a8]/60 tracking-widest font-normal">
-            {aboutOpen ? "[ collapse ]" : "[ expand ]"}
-          </span>
         </button>
 
         <Collapsible open={aboutOpen}>
