@@ -149,20 +149,16 @@ export default function Home() {
                 </p>
                 <div className="flex flex-col gap-3">
                   {SKILLS.map((group) => (
-                    <div key={group.label} className="flex gap-4 items-start">
-                      <span className="text-sm text-white/50 uppercase tracking-widest w-24 pt-0.5 flex-shrink-0">
+                    <div
+                      key={group.label}
+                      className="flex gap-4 items-baseline border-l-2 border-[#7dd3a8]/25 pl-3"
+                    >
+                      <span className="text-xs text-white/40 uppercase tracking-widest w-20 flex-shrink-0">
                         {group.label}
                       </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {group.items.map((item) => (
-                          <span
-                            key={item}
-                            className="text-sm text-[#7dd3a8]/80 border border-[#7dd3a8]/30 px-2 py-0.5"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
+                      <span className="text-sm text-[#7dd3a8]/70 leading-relaxed">
+                        {group.items.join(" / ")}
+                      </span>
                     </div>
                   ))}
                 </div>
