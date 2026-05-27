@@ -1,5 +1,5 @@
 import { useState } from "react";
-import beachLuke from "../assets/beachluke.jpg";
+import team from "../assets/team.jpg";
 import supan from "../assets/supan.pdf";
 
 import { Nav } from "../components/Nav";
@@ -18,7 +18,7 @@ export default function Home() {
     <div className="bg-[#1c1c1c] text-white min-h-screen font-mono font-semibold">
       <Nav />
 
-      {/* --- Title --- */}
+      {/* --- title --- */}
       <section
         id="title"
         className="pt-20 sm:pt-16 px-6 sm:px-10 py-16 sm:py-24 min-h-[85vh] flex flex-col justify-center"
@@ -44,11 +44,11 @@ export default function Home() {
           </div>
 
           {/* photo */}
-          <div className="flex-shrink-0 flex justify-center sm:justify-start">
+          <div className="flex-1 flex justify-center lg:justify-start min-w-0 max-w-8xl">
             <img
-              src={beachLuke}
+              src={team}
               alt="Luke Supan"
-              className="w-72 h-96 sm:w-80 sm:h-[26rem] lg:w-96 lg:h-[30rem] object-cover object-top"
+              className="w-full aspect-[3/2] object-cover object-bottom rounded-lg"
             />
           </div>
         </div>
