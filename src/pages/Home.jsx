@@ -47,7 +47,7 @@ export default function Home() {
           <div className="flex-1 flex-shrink-0 flex justify-center lg:justify-start min-w-0 max-w-8xl">
             <img
               src={team}
-              alt="Luke Supan"
+              alt="Luke Supan and Senior Design Team"
               className="w-full aspect-[3/2] object-cover object-bottom rounded-lg"
             />
           </div>
@@ -144,7 +144,7 @@ export default function Home() {
             {/* skills */}
             <Reveal delay={120}>
               <div>
-                <p className="text-base text-white/65 tracking-widest uppercase mb-4">
+                <p className="text-xl text-white/90 tracking-widest uppercase mb-3">
                   Skills
                 </p>
                 <div className="flex flex-col gap-3">
@@ -162,20 +162,6 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-              </div>
-            </Reveal>
-
-            {/* currently */}
-            <Reveal delay={180}>
-              <div>
-                <p className="text-base text-white/65 tracking-widest uppercase mb-3">
-                  Currently
-                </p>
-                <p className="text-xl text-white/80 leading-relaxed">
-                  Looking for full-time SWE roles in any location.
-                  <br />
-                  Working on Roblox Dev and an application tracker web app.
-                </p>
               </div>
             </Reveal>
           </div>

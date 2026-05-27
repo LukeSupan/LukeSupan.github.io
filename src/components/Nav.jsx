@@ -57,13 +57,13 @@ export function Nav() {
             onClick={() => scrollTo("projects")}
             className="text-sm text-white/65 hover:text-white transition-colors cursor-pointer"
           >
-            /projects
+            projects
           </button>
           <button
             onClick={() => scrollTo("about")}
             className="text-sm text-white/65 hover:text-white transition-colors cursor-pointer"
           >
-            /about
+            about
           </button>
           <a
             href={supan}
