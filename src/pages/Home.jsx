@@ -119,15 +119,15 @@ export default function Home() {
             {/* education */}
             <Reveal delay={60}>
               <div>
-                <p className="text-xl text-white/90 tracking-widest uppercase mb-3">
+                <p className="text-2xl text-white/90 tracking-widest uppercase mb-3">
                   Education
                 </p>
-                <span className="text-2xl text-white/90">
+                <span className="text-xl text-white/90">
                   University of Central Florida — B.S. Computer Science
                 </span>
                 <br />
                 <span className="text-base text-white/65 mt-1 inline-block">
-                  GPA 3.9 &middot; Magna Cum Laude &middot; May 2026
+                  GPA 3.9 - Magna Cum Laude - May 2026
                 </span>
                 <br />
                 <a
@@ -144,21 +144,18 @@ export default function Home() {
             {/* skills */}
             <Reveal delay={120}>
               <div>
-                <p className="text-xl text-white/90 tracking-widest uppercase mb-3">
+                <p className="text-2xl text-white/90 tracking-widest uppercase mb-3">
                   Skills
                 </p>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-6">
                   {SKILLS.map((group) => (
-                    <div
-                      key={group.label}
-                      className="flex gap-4 items-baseline border-l-2 border-white/25 pl-3"
-                    >
-                      <span className="text-xs text-white/40 uppercase tracking-widest w-20 flex-shrink-0">
+                    <div key={group.label}>
+                      <p className="text-base text-white/40 tracking-widest mb-2">
                         {group.label}
-                      </span>
-                      <span className="text-sm text-white/70 leading-relaxed">
+                      </p>
+                      <p className="text-base text-white/70 leading-relaxed">
                         {group.items.join(" / ")}
-                      </span>
+                      </p>
                     </div>
                   ))}
                 </div>

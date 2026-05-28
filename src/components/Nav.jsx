@@ -35,7 +35,7 @@ export function Nav() {
       {/* Scroll progress bar */}
       <div className="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-50">
         <div
-          className="h-full bg-white/80 transition-all duration-75"
+          className="h-full bg-white/80"
           style={{ width: `${scrollPct}%` }}
         />
       </div>
