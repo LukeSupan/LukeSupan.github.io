@@ -12,6 +12,15 @@ export function Nav() {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
+    // Prevent horizontal overscroll from exposing the gap behind the nav
+    const prev = document.body.style.overscrollBehaviorX;
+    document.body.style.overscrollBehaviorX = "none";
+    return () => {
+      document.body.style.overscrollBehaviorX = prev;
+    };
+  }, []);
+
+  useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY;
       const total = document.documentElement.scrollHeight - window.innerHeight;
@@ -33,7 +42,7 @@ export function Nav() {
   return (
     <>
       {/* Scroll progress bar */}
-      <div className="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-50">
+      <div className="fixed top-0 left-0 w-screen h-[2px] bg-transparent z-50">
         <div
           className="h-full bg-white/80"
           style={{ width: `${scrollPct}%` }}
@@ -41,7 +50,7 @@ export function Nav() {
       </div>
 
       <nav
-        className={`fixed top-0 left-0 right-0 z-40 bg-[#111111] px-6 sm:px-10 py-4 flex justify-between items-center transition-transform duration-300 ${
+        className={`fixed top-0 left-0 w-screen z-40 bg-[#111111] px-6 sm:px-10 py-4 flex justify-between items-center transition-transform duration-300 ${
           navVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
