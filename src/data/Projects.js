@@ -51,7 +51,7 @@ export const PROJECTS = [
   },
   {
     num: "06",
-    name: "Cody Hunter Portfolio",
+    name: "Geography/Geology Portfolio",
     description:
       "A simple portfolio created for a Geography/Geology double major at the University of Florida. A simple GitHub Pages site to display his research in a clean formatted manner.",
     stack: ["HTML", "CSS", "JavaScript"],

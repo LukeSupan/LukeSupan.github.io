@@ -28,7 +28,7 @@ export function ProjectCard({ project, delay }) {
 
         {/* info */}
         <div className="flex flex-col gap-2">
-          <span className="text-base text-white/85 uppercase tracking-wide group-hover:text-white transition-colors duration-150">
+          <span className="text-base text-white/85 tracking-wide group-hover:text-white transition-colors duration-150">
             {project.name}
           </span>
           <p className="text-sm text-white/55 leading-relaxed">
