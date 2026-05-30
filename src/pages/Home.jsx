@@ -10,6 +10,12 @@ import { Reveal, Collapsible } from "../components/Animated";
 import { PROJECTS } from "../data/projects";
 import { SKILLS } from "../data/skills";
 
+// redundant from nav.jsx. fine for now
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+
 export default function Home() {
   const [projectsOpen, setProjectsOpen] = useState(true);
   const [aboutOpen, setAboutOpen] = useState(true);
@@ -35,10 +41,11 @@ export default function Home() {
                 CS grad from UCF, Magna Cum Laude, May 2026.
               </p>
               <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
-                Currently making full stack projects and learning Roblox Dev.
+                Currently making full stack projects and learning Roblox game
+                development in my free time.
               </p>
               <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
-                Open to any SWE roles/programs.
+                Looking for Software Engineer positions.
               </p>
             </div>
           </div>
@@ -103,16 +110,22 @@ export default function Home() {
                 with a 3.9 GPA in May, 2026.
                 <br />
                 <br />
-                I enjoy making projects for myself and my friends. I started
-                with simple CLI tools, eventually moving to full-stack web apps
-                and some Unity work.
+                I enjoy making useful/fun projects for myself and my friends. I
+                started with simple CLI tools, eventually moving to full-stack
+                web apps and Unity for some game dev.
                 <br />
                 <br />
-                I'm now working on learning Roblox Dev alongside creating a job
-                application tracker web app.
+                For more information on the story behind each project. Click on
+                the project cards in the{" "}
+                <span
+                  className="text-white/80 hover:text-white transition-colors cursor-pointer underline"
+                  onClick={() => scrollTo("projects")}
+                >
+                  project
+                </span>{" "}
+                section. (this doesnt work right now... i need to make the pages for the projects)
                 <br />
                 <br />
-                Open to any SWE positions currently.
               </p>
             </Reveal>
 
