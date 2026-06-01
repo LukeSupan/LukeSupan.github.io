@@ -41,8 +41,7 @@ export default function Home() {
                 CS grad from UCF, Magna Cum Laude, May 2026.
               </p>
               <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
-                Currently making full stack projects and learning Roblox game
-                development in my free time.
+                Currently making full stack projects and maintaining a role-base stat tracking site. 
               </p>
               <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
                 Looking for Software Engineer positions.
@@ -136,7 +135,7 @@ export default function Home() {
                   Education
                 </p>
                 <span className="text-xl text-white/90">
-                  University of Central Florida — B.S. Computer Science
+                  University of Central Florida - B.S. Computer Science
                 </span>
                 <br />
                 <span className="text-base text-white/65 mt-1 inline-block">
