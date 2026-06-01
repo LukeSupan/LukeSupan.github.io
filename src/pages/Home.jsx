@@ -37,14 +37,18 @@ export default function Home() {
             </h1>
 
             <div className="flex flex-col gap-1 pl-4 sm:pl-2 border-l border-white/20">
+            
               <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
                 CS grad from UCF, Magna Cum Laude, May 2026.
               </p>
               <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
-                Currently making full stack projects and maintaining a role-base stat tracking site. 
-              </p>
-              <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
                 Looking for Software Engineer positions.
+              </p>
+              <br></br>
+              <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
+                Working on full stack projects, specifically a job application tracker. 
+                <br></br>
+                Maintaining a role-base stat tracking site (Power Level) and a portfolio site for a prospective UF grad student. 
               </p>
             </div>
           </div>
