@@ -62,7 +62,7 @@ export function Nav() {
       </div>
 
       <nav
-        className={`fixed top-0 left-0 w-screen z-40 bg-[#111111] px-6 sm:px-10 py-4 flex justify-between items-center transition-transform duration-300 ${
+        className={`fixed top-0 left-0 w-screen z-40 border-b border-white/10 bg-[#111111]/88 px-6 py-4 backdrop-blur sm:px-10 flex justify-between items-center transition-transform duration-300 ${
           navVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >

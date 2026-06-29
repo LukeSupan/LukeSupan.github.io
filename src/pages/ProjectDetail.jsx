@@ -36,7 +36,7 @@ export default function ProjectDetail() {
           <p className="mb-4 text-sm uppercase tracking-widest text-white/40">
             Project not found
           </p>
-          <h1 className="mb-8 text-4xl font-bold tracking-tight sm:text-6xl">
+          <h1 className="mb-8 text-4xl font-bold tracking-normal sm:text-6xl">
             That project page does not exist.
           </h1>
           <Link
@@ -74,7 +74,7 @@ export default function ProjectDetail() {
               <p className="mb-4 text-sm uppercase tracking-widest text-white/40">
                 {project.num} / {project.dates}
               </p>
-              <h1 className="mb-5 text-4xl font-bold leading-none tracking-tight sm:text-6xl lg:text-7xl">
+              <h1 className="mb-5 text-4xl font-bold leading-none tracking-normal sm:text-6xl lg:text-7xl">
                 {project.name}
               </h1>
               <p className="max-w-3xl text-xl leading-relaxed text-white/75">

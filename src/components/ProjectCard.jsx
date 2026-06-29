@@ -7,11 +7,11 @@ export function ProjectCard({ project, delay }) {
     <Reveal direction="up" delay={delay}>
       <Link
         to={`/projects/${project.id}`}
-        className="group flex h-full flex-col overflow-hidden"
+        className="group flex h-full flex-col overflow-hidden rounded-md border border-white/10 bg-[#151515] p-4 transition-colors hover:border-emerald-200/35 hover:bg-white/[0.035]"
       >
         <ProjectVisual
           project={project}
-          className="mb-4 rounded-sm"
+          className="mb-4 rounded-sm border-white/8 transition-colors group-hover:border-emerald-200/25"
           imageClassName="transition-transform duration-500 group-hover:scale-[1.03]"
         />
 
@@ -26,7 +26,7 @@ export function ProjectCard({ project, delay }) {
           <p className="text-sm text-white/55 leading-relaxed">
             {project.summary}
           </p>
-          <p className="mt-auto pt-2 text-xs tracking-wide text-white/55">
+          <p className="mt-auto pt-2 text-xs tracking-wide text-white/55 transition-colors group-hover:text-emerald-100/65">
             {project.stack.join(" / ")}
           </p>
         </div>

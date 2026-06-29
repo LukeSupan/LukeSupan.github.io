@@ -121,17 +121,17 @@ export const PROJECTS = [
     year: "2026",
     role: "Freelance designer and developer",
     status: "Maintained",
-    stack: ["HTML", "CSS"],
-    skills: ["HTML", "CSS", "Client Relations"],
+    stack: ["React", "Tailwind CSS"],
+    skills: ["React", "Tailwind CSS", "Client Relations"],
     thumbnail: eportHome,
     summary:
       "A GitHub Pages e-portfolio built from scratch to present research projects, field photography, resume materials, and GIS work for graduate applications.",
     description: [
-      "I built this static e-portfolio as a freelance project for a UF Geology & Geography student applying to graduate programs. I gathered requirements, designed the layout, and implemented the site in vanilla HTML and CSS.",
+      "I built this e-portfolio as a freelance project for a UF Geology & Geography student applying to graduate programs. I gathered requirements, designed the layout, and implemented the site with React and Tailwind CSS.",
       "Since launch, I have continued maintaining the site by updating information, adding project pages, and adding his personal portfolio as a PDF."
     ],
     highlights: [
-      "Designed and built the site from scratch with vanilla HTML and CSS.",
+      "Designed and built the site from scratch with React and Tailwind CSS.",
       "Created clean sections for research projects, field photography, resume content, and GIS skills.",
       "Hosted on GitHub Pages and maintained after launch."
     ],
