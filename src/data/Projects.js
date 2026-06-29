@@ -57,7 +57,11 @@ export const PROJECTS = [
     links: [
       {
         label: "GitHub Repository",
-        href: ""
+        href: "https://github.com/LukeSupan/stack-tracker-web"
+      },
+      {
+        label: "Live Site",
+        href: "https://power-level-scouter.vercel.app/"
       }
     ]
   },
@@ -104,7 +108,7 @@ export const PROJECTS = [
     links: [
       {
         label: "GitHub Repository",
-        href: ""
+        href: "https://github.com/lbrown169/Medical-Resident-Scheduling"
       }
     ]
   },
@@ -146,7 +150,11 @@ export const PROJECTS = [
     links: [
       {
         label: "GitHub Repository",
-        href: ""
+        href: "https://github.com/codyhunter-ufl/codyhunter-ufl.github.io"
+      },
+      {
+        label: "Live Site",
+        href: "https://codyhunter-ufl.github.io/"
       }
     ]
   },
@@ -191,11 +199,11 @@ export const PROJECTS = [
     links: [
       {
         label: "GitHub Repository",
-        href: ""
+        href: "https://github.com/LukeSupan/pong-unity-test"
       },
       {
         label: "itch.io Page",
-        href: ""
+        href: "https://holeset.itch.io/pong-by-holeset"
       }
     ]
   }

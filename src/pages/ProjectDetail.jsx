@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { Nav } from "../components/Nav";
@@ -8,6 +9,24 @@ import { getProjectById, PROJECTS } from "../data/Projects";
 export default function ProjectDetail() {
   const { id } = useParams();
   const project = getProjectById(id);
+  const [selectedMedia, setSelectedMedia] = useState(null);
+
+  useEffect(() => {
+    if (!selectedMedia) return;
+
+    function onKeyDown(event) {
+      if (event.key === "Escape") setSelectedMedia(null);
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [selectedMedia]);
 
   if (!project) {
     return (
@@ -143,14 +162,19 @@ export default function ProjectDetail() {
               {project.media.map((item, index) => (
                 <Reveal key={item.title} delay={index * 60}>
                   <article className="overflow-hidden rounded-sm border border-white/10 bg-white/[0.03]">
-                    <ProjectVisual
-                      project={project}
-                      src={item.image}
-                      alt={item.title}
-                      label={item.title}
-                      fit="contain"
-                      imageClassName="opacity-85"
-                    />
+                    <button
+                      type="button"
+                      onClick={() => setSelectedMedia(item)}
+                      className="block w-full cursor-zoom-in bg-transparent p-0 text-left"
+                    >
+                      <ProjectVisual
+                        project={project}
+                        src={item.image}
+                        alt={item.title}
+                        label={item.title}
+                        fit="contain"
+                      />
+                    </button>
                     <div className="p-5">
                       <h3 className="mb-3 text-base text-white/85">{item.title}</h3>
                       <p className="text-sm leading-relaxed text-white/55">
@@ -190,6 +214,14 @@ export default function ProjectDetail() {
         </section>
       </main>
 
+      {selectedMedia && (
+        <MediaLightbox
+          media={selectedMedia}
+          project={project}
+          onClose={() => setSelectedMedia(null)}
+        />
+      )}
+
       <Footer />
     </div>
   );
@@ -224,5 +256,49 @@ function ProjectLink({ link }) {
     >
       {link.label}
     </a>
+  );
+}
+
+function MediaLightbox({ media, project, onClose }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4 py-6 sm:px-8"
+      onClick={onClose}
+      role="presentation"
+    >
+      <div
+        className="flex max-h-full w-full max-w-6xl flex-col"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="mb-3 flex justify-end">
+          <button
+            type="button"
+            onClick={onClose}
+            className="border border-white/20 px-3 py-2 text-sm text-white/70 transition-colors hover:border-white/45 hover:text-white"
+            aria-label="Close media viewer"
+          >
+            close
+          </button>
+        </div>
+
+        <div className="min-h-0 overflow-hidden rounded-sm border border-white/15 bg-[#111111]">
+          <img
+            src={media.image}
+            alt={media.title}
+            className="max-h-[72vh] w-full object-contain"
+          />
+        </div>
+
+        <div className="border-x border-b border-white/15 bg-[#111111] p-5">
+          <p className="mb-2 text-base text-white/90">{media.title}</p>
+          <p className="text-sm leading-relaxed text-white/60">
+            {media.caption}
+          </p>
+          <p className="mt-3 text-xs uppercase tracking-widest text-white/30">
+            {project.name}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }

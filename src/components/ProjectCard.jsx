@@ -12,7 +12,7 @@ export function ProjectCard({ project, delay }) {
         <ProjectVisual
           project={project}
           className="mb-4 rounded-sm"
-          imageClassName="opacity-70 transition-all duration-500 group-hover:scale-[1.03] group-hover:opacity-95"
+          imageClassName="transition-transform duration-500 group-hover:scale-[1.03]"
         />
 
         <div className="flex flex-1 flex-col gap-2">
