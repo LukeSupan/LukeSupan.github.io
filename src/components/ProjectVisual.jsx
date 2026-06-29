@@ -15,6 +15,7 @@ export function ProjectVisual({
   src,
   alt,
   label,
+  fit = "cover",
   className = "",
   imageClassName = "",
 }) {
@@ -32,7 +33,7 @@ export function ProjectVisual({
           src={imageSrc}
           alt={alt || project.name}
           onError={() => setImgFailed(true)}
-          className={`h-full w-full object-cover ${imageClassName}`}
+          className={`h-full w-full ${fit === "contain" ? "object-contain" : "object-cover"} ${imageClassName}`}
         />
       ) : (
         <div className="flex h-full w-full flex-col justify-between p-5">

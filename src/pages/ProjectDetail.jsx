@@ -125,15 +125,7 @@ export default function ProjectDetail() {
                   </h2>
                   <div className="flex flex-col gap-3">
                     {project.links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-sm text-white/65 underline underline-offset-4 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
+                      <ProjectLink key={link.label} link={link} />
                     ))}
                   </div>
                 </div>
@@ -156,6 +148,7 @@ export default function ProjectDetail() {
                       src={item.image}
                       alt={item.title}
                       label={item.title}
+                      fit="contain"
                       imageClassName="opacity-85"
                     />
                     <div className="p-5">
@@ -210,5 +203,26 @@ function MetaBlock({ label, value }) {
       </p>
       <p className="text-sm leading-relaxed text-white/75">{value}</p>
     </div>
+  );
+}
+
+function ProjectLink({ link }) {
+  if (!link.href) {
+    return (
+      <span className="text-sm text-white/35">
+        {link.label} <span className="text-white/25">(link coming soon)</span>
+      </span>
+    );
+  }
+
+  return (
+    <a
+      href={link.href}
+      target="_blank"
+      rel="noreferrer"
+      className="text-sm text-white/65 underline underline-offset-4 transition-colors hover:text-white"
+    >
+      {link.label}
+    </a>
   );
 }

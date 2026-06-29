@@ -8,7 +8,7 @@ import { Footer } from "../components/Footer";
 import { ProjectCard } from "../components/ProjectCard";
 import { Reveal, Collapsible } from "../components/Animated";
 
-import { PROJECTS } from "../data/Projects";
+import { OTHER_PROJECTS, PROJECTS } from "../data/Projects";
 import { SKILLS } from "../data/Skills";
 
 // redundant from nav.jsx. fine for now
@@ -94,6 +94,37 @@ export default function Home() {
               <ProjectCard key={project.num} project={project} delay={i * 80} />
             ))}
           </div>
+
+          <Reveal delay={PROJECTS.length * 80 + 80}>
+            <div className="mt-14 border-t border-white/10 pt-8">
+              <p className="mb-5 text-base uppercase tracking-widest text-white/45">
+                Other Work
+              </p>
+              <div className="grid gap-4 md:grid-cols-2">
+                {OTHER_PROJECTS.map((project) => (
+                  <article
+                    key={project.name}
+                    className="rounded-sm border border-white/10 p-5"
+                  >
+                    <div className="mb-3 flex items-start justify-between gap-4">
+                      <h3 className="text-base text-white/80">
+                        {project.name}
+                      </h3>
+                      <span className="text-xs text-white/35">
+                        {project.year}
+                      </span>
+                    </div>
+                    <p className="mb-4 text-sm leading-relaxed text-white/55">
+                      {project.summary}
+                    </p>
+                    <p className="text-xs tracking-wide text-white/45">
+                      {project.stack.join(" / ")}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </Collapsible>
       </section>
 
