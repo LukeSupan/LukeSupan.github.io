@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import team from "../assets/team.jpg";
 import supan from "../assets/supan.pdf";
 
@@ -7,8 +8,8 @@ import { Footer } from "../components/Footer";
 import { ProjectCard } from "../components/ProjectCard";
 import { Reveal, Collapsible } from "../components/Animated";
 
-import { PROJECTS } from "../data/projects";
-import { SKILLS } from "../data/skills";
+import { PROJECTS } from "../data/Projects";
+import { SKILLS } from "../data/Skills";
 
 // redundant from nav.jsx. fine for now
 function scrollTo(id) {
@@ -17,8 +18,17 @@ function scrollTo(id) {
 }
 
 export default function Home() {
+  const location = useLocation();
   const [projectsOpen, setProjectsOpen] = useState(true);
   const [aboutOpen, setAboutOpen] = useState(true);
+
+  useEffect(() => {
+    if (!location.state?.scrollTo) return;
+
+    requestAnimationFrame(() => {
+      scrollTo(location.state.scrollTo);
+    });
+  }, [location.state]);
 
   return (
     <div className="bg-[#1c1c1c] text-white min-h-screen font-mono font-semibold">
@@ -46,9 +56,9 @@ export default function Home() {
               </p>
               <br></br>
               <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
-                Working on full stack projects, specifically a job application tracker. 
+                Working on full stack projects, including a job application tracker.
                 <br></br>
-                Maintaining a role-base stat tracking site (Power Level) and a portfolio site for a prospective UF grad student. 
+                Maintaining a role-based stat tracking site (Power Level) and a portfolio site for a prospective UF grad student.
               </p>
             </div>
           </div>
@@ -118,15 +128,15 @@ export default function Home() {
                 web apps and Unity for some game dev.
                 <br />
                 <br />
-                For more information on the story behind each project. Click on
+                For more information on the story behind each project, click on
                 the project cards in the{" "}
                 <span
                   className="text-white/80 hover:text-white transition-colors cursor-pointer underline"
                   onClick={() => scrollTo("projects")}
                 >
-                  project
+                  projects
                 </span>{" "}
-                section. (this doesnt work right now... i need to make the pages for the projects)
+                section.
                 <br />
                 <br />
               </p>
