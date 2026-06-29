@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import beachLuke from "../assets/beachluke.jpg";
-import enolaImage from "../assets/enolaimage.jpg";
-import natureImage from "../assets/natureimage.jpg";
+import beachLuke from "../assets/hero/beachluke-hero.jpg";
+import enolaImage from "../assets/hero/enolaimage-hero.jpg";
+import natureImage from "../assets/hero/natureimage-hero.jpg";
 import supan from "../assets/supan.pdf";
 
 import { Nav } from "../components/Nav";
@@ -48,6 +48,22 @@ export default function Home() {
       scrollTo(location.state.scrollTo);
     });
   }, [location.state]);
+
+  useEffect(() => {
+    const preloadedImages = HERO_IMAGES.map(({ src }) => {
+      const image = new Image();
+      image.decoding = "async";
+      image.src = src;
+      return image;
+    });
+
+    return () => {
+      preloadedImages.forEach((image) => {
+        image.onload = null;
+        image.onerror = null;
+      });
+    };
+  }, []);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#1c1c1c] font-mono font-semibold text-white">
@@ -242,6 +258,11 @@ function HeroCarousel({
           key={image.src}
           src={image.src}
           alt={image.alt}
+          width="960"
+          height="1200"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
           className={`aspect-[4/5] h-full w-full object-cover ${image.position}`}
         />
 
