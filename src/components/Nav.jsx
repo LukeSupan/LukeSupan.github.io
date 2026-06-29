@@ -1,15 +1,27 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import supan from "../assets/supan.pdf";
 
-function scrollTo(id) {
+function scrollTo(id, behavior = "smooth") {
   const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth" });
+  if (el) el.scrollIntoView({ behavior });
 }
 
 export function Nav() {
   const [scrollPct, setScrollPct] = useState(0);
   const [navVisible, setNavVisible] = useState(true);
   const lastScrollY = useRef(0);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function goToSection(id) {
+    if (location.pathname === "/") {
+      scrollTo(id);
+      return;
+    }
+
+    navigate("/", { state: { scrollTo: id } });
+  }
 
   useEffect(() => {
     // Prevent horizontal overscroll from exposing the gap behind the nav
@@ -56,20 +68,22 @@ export function Nav() {
       >
         <span
           className="text-base text-white/65 hover:text-white transition-colors cursor-pointer"
-          onClick={() => scrollTo("title")}
+          onClick={() => goToSection("title")}
         >
           luke_supan
         </span>
 
         <div className="flex gap-4 sm:gap-10 items-center">
           <button
-            onClick={() => scrollTo("projects")}
+            type="button"
+            onClick={() => goToSection("projects")}
             className="text-sm text-white/65 hover:text-white transition-colors cursor-pointer"
           >
             projects
           </button>
           <button
-            onClick={() => scrollTo("about")}
+            type="button"
+            onClick={() => goToSection("about")}
             className="text-sm text-white/65 hover:text-white transition-colors cursor-pointer"
           >
             about
