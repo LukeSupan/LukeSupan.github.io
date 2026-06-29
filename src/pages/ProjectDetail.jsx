@@ -61,36 +61,30 @@ export default function ProjectDetail() {
       <Nav />
 
       <main>
-        <section className="px-6 pt-32 pb-16 sm:px-10 sm:pt-36">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.7fr)] lg:items-end">
-            <Reveal>
-              <div className="max-w-4xl">
-                <Link
-                  to="/"
-                  state={{ scrollTo: "projects" }}
-                  className="mb-8 inline-block text-sm text-white/50 underline underline-offset-4 transition-colors hover:text-white"
-                >
-                  back to projects
-                </Link>
-                <p className="mb-4 text-sm uppercase tracking-widest text-white/40">
-                  {project.num} / {project.dates}
-                </p>
-                <h1 className="mb-5 text-4xl font-bold leading-none tracking-tight sm:text-6xl lg:text-7xl">
-                  {project.name}
-                </h1>
-                <p className="max-w-3xl text-xl leading-relaxed text-white/75">
-                  {project.subtitle}
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={80}>
-              <ProjectVisual project={project} className="rounded-sm" />
-            </Reveal>
-          </div>
+        <section className="px-6 pt-24 pb-10 sm:px-10 sm:pt-28">
+          <Reveal>
+            <div className="max-w-5xl">
+              <Link
+                to="/"
+                state={{ scrollTo: "projects" }}
+                className="mb-7 inline-block text-sm text-white/50 underline underline-offset-4 transition-colors hover:text-white"
+              >
+                back to projects
+              </Link>
+              <p className="mb-4 text-sm uppercase tracking-widest text-white/40">
+                {project.num} / {project.dates}
+              </p>
+              <h1 className="mb-5 text-4xl font-bold leading-none tracking-tight sm:text-6xl lg:text-7xl">
+                {project.name}
+              </h1>
+              <p className="max-w-3xl text-xl leading-relaxed text-white/75">
+                {project.subtitle}
+              </p>
+            </div>
+          </Reveal>
         </section>
 
-        <section className="border-y border-white/10 px-6 py-8 sm:px-10">
+        <section className="border-y border-white/10 px-6 py-6 sm:px-10">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <MetaBlock label="Role" value={project.role} />
             <MetaBlock label="Status" value={project.status} />
@@ -102,7 +96,7 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        <section className="grid gap-12 px-6 py-16 sm:px-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(280px,0.35fr)]">
+        <section className="grid gap-12 px-6 py-12 sm:px-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(280px,0.35fr)]">
           <Reveal>
             <div className="max-w-3xl">
               <h2 className="mb-6 text-2xl uppercase tracking-widest text-white/90">
@@ -154,7 +148,7 @@ export default function ProjectDetail() {
         </section>
 
         {project.media.length > 0 && (
-          <section className="px-6 py-16 sm:px-10">
+          <section className="px-6 py-12 sm:px-10">
             <h2 className="mb-8 text-2xl uppercase tracking-widest text-white/90">
               Media
             </h2>

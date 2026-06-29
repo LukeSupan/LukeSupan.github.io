@@ -1,4 +1,5 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
 
@@ -7,6 +8,7 @@ import ProjectDetail from "./pages/ProjectDetail";
 export default function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -14,4 +16,15 @@ export default function App() {
       </Routes>
     </HashRouter>
   );
+}
+
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) return;
+    window.scrollTo({ top: 0, left: 0 });
+  }, [location.pathname, location.state]);
+
+  return null;
 }
