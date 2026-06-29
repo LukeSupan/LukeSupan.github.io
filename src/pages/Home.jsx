@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import coasterImage from "../assets/coasterimage.png";
+import enolaImage from "../assets/enolaimage.jpg";
+import natureImage from "../assets/natureimage.jpg";
 import team from "../assets/team.jpg";
 import supan from "../assets/supan.pdf";
+import washingtonImage from "../assets/washingtonimage.jpg";
 
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
@@ -10,6 +14,34 @@ import { Reveal, Collapsible } from "../components/Animated";
 
 import { OTHER_PROJECTS, PROJECTS } from "../data/Projects";
 import { SKILLS } from "../data/Skills";
+
+const HERO_IMAGES = [
+  {
+    src: team,
+    alt: "Luke Supan and Senior Design Team",
+    position: "object-bottom",
+  },
+  {
+    src: coasterImage,
+    alt: "Luke Supan at a coaster park",
+    position: "object-center",
+  },
+  {
+    src: enolaImage,
+    alt: "Luke Supan outdoors in Enola",
+    position: "object-center",
+  },
+  {
+    src: natureImage,
+    alt: "Luke Supan outside in nature",
+    position: "object-center",
+  },
+  {
+    src: washingtonImage,
+    alt: "Luke Supan in Washington",
+    position: "object-center",
+  },
+];
 
 // redundant from nav.jsx. fine for now
 function scrollTo(id) {
@@ -21,6 +53,8 @@ export default function Home() {
   const location = useLocation();
   const [projectsOpen, setProjectsOpen] = useState(true);
   const [aboutOpen, setAboutOpen] = useState(true);
+  const [heroIndex, setHeroIndex] = useState(0);
+  const heroImage = HERO_IMAGES[heroIndex];
 
   useEffect(() => {
     if (!location.state?.scrollTo) return;
@@ -29,6 +63,16 @@ export default function Home() {
       scrollTo(location.state.scrollTo);
     });
   }, [location.state]);
+
+  function showPreviousHero() {
+    setHeroIndex((index) =>
+      index === 0 ? HERO_IMAGES.length - 1 : index - 1,
+    );
+  }
+
+  function showNextHero() {
+    setHeroIndex((index) => (index + 1) % HERO_IMAGES.length);
+  }
 
   return (
     <div className="bg-[#1c1c1c] text-white min-h-screen font-mono font-semibold">
@@ -39,9 +83,9 @@ export default function Home() {
         id="title"
         className="pt-20 sm:pt-16 px-6 sm:px-10 py-16 sm:py-24 min-h-[85vh] flex flex-col justify-center"
       >
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-start gap-12 sm:gap-16">
+        <div className="grid gap-12 sm:gap-16 lg:grid-cols-[minmax(420px,0.75fr)_minmax(500px,0.95fr)] xl:grid-cols-[minmax(500px,0.78fr)_minmax(620px,0.92fr)] lg:items-center">
           {/* name and mini bio */}
-          <div className="max-w-xl min-w-0">
+          <div className="max-w-3xl min-w-0">
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-none mb-8">
               LUKE SUPAN
             </h1>
@@ -64,13 +108,14 @@ export default function Home() {
           </div>
 
           {/* photo */}
-          <div className="flex-1 flex-shrink-0 flex justify-center lg:justify-start min-w-0 max-w-8xl">
-            <img
-              src={team}
-              alt="Luke Supan and Senior Design Team"
-              className="w-full aspect-[3/2] object-cover object-bottom rounded-lg"
-            />
-          </div>
+          <HeroCarousel
+            images={HERO_IMAGES}
+            activeIndex={heroIndex}
+            image={heroImage}
+            onPrevious={showPreviousHero}
+            onNext={showNextHero}
+            onSelect={setHeroIndex}
+          />
         </div>
       </section>
 
@@ -223,6 +268,69 @@ export default function Home() {
       </section>
 
       <Footer />
+    </div>
+  );
+}
+
+function HeroCarousel({
+  images,
+  activeIndex,
+  image,
+  onPrevious,
+  onNext,
+  onSelect,
+}) {
+  return (
+    <div className="min-w-0 lg:justify-self-end">
+      <div className="group relative w-full max-w-[980px] overflow-hidden rounded-lg border border-white/10 bg-[#111111] aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] xl:aspect-[3/2]">
+        <img
+          src={image.src}
+          alt=""
+          aria-hidden="true"
+          className={`absolute inset-0 h-full w-full scale-110 object-cover ${image.position} opacity-25 blur-2xl transition-opacity duration-500`}
+        />
+        <img
+          key={image.src}
+          src={image.src}
+          alt={image.alt}
+          className={`relative z-10 h-full w-full object-contain ${image.position}`}
+        />
+
+        <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between gap-4 bg-gradient-to-t from-black/65 to-transparent px-4 pb-4 pt-10">
+          <div className="flex gap-2">
+            {images.map((item, index) => (
+              <button
+                key={item.src}
+                type="button"
+                onClick={() => onSelect(index)}
+                aria-label={`Show hero image ${index + 1}`}
+                className={`h-2.5 w-2.5 rounded-full border border-white/50 transition-colors ${
+                  index === activeIndex ? "bg-white" : "bg-transparent"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={onPrevious}
+              aria-label="Previous hero image"
+              className="flex h-9 w-9 items-center justify-center border border-white/25 bg-black/25 text-lg text-white/75 transition-colors hover:border-white/50 hover:text-white"
+            >
+              &lt;
+            </button>
+            <button
+              type="button"
+              onClick={onNext}
+              aria-label="Next hero image"
+              className="flex h-9 w-9 items-center justify-center border border-white/25 bg-black/25 text-lg text-white/75 transition-colors hover:border-white/50 hover:text-white"
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
