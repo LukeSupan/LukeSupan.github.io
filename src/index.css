@@ -1,1 +1,72 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+:root {
+  font-family:
+    "Lucida Console", Monaco, "Courier New", monospace;
+  background: #171717;
+  color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.35em;
+}
+
+.portfolio-shell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: #242424;
+}
+
+.portfolio-stage {
+  position: relative;
+  display: grid;
+  place-items: start center;
+  width: min(88vw, 760px);
+  height: clamp(440px, 70vw, 640px);
+  padding-top: clamp(7rem, 13vw, 9.25rem);
+  text-align: center;
+}
+
+.triangle-outline,
+.triangle-outline::before,
+.triangle-outline::after {
+  position: absolute;
+  inset: 0;
+}
+
+.triangle-outline {
+  pointer-events: none;
+}
+
+.triangle-outline::before,
+.triangle-outline::after {
+  content: "";
+  clip-path: polygon(4% 5%, 47% 7%, 57% 6%, 96% 5%, 52% 94%, 50% 98%, 47% 94%);
+}
+
+.triangle-outline::before {
+  background: rgb(255 255 255 / 0.42);
+}
+
+.triangle-outline::after {
+  inset: 2px;
+  background: #1b1b1b;
+  clip-path: polygon(5% 6%, 47% 8%, 57% 7%, 95% 6%, 52% 92.5%, 50% 96%, 48% 92.5%);
+}
+
+.portfolio-content {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 10px rgb(0 0 0 / 0.35);
+}
