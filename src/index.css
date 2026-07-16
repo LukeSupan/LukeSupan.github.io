@@ -80,10 +80,10 @@ body {
 .shape-pentagon .polygon-outline,
 .shape-pentagon .polygon-fill {
   clip-path: polygon(
-    50% 7%,
-    92% 39%,
-    76% 91%,
-    24% 91%,
-    8% 39%
+    50% 0%,
+    94% 36%,
+    80% 96%,
+    20% 96%,
+    6% 36%
   );
 }
