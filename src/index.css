@@ -32,9 +32,11 @@ a {
   position: relative;
   display: grid;
   place-items: start center;
-  width: min(88vw, 760px);
-  height: clamp(440px, 70vw, 640px);
-  padding-top: clamp(7rem, 13vw, 9.25rem);
+  width: 760px;
+  height: 640px;
+  max-width: 88vw;
+  max-height: 80vh;
+  padding-top: 140px;
   text-align: center;
 }
 
