@@ -132,11 +132,11 @@ body {
 .shape-square .polygon-fill,
 .shape-square .polygon-text-cover-fill {
   clip-path: polygon(
-    5% 50%,
-    50% 5%,
-    95% 50%,
-    50% 95%,
-    5% 50%
+    18% 32%,
+    50% 0%,
+    82% 32%,
+    50% 97.6%,
+    18% 32%
   );
 }
 
@@ -147,9 +147,9 @@ body {
 .shape-pentagon .polygon-text-cover-fill {
   clip-path: polygon(
     50% 0%,
-    94% 36%,
-    80% 96%,
-    20% 96%,
-    6% 36%
+    90% 28%,
+    76% 86%,
+    24% 86%,
+    10% 28%
   );
 }
