@@ -17,7 +17,7 @@ body {
   margin: 0;
 }
 
-.triangle-mark {
+.polygon-mark {
   position: absolute;
   top: 0;
   left: 0;
@@ -26,32 +26,64 @@ body {
   pointer-events: none;
 }
 
-.triangle-outline {
+.polygon-outline {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background: rgb(255 255 255 / 0.42);
+  transition: clip-path 650ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.shape-triangle .polygon-outline {
   clip-path: polygon(
-    5% 5%,
-    50% 0%,
+    50% 5%,
     95% 5%,
-    50% 98%
+    95% 5%,
+    50% 98%,
+    5% 5%
   );
 }
 
-.triangle-fill {
+.polygon-fill {
   position: absolute;
   top: 6px;
   right: 6px;
   bottom: 6px;
   left: 6px;
   background: #1b1b1b;
+  transition: clip-path 650ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.shape-triangle .polygon-fill {
   clip-path: polygon(
-    5% 5%,
-    50% 0%,
+    50% 5%,
     95% 5%,
-    50% 98%
+    95% 5%,
+    50% 98%,
+    5% 5%
+  );
+}
+
+.shape-square .polygon-outline,
+.shape-square .polygon-fill {
+  clip-path: polygon(
+    12% 12%,
+    88% 12%,
+    88% 88%,
+    50% 88%,
+    12% 88%
+  );
+}
+
+.shape-pentagon .polygon-outline,
+.shape-pentagon .polygon-fill {
+  clip-path: polygon(
+    50% 7%,
+    92% 39%,
+    76% 91%,
+    24% 91%,
+    8% 39%
   );
 }
