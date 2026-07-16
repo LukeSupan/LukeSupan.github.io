@@ -20,6 +20,9 @@ function App() {
   // polygons current ruleset for displaying content (changes after visual)
   const [contentShapeIndex, setContentShapeIndex] = useState(0);
 
+  // white polygon cover that hides the text during shape changes
+  const [isTextCoverVisible, setIsTextCoverVisible] = useState(false);
+
   // used to point at middle
   const heroRef = useRef(null);
 
@@ -28,6 +31,9 @@ function App() {
 
   // store content swap timer so it can be cancelled if you shape swap again instantly
   const contentSwapTimeout = useRef(null);
+
+  // store text cover timer so it stays visible if you spam shape swap
+  const textCoverTimeout = useRef(null);
 
   // during a shape change, this blocks a scroll direction (makes it cleaner)
   const scrollLockDirection = useRef(null);
@@ -68,7 +74,9 @@ function App() {
 
     // clear an old timeout if it exists
     window.clearTimeout(contentSwapTimeout.current);
+    window.clearTimeout(textCoverTimeout.current);
     lockOldRevealDirection(previousShape);
+    setIsTextCoverVisible(true);
     setVisualShapeIndex(nextShapeIndex);
 
     // scroll to the shape
@@ -81,6 +89,11 @@ function App() {
     contentSwapTimeout.current = window.setTimeout(() => {
       setContentShapeIndex(nextShapeIndex);
     }, 475);
+
+    // keep the cover on until the polygon has been stable for a moment
+    textCoverTimeout.current = window.setTimeout(() => {
+      setIsTextCoverVisible(false);
+    }, 700);
   }
 
   function showPreviousShape() {
@@ -114,6 +127,7 @@ function App() {
   useEffect(() => {
     return () => {
       window.clearTimeout(contentSwapTimeout.current);
+      window.clearTimeout(textCoverTimeout.current);
       window.clearTimeout(scrollLockTimeout.current);
     };
   }, []);
@@ -239,7 +253,11 @@ function App() {
           </button>
 
           {/* name */}
-          <div className="relative z-10">
+          <div
+            className={`polygon-content relative z-10 ${
+              isTextCoverVisible ? "is-covered" : ""
+            }`}
+          >
             <h1 className="text-3xl font-normal">luke supan</h1>
 
             {/* links to my stuff*/}
@@ -275,6 +293,16 @@ function App() {
           <div className={`polygon-mark shape-${visualShape}`} aria-hidden="true">
             <div className="polygon-outline"></div>
             <div className="polygon-fill"></div>
+          </div>
+
+          {/* fades over the words while the content is swapping */}
+          <div
+            className={`polygon-text-cover shape-${visualShape} ${
+              isTextCoverVisible ? "is-visible" : ""
+            }`}
+            aria-hidden="true"
+          >
+            <div className="polygon-text-cover-fill"></div>
           </div>
         </div>
       </section>

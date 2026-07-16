@@ -41,6 +41,27 @@ body {
   pointer-events: none;
 }
 
+/* words inside the polygon. fades out while the cover fades in */
+.polygon-content {
+  transition: opacity 420ms ease;
+}
+
+.polygon-content.is-covered {
+  opacity: 0;
+}
+
+/* second polygon container. this one sits over the text during shape swaps */
+.polygon-text-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 15;
+  width: 100%;
+  height: 100%;
+  color: rgba(75, 75, 75, 0.716);
+  pointer-events: none;
+}
+
 /* border/outer polygon */
 .polygon-outline {
   position: absolute;
@@ -67,18 +88,36 @@ body {
 }
 
 /* 6px inset for cool border thing */
-.polygon-fill {
+.polygon-fill,
+.polygon-text-cover-fill {
   position: absolute;
   top: 6px;
   right: 6px;
   bottom: 6px;
   left: 6px;
+}
+
+.polygon-fill {
   background: #1b1b1b;
   transition: clip-path 650ms cubic-bezier(0.76, 0, 0.24, 1);
 }
 
+/* starts invisible. react adds is-visible when the cover should fade in */
+.polygon-text-cover-fill {
+  background: currentColor;
+  opacity: 0;
+  transition:
+    opacity 420ms ease,
+    clip-path 650ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.polygon-text-cover.is-visible .polygon-text-cover-fill {
+  opacity: 1;
+}
+
 /* fill for triangle */
-.shape-triangle .polygon-fill {
+.shape-triangle .polygon-fill,
+.shape-triangle .polygon-text-cover-fill {
   clip-path: polygon(
     5% 5%,
     95% 5%,
@@ -90,7 +129,8 @@ body {
 
 /* square fill and outline*/
 .shape-square .polygon-outline,
-.shape-square .polygon-fill {
+.shape-square .polygon-fill,
+.shape-square .polygon-text-cover-fill {
   clip-path: polygon(
     5% 5%,
     95% 5%,
@@ -103,7 +143,8 @@ body {
 
 /* pentagon fill and outline */
 .shape-pentagon .polygon-outline,
-.shape-pentagon .polygon-fill {
+.shape-pentagon .polygon-fill,
+.shape-pentagon .polygon-text-cover-fill {
   clip-path: polygon(
     50% 0%,
     94% 36%,
