@@ -80,7 +80,7 @@ body {
 .shape-triangle .polygon-outline {
   clip-path: polygon(
     5% 5%,
-    95% 5%,
+    50% 5%,
     95% 5%,
     50% 98%,
     5% 5%
@@ -120,23 +120,23 @@ body {
 .shape-triangle .polygon-text-cover-fill {
   clip-path: polygon(
     5.4% 5%,
-    94.6% 5%,
+    50% 5%,
     94.6% 5%,
     50% 97.6%,
     5.4% 5%
   );
 }
 
-/* square fill and outline*/
+/* square fill and outline. diamond is just a square rotated 45 degrees */
 .shape-square .polygon-outline,
 .shape-square .polygon-fill,
 .shape-square .polygon-text-cover-fill {
   clip-path: polygon(
-    5% 5%,
-    95% 5%,
-    95% 95%,
+    5% 50%,
+    50% 5%,
+    95% 50%,
     50% 95%,
-    5% 95%
+    5% 50%
   );
 }
 
