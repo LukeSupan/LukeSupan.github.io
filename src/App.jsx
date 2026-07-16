@@ -14,17 +14,35 @@ function getNextShapeIndex(currentIndex) {
 }
 
 function App() {
+  // polygons current visual
   const [visualShapeIndex, setVisualShapeIndex] = useState(0);
+
+  // polygons current ruleset for displaying content (changes after visual)
   const [contentShapeIndex, setContentShapeIndex] = useState(0);
+
+  // used to point at middle
   const heroRef = useRef(null);
-  const hasMounted = useRef(false);
-  const shapeChangeAfterScroll = useRef(null);
+
+  // Tracks if the page already did its first automatic scroll to the middle.
+  const hasScrolledToHeroOnLoad = useRef(false);
+
+  // store content swap timer so it can be cancelled if you shape swap again instantly
+  const contentSwapTimeout = useRef(null);
+
+  // during a shape change, this blocks a scroll direction (makes it cleaner)
   const scrollLockDirection = useRef(null);
+
+  // store scroll lock timer that turns the scroll lock back off.
   const scrollLockTimeout = useRef(null);
+
+  // for mobile. determine up or down scroll
   const touchStartY = useRef(null);
+
+  // index to shape converter
   const visualShape = shapes[visualShapeIndex];
   const contentShape = shapes[contentShapeIndex];
 
+  // lock the direction of previous shape. prevents user breaking the scroll (roughly)
   function lockOldRevealDirection(previousShape) {
     window.clearTimeout(scrollLockTimeout.current);
 
@@ -42,20 +60,25 @@ function App() {
     }, 800);
   }
 
+  // change shape on button press
   function changeShape(getShapeIndex) {
     const nextShapeIndex = getShapeIndex(visualShapeIndex);
+
     const previousShape = shapes[visualShapeIndex];
 
-    window.clearTimeout(shapeChangeAfterScroll.current);
+    // clear an old timeout if it exists
+    window.clearTimeout(contentSwapTimeout.current);
     lockOldRevealDirection(previousShape);
     setVisualShapeIndex(nextShapeIndex);
 
+    // scroll to the shape
     heroRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
 
-    shapeChangeAfterScroll.current = window.setTimeout(() => {
+    // set timeout until we swap content. less jank
+    contentSwapTimeout.current = window.setTimeout(() => {
       setContentShapeIndex(nextShapeIndex);
     }, 475);
   }
@@ -68,6 +91,7 @@ function App() {
     changeShape(getNextShapeIndex);
   }
 
+  // change shape with arrow keys on desktop
   useEffect(() => {
     function handleKeyDown(event) {
       if (event.key === "ArrowLeft") {
@@ -86,9 +110,10 @@ function App() {
     };
   }, [visualShapeIndex]);
 
+  // timer cancel insurance
   useEffect(() => {
     return () => {
-      window.clearTimeout(shapeChangeAfterScroll.current);
+      window.clearTimeout(contentSwapTimeout.current);
       window.clearTimeout(scrollLockTimeout.current);
     };
   }, []);
@@ -116,6 +141,7 @@ function App() {
         return;
       }
 
+      // compare the finger's starting spot to its current spot to get scroll direction on mobile
       const currentY = event.touches[0]?.clientY ?? touchStartY.current;
       const scrollAmount = touchStartY.current - currentY;
 
@@ -125,6 +151,7 @@ function App() {
     }
 
     function handleScrollKey(event) {
+      // keyboard keys translated into scroll direction. negative is up, positive is down. thats just how browser works.
       const scrollAmounts = {
         ArrowUp: -1,
         PageUp: -1,
@@ -135,6 +162,7 @@ function App() {
         " ": 1,
       };
 
+      // if this key is not in the list. nothing happens. undefined.
       const scrollAmount = scrollAmounts[event.key];
 
       if (scrollAmount && isLockedScroll(scrollAmount)) {
@@ -156,15 +184,16 @@ function App() {
   }, []);
 
   useLayoutEffect(() => {
+    // middle of page section
     const hero = heroRef.current;
 
     if (!hero) {
       return;
     }
 
-    if (!hasMounted.current) {
+    if (!hasScrolledToHeroOnLoad.current) {
       hero.scrollIntoView({ block: "start" });
-      hasMounted.current = true;
+      hasScrolledToHeroOnLoad.current = true;
       return;
     }
 
@@ -172,8 +201,8 @@ function App() {
   }, [contentShape]);
 
   return (
-    // whole thing
     <main className="bg-[#242424] text-white">
+      {/* pentagon bonus content */}
       {contentShape === "pentagon" && (
         <section className="grid min-h-screen place-items-center px-6 text-center text-white/55">
           <div>
@@ -189,7 +218,7 @@ function App() {
         className="grid min-h-screen place-items-center px-6"
         ref={heroRef}
       >
-        {/* triangle */}
+        {/* polygon gallery */}
         <div className="relative grid h-[720px] max-h-[86vh] w-[860px] max-w-[92vw] place-items-start justify-items-center pt-[180px] text-center">
           <button
             aria-label="previous shape"
@@ -250,6 +279,7 @@ function App() {
         </div>
       </section>
 
+      {/* triangle bonus content */}
       {contentShape === "triangle" && (
         <section className="grid min-h-screen place-items-center px-6 text-center text-white/55">
           <div>
