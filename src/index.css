@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  font-family:
-    "Lucida Console", Monaco, "Courier New", monospace;
+  font-family: "Lucida Console", Monaco, "Courier New", monospace;
   background: #242424;
   color: #ffffff;
 }
@@ -16,4 +15,43 @@ body,
 
 body {
   margin: 0;
+}
+
+.triangle-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.triangle-outline {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgb(255 255 255 / 0.42);
+  clip-path: polygon(
+    5% 5%,
+    50% 0%,
+    95% 5%,
+    50% 98%
+  );
+}
+
+.triangle-fill {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  bottom: 6px;
+  left: 6px;
+  background: #1b1b1b;
+  clip-path: polygon(
+    5% 5%,
+    50% 0%,
+    95% 5%,
+    50% 98%
+  );
 }
