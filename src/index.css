@@ -7,6 +7,17 @@
 }
 
 html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html,
 body,
 #root {
   min-height: 100%;
