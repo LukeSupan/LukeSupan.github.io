@@ -1,23 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import resumePdf from "./SupanResume.pdf";
 
 const shapes = ["triangle", "square", "pentagon"];
+
+function getPreviousShapeIndex(currentIndex) {
+  return currentIndex === 0 ? shapes.length - 1 : currentIndex - 1;
+}
+
+function getNextShapeIndex(currentIndex) {
+  return currentIndex === shapes.length - 1 ? 0 : currentIndex + 1;
+}
 
 function App() {
   const [shapeIndex, setShapeIndex] = useState(0);
   const shape = shapes[shapeIndex];
 
   function showPreviousShape() {
-    setShapeIndex((currentIndex) =>
-      currentIndex === 0 ? shapes.length - 1 : currentIndex - 1,
-    );
+    setShapeIndex(getPreviousShapeIndex);
   }
 
   function showNextShape() {
-    setShapeIndex((currentIndex) =>
-      currentIndex === shapes.length - 1 ? 0 : currentIndex + 1,
-    );
+    setShapeIndex(getNextShapeIndex);
   }
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === "ArrowLeft") {
+        setShapeIndex(getPreviousShapeIndex);
+      }
+
+      if (event.key === "ArrowRight") {
+        setShapeIndex(getNextShapeIndex);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     // whole thing
