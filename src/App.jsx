@@ -5,7 +5,7 @@ function App() {
     // whole thing
     <main className="grid min-h-screen place-items-center bg-[#242424] px-6 text-white">
       {/* triangle */}
-      <section className="relative grid h-[720px] max-h-[86vh] w-[860px] max-w-[92vw] place-items-start justify-items-center pt-[210px] text-center">
+      <section className="relative grid h-[720px] max-h-[86vh] w-[860px] max-w-[92vw] place-items-start justify-items-center pt-[180px] text-center">
         {/* name */}
         <div className="relative z-10">
           <h1 className="text-3xl font-normal">luke supan</h1>
