@@ -38,31 +38,44 @@ a {
   text-align: center;
 }
 
-.triangle-outline,
-.triangle-outline::before,
-.triangle-outline::after {
+.triangle-mark {
   position: absolute;
-  inset: 0;
-}
-
-.triangle-outline {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
 }
 
-.triangle-outline::before,
-.triangle-outline::after {
-  content: "";
-  clip-path: polygon(4% 5%, 47% 7%, 57% 6%, 96% 5%, 52% 94%, 50% 98%, 47% 94%);
+/* rough triangle outline. imperfection intentional but of course!!*/
+.triangle-outline,
+.triangle-fill {
+  position: absolute;
+  clip-path: polygon(
+    4% 5%,
+    47% 7%,
+    57% 6%,
+    96% 5%,
+    52% 94%,
+    50% 98%,
+    47% 94%
+  );
 }
 
-.triangle-outline::before {
+.triangle-outline {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: rgb(255 255 255 / 0.42);
 }
 
-.triangle-outline::after {
-  inset: 2px;
+.triangle-fill {
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
   background: #1b1b1b;
-  clip-path: polygon(5% 6%, 47% 8%, 57% 7%, 95% 6%, 52% 92.5%, 50% 96%, 48% 92.5%);
 }
 
 .portfolio-content {
