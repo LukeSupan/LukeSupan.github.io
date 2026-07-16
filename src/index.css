@@ -38,7 +38,7 @@ body {
 
 .shape-triangle .polygon-outline {
   clip-path: polygon(
-    50% 5%,
+    5% 5%,
     95% 5%,
     95% 5%,
     50% 98%,
@@ -58,7 +58,7 @@ body {
 
 .shape-triangle .polygon-fill {
   clip-path: polygon(
-    50% 5%,
+    5% 5%,
     95% 5%,
     95% 5%,
     50% 98%,
@@ -69,11 +69,11 @@ body {
 .shape-square .polygon-outline,
 .shape-square .polygon-fill {
   clip-path: polygon(
-    12% 12%,
-    88% 12%,
-    88% 88%,
-    50% 88%,
-    12% 88%
+    5% 5%,
+    95% 5%,
+    95% 95%,
+    50% 95%,
+    5% 95%
   );
 }
 
