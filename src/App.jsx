@@ -303,6 +303,9 @@ function App() {
             aria-hidden="true"
           >
             <div className="polygon-text-cover-fill"></div>
+            <div className="pyramid-reference">
+              <div className="pyramid-reference-ring"></div>
+            </div>
           </div>
         </div>
       </section>
