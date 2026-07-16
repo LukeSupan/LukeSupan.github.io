@@ -3,85 +3,17 @@
 :root {
   font-family:
     "Lucida Console", Monaco, "Courier New", monospace;
-  background: #171717;
+  background: #242424;
   color: #ffffff;
 }
 
-* {
-  box-sizing: border-box;
+html,
+body,
+#root {
+  min-height: 100%;
+  background: #242424;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
-}
-
-a {
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.35em;
-}
-
-.portfolio-shell {
-  position: relative;
-  display: grid;
-  place-items: center;
-  background: #242424;
-}
-
-.portfolio-stage {
-  position: relative;
-  display: grid;
-  place-items: start center;
-  width: 760px;
-  height: 640px;
-  max-width: 88vw;
-  max-height: 80vh;
-  padding-top: 140px;
-  text-align: center;
-}
-
-.triangle-mark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/* rough triangle outline. imperfection intentional but of course!!*/
-.triangle-outline,
-.triangle-fill {
-  position: absolute;
-  clip-path: polygon(
-    4% 5%,
-    47% 7%,
-    57% 6%,
-    96% 5%,
-    52% 94%,
-    50% 98%,
-    47% 94%
-  );
-}
-
-.triangle-outline {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgb(255 255 255 / 0.42);
-}
-
-.triangle-fill {
-  top: 2px;
-  right: 2px;
-  bottom: 2px;
-  left: 2px;
-  background: #1b1b1b;
-}
-
-.portfolio-content {
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 1px 10px rgb(0 0 0 / 0.35);
 }
