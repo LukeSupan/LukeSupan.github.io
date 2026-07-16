@@ -115,15 +115,15 @@ body {
   opacity: 1;
 }
 
-/* fill for triangle */
+/* fill for triangle. slightly pulled inward so the slanted border looks thicker */
 .shape-triangle .polygon-fill,
 .shape-triangle .polygon-text-cover-fill {
   clip-path: polygon(
-    5% 5%,
-    95% 5%,
-    95% 5%,
-    50% 98%,
-    5% 5%
+    5.4% 5%,
+    94.6% 5%,
+    94.6% 5%,
+    50% 97.6%,
+    5.4% 5%
   );
 }
 
