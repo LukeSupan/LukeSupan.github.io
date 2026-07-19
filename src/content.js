@@ -173,7 +173,7 @@ export const galleryDrafts = [
     label: "halo wars",
   },
   {
-    detail: "so cool. spoilers for chainsaw man reze...",
+    detail: "so cool. spoilers for chainsaw man reze.",
     href: "https://youtu.be/ZeTlktszpng?t=29",
     label: "neat",
   },
