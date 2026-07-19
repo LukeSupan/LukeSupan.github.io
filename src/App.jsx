@@ -1,9 +1,24 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import resumePdf from "./SupanResume.pdf";
 
 // three for now. honestly really just need two but you gotta have a square to have a pentagon
 // could shoot for up arrow down arrow but. eh. this is stylish
 const shapes = ["triangle", "square", "pentagon"];
+
+const shapePages = {
+  triangle: {
+    eyebrow: "triangle page",
+    body: "placeholder for triangle content",
+  },
+  square: {
+    eyebrow: "square page",
+    body: "placeholder for square content",
+  },
+  pentagon: {
+    eyebrow: "pentagon page",
+    body: "placeholder for pentagon content",
+  },
+};
 
 function getPreviousShapeIndex(currentIndex) {
   return currentIndex === 0 ? shapes.length - 1 : currentIndex - 1;
@@ -35,47 +50,18 @@ function App() {
   // store text cover timer so it stays visible if you spam shape swap
   const textCoverTimeout = useRef(null);
 
-  // during a shape change, this blocks a scroll direction (makes it cleaner)
-  const scrollLockDirection = useRef(null);
-
-  // store scroll lock timer that turns the scroll lock back off.
-  const scrollLockTimeout = useRef(null);
-
-  // for mobile. determine up or down scroll
-  const touchStartY = useRef(null);
-
   // index to shape converter
   const visualShape = shapes[visualShapeIndex];
   const contentShape = shapes[contentShapeIndex];
-
-  // lock the direction of previous shape. prevents user breaking the scroll (roughly)
-  function lockOldRevealDirection(previousShape) {
-    window.clearTimeout(scrollLockTimeout.current);
-
-    if (previousShape === "triangle") {
-      scrollLockDirection.current = "down";
-    } else if (previousShape === "pentagon") {
-      scrollLockDirection.current = "up";
-    } else {
-      scrollLockDirection.current = null;
-      return;
-    }
-
-    scrollLockTimeout.current = window.setTimeout(() => {
-      scrollLockDirection.current = null;
-    }, 800);
-  }
+  const pageContent = shapePages[contentShape];
 
   // change shape on button press
-  function changeShape(getShapeIndex) {
+  const changeShape = useCallback((getShapeIndex) => {
     const nextShapeIndex = getShapeIndex(visualShapeIndex);
-
-    const previousShape = shapes[visualShapeIndex];
 
     // clear an old timeout if it exists
     window.clearTimeout(contentSwapTimeout.current);
     window.clearTimeout(textCoverTimeout.current);
-    lockOldRevealDirection(previousShape);
     setIsTextCoverVisible(true);
     setVisualShapeIndex(nextShapeIndex);
 
@@ -94,7 +80,7 @@ function App() {
     textCoverTimeout.current = window.setTimeout(() => {
       setIsTextCoverVisible(false);
     }, 700);
-  }
+  }, [visualShapeIndex]);
 
   function showPreviousShape() {
     changeShape(getPreviousShapeIndex);
@@ -121,79 +107,13 @@ function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [visualShapeIndex]);
+  }, [changeShape]);
 
   // timer cancel insurance
   useEffect(() => {
     return () => {
       window.clearTimeout(contentSwapTimeout.current);
       window.clearTimeout(textCoverTimeout.current);
-      window.clearTimeout(scrollLockTimeout.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    function isLockedScroll(scrollAmount) {
-      return (
-        (scrollLockDirection.current === "down" && scrollAmount > 0) ||
-        (scrollLockDirection.current === "up" && scrollAmount < 0)
-      );
-    }
-
-    function handleWheel(event) {
-      if (isLockedScroll(event.deltaY)) {
-        event.preventDefault();
-      }
-    }
-
-    function handleTouchStart(event) {
-      touchStartY.current = event.touches[0]?.clientY ?? null;
-    }
-
-    function handleTouchMove(event) {
-      if (touchStartY.current === null) {
-        return;
-      }
-
-      // compare the finger's starting spot to its current spot to get scroll direction on mobile
-      const currentY = event.touches[0]?.clientY ?? touchStartY.current;
-      const scrollAmount = touchStartY.current - currentY;
-
-      if (isLockedScroll(scrollAmount)) {
-        event.preventDefault();
-      }
-    }
-
-    function handleScrollKey(event) {
-      // keyboard keys translated into scroll direction. negative is up, positive is down. thats just how browser works.
-      const scrollAmounts = {
-        ArrowUp: -1,
-        PageUp: -1,
-        Home: -1,
-        ArrowDown: 1,
-        PageDown: 1,
-        End: 1,
-        " ": 1,
-      };
-
-      // if this key is not in the list. nothing happens. undefined.
-      const scrollAmount = scrollAmounts[event.key];
-
-      if (scrollAmount && isLockedScroll(scrollAmount)) {
-        event.preventDefault();
-      }
-    }
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("keydown", handleScrollKey);
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("keydown", handleScrollKey);
     };
   }, []);
 
@@ -216,18 +136,6 @@ function App() {
 
   return (
     <main className="bg-[#242424] text-white">
-      {/* pentagon bonus content */}
-      {contentShape === "pentagon" && (
-        <section className="grid min-h-screen place-items-center px-6 text-center text-white/55">
-          <div>
-            <p className="text-sm">upper reveal</p>
-            <p className="mt-4 max-w-md text-xs leading-6">
-              placeholder for pentagon direction (up duh)
-            </p>
-          </div>
-        </section>
-      )}
-
       <section
         className="grid min-h-screen place-items-center px-6"
         ref={heroRef}
@@ -307,17 +215,12 @@ function App() {
         </div>
       </section>
 
-      {/* triangle bonus content */}
-      {contentShape === "triangle" && (
-        <section className="grid min-h-screen place-items-center px-6 text-center text-white/55">
-          <div>
-            <p className="text-sm">lower reveal</p>
-            <p className="mt-4 max-w-md text-xs leading-6">
-              placeholder for triangle direction (down duh)
-            </p>
-          </div>
-        </section>
-      )}
+      <section className="grid min-h-screen place-items-center px-6 text-center text-white/55">
+        <div>
+          <p className="text-sm">{pageContent.eyebrow}</p>
+          <p className="mt-4 max-w-md text-xs leading-6">{pageContent.body}</p>
+        </div>
+      </section>
     </main>
   );
 }
