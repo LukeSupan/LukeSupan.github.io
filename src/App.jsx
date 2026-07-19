@@ -296,6 +296,10 @@ function ShapeDetailSection({
   }, []);
 
   function openLightbox(images, index) {
+    if (window.matchMedia("(max-width: 639px)").matches) {
+      return;
+    }
+
     setLightbox({ images, index });
   }
 

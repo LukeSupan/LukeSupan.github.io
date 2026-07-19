@@ -748,6 +748,11 @@ button:focus-visible {
     max-height: 520px;
   }
 
+  .image-open-button {
+    cursor: default;
+    pointer-events: none;
+  }
+
   .gallery-grid {
     grid-template-columns: 1fr;
   }
