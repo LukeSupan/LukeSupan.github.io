@@ -1,8 +1,3 @@
-# lukesupan-github-io
+# lukesupan.com
 
-Minimal React + Tailwind starter.
-
-```sh
-npm install
-npm run dev
-```
+portfolio site with shapes. nice shames
