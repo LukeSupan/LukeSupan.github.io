@@ -38,6 +38,15 @@ function getLinksForShape(shape) {
     ];
   }
 
+  if (shape === "pentagon") {
+    return [
+      { href: "#", label: "spotify" },
+      { href: "#", label: "halo wars" },
+      { href: "#", label: "neat" },
+      { href: "#", label: "backloggd" },
+    ];
+  }
+
   return [
     { href: "mailto:lukesupan@outlook.com", label: "email" },
     { href: "https://github.com/LukeSupan", label: "github" },
