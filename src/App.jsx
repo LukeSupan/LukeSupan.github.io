@@ -135,7 +135,7 @@ function App() {
   }, [contentShape]);
 
   return (
-    <main className="bg-[#242424] text-white">
+    <main className="site-shell text-white">
       <section
         className="grid min-h-screen place-items-center px-6"
         ref={heroRef}
