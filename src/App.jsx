@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
+  aboutImages,
   aboutNotes,
   galleryDrafts,
+  galleryImages,
   getLinksForShape,
   projectDrafts,
   shapePages,
@@ -53,6 +55,192 @@ function DetailMark({ shape }) {
   );
 }
 
+function ProjectImages({ images, onOpen }) {
+  if (!images?.length) {
+    return null;
+  }
+
+  return (
+    <div className="project-images">
+      {images.map((image, index) => (
+        <button
+          aria-label={`open ${image.alt}`}
+          className="image-open-button"
+          key={image.src}
+          onClick={() => onOpen(images, index)}
+          type="button"
+        >
+          <img
+            alt={image.alt}
+            decoding="async"
+            loading="lazy"
+            src={image.src}
+          />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function GalleryImages({ onOpen }) {
+  return (
+    <div className="gallery-photo-grid">
+      {galleryImages.map((image, index) => (
+        <figure className="gallery-photo" key={image.src}>
+          <button
+            aria-label={`open ${image.alt}`}
+            className="image-open-button"
+            onClick={() => onOpen(galleryImages, index)}
+            type="button"
+          >
+            <img
+              alt={image.alt}
+              decoding="async"
+              loading="lazy"
+              src={image.src}
+            />
+          </button>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+function AboutImages({ onOpen }) {
+  return (
+    <div className="about-images">
+      {aboutImages.map((image, index) => (
+        <button
+          aria-label={`open ${image.alt}`}
+          className={`image-open-button about-image about-image-${image.orientation}`}
+          key={image.src}
+          onClick={() => onOpen(aboutImages, index)}
+          type="button"
+        >
+          <img
+            alt={image.alt}
+            decoding="async"
+            loading="lazy"
+            src={image.src}
+          />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ImageLightbox({ lightbox, onClose, onNext, onPrevious }) {
+  const touchStartX = useRef(null);
+  const image = lightbox?.images[lightbox.index];
+  const imageCount = lightbox?.images.length ?? 0;
+
+  useEffect(() => {
+    if (!lightbox) {
+      return;
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [lightbox, onClose]);
+
+  if (!lightbox || !image) {
+    return null;
+  }
+
+  function handleTouchStart(event) {
+    touchStartX.current = event.touches[0]?.clientX ?? null;
+  }
+
+  function handleTouchEnd(event) {
+    if (touchStartX.current === null) {
+      return;
+    }
+
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const swipeDistance = touchStartX.current - touchEndX;
+
+    touchStartX.current = null;
+
+    if (Math.abs(swipeDistance) < 40) {
+      return;
+    }
+
+    if (swipeDistance > 0) {
+      onNext();
+      return;
+    }
+
+    onPrevious();
+  }
+
+  return (
+    <div
+      aria-label="image viewer"
+      aria-modal="true"
+      className="lightbox"
+      onClick={onClose}
+      role="dialog"
+    >
+      <button
+        aria-label="close image viewer"
+        className="lightbox-close"
+        onClick={onClose}
+        type="button"
+      >
+        x
+      </button>
+
+      <button
+        aria-label="previous image"
+        className="lightbox-button lightbox-button-previous"
+        onClick={(event) => {
+          event.stopPropagation();
+          onPrevious();
+        }}
+        type="button"
+      >
+        &lt;
+      </button>
+
+      <figure
+        className="lightbox-frame"
+        onClick={(event) => event.stopPropagation()}
+        onTouchEnd={handleTouchEnd}
+        onTouchStart={handleTouchStart}
+      >
+        <img alt={image.alt} src={image.src} />
+        <figcaption>
+          <span>{image.alt}</span>
+          <span>
+            {lightbox.index + 1} / {imageCount}
+          </span>
+        </figcaption>
+      </figure>
+
+      <button
+        aria-label="next image"
+        className="lightbox-button lightbox-button-next"
+        onClick={(event) => {
+          event.stopPropagation();
+          onNext();
+        }}
+        type="button"
+      >
+        &gt;
+      </button>
+    </div>
+  );
+}
+
 function ShapeDetailSection({
   isTransitioning,
   onNext,
@@ -63,6 +251,7 @@ function ShapeDetailSection({
   const page = shapePages[shape];
   const topbarRef = useRef(null);
   const [isTopbarStuck, setIsTopbarStuck] = useState(false);
+  const [lightbox, setLightbox] = useState(null);
   const detailControls = (
     <div className="detail-controls" aria-label="section controls">
       <button
@@ -106,6 +295,46 @@ function ShapeDetailSection({
     };
   }, []);
 
+  function openLightbox(images, index) {
+    setLightbox({ images, index });
+  }
+
+  function closeLightbox() {
+    setLightbox(null);
+  }
+
+  function showPreviousLightboxImage() {
+    setLightbox((currentLightbox) => {
+      if (!currentLightbox) {
+        return currentLightbox;
+      }
+
+      return {
+        ...currentLightbox,
+        index:
+          currentLightbox.index === 0
+            ? currentLightbox.images.length - 1
+            : currentLightbox.index - 1,
+      };
+    });
+  }
+
+  function showNextLightboxImage() {
+    setLightbox((currentLightbox) => {
+      if (!currentLightbox) {
+        return currentLightbox;
+      }
+
+      return {
+        ...currentLightbox,
+        index:
+          currentLightbox.index === currentLightbox.images.length - 1
+            ? 0
+            : currentLightbox.index + 1,
+      };
+    });
+  }
+
   return (
     <section className={`detail-section detail-${shape}`}>
       <div className="detail-shell">
@@ -133,6 +362,8 @@ function ShapeDetailSection({
                   <p key={note}>{note}</p>
                 ))}
               </div>
+
+              <AboutImages onOpen={openLightbox} />
             </div>
           )}
 
@@ -142,20 +373,24 @@ function ShapeDetailSection({
 
               <div className="project-list">
                 {projectDrafts.map((project) => (
-                  <a
+                  <article
                     className="project-row"
-                    href={project.href}
                     key={project.label}
-                    onClick={
-                      project.href === "#"
-                        ? (event) => event.preventDefault()
-                        : undefined
-                    }
-                    rel={project.href === "#" ? undefined : "noreferrer"}
-                    target={project.href === "#" ? undefined : "_blank"}
                   >
                     <div className="project-copy">
-                      <strong>{project.label}</strong>
+                      <a
+                        className="project-title-link"
+                        href={project.href}
+                        onClick={
+                          project.href === "#"
+                            ? (event) => event.preventDefault()
+                            : undefined
+                        }
+                        rel={project.href === "#" ? undefined : "noreferrer"}
+                        target={project.href === "#" ? undefined : "_blank"}
+                      >
+                        <strong>{project.label}</strong>
+                      </a>
                       <small>
                         {project.tech} - {project.date}
                       </small>
@@ -166,8 +401,10 @@ function ShapeDetailSection({
                           <li key={point}>{point}</li>
                         ))}
                       </ul>
+
+                      <ProjectImages images={project.images} onOpen={openLightbox} />
                     </div>
-                  </a>
+                  </article>
                 ))}
               </div>
             </>
@@ -181,19 +418,29 @@ function ShapeDetailSection({
                 {galleryDrafts.map((item) => (
                   <a
                     className="gallery-item"
-                    href="#"
+                    href={item.href}
                     key={item.label}
-                    onClick={(event) => event.preventDefault()}
+                    rel="noreferrer"
+                    target="_blank"
                   >
                     <span>{item.label}</span>
                     <p>{item.detail}</p>
                   </a>
                 ))}
               </div>
+
+              <GalleryImages onOpen={openLightbox} />
             </>
           )}
         </div>
       </div>
+
+      <ImageLightbox
+        lightbox={lightbox}
+        onClose={closeLightbox}
+        onNext={showNextLightboxImage}
+        onPrevious={showPreviousLightboxImage}
+      />
     </section>
   );
 }
@@ -285,6 +532,10 @@ function App() {
   // change shape with arrow keys on desktop
   useEffect(() => {
     function handleKeyDown(event) {
+      if (document.querySelector(".lightbox")) {
+        return;
+      }
+
       if (event.key === "ArrowLeft") {
         changeShape(getPreviousShapeIndex);
       }
