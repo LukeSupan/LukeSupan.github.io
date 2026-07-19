@@ -255,7 +255,13 @@ function App() {
             >
               <h1 className="polygon-name font-normal">luke supan</h1>
 
-              <nav className="polygon-links flex flex-col items-center text-white/55">
+              <nav
+                className={`polygon-links text-white/55 ${
+                  contentShape === "square"
+                    ? "polygon-links-grid"
+                    : "flex flex-col items-center"
+                }`}
+              >
                 {heroLinks.map((link) => (
                   <a
                     className="transition hover:text-white"
@@ -313,7 +319,11 @@ function App() {
             </button>
           </div>
 
-          <nav className="hero-links">
+          <nav
+            className={`hero-links mobile-hero-links ${
+              isTextCoverVisible ? "is-changing" : ""
+            }`}
+          >
             {heroLinks.map((link) => (
               <a
                 className="transition hover:text-white"
