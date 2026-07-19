@@ -524,6 +524,7 @@ button:focus-visible {
   margin: 22px 0 0;
   font-size: 1.04rem;
   line-height: 1.65;
+  pointer-events: none;
 }
 
 .gallery-photo-grid {
