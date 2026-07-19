@@ -643,7 +643,6 @@ button:focus-visible {
       linear-gradient(rgb(255 255 255 / 0.014) 1px, transparent 1px),
       linear-gradient(90deg, rgb(255 255 255 / 0.014) 1px, transparent 1px);
     font-weight: 600;
-    text-shadow: 0.22px 0 currentColor;
   }
 
   .hero-section {
