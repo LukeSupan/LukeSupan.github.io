@@ -5,11 +5,6 @@ import resumePdf from "./SupanResume.pdf";
 // could shoot for up arrow down arrow but. eh. this is stylish
 const shapes = ["triangle", "square", "pentagon"];
 
-const gallerySize = {
-  width: 860,
-  height: 720,
-};
-
 const shapePages = {
   triangle: {
     eyebrow: "triangle page",
@@ -33,29 +28,12 @@ function getNextShapeIndex(currentIndex) {
   return currentIndex === shapes.length - 1 ? 0 : currentIndex + 1;
 }
 
-function getGalleryScale() {
-  if (typeof window === "undefined") {
-    return 1;
-  }
-
-  return Math.min(
-    1,
-    (window.innerWidth * 0.92) / gallerySize.width,
-    (window.innerHeight * 0.86) / gallerySize.height,
-  );
-}
-
 function App() {
   // polygons current visual
   const [visualShapeIndex, setVisualShapeIndex] = useState(0);
 
   // polygons current ruleset for displaying content (changes after visual)
   const [contentShapeIndex, setContentShapeIndex] = useState(0);
-
-  // white polygon cover that hides the text during shape changes
-  const [isTextCoverVisible, setIsTextCoverVisible] = useState(false);
-
-  const [galleryScale, setGalleryScale] = useState(getGalleryScale);
 
   // used to point at middle
   const heroRef = useRef(null);
@@ -65,9 +43,6 @@ function App() {
 
   // store content swap timer so it can be cancelled if you shape swap again instantly
   const contentSwapTimeout = useRef(null);
-
-  // store text cover timer so it stays visible if you spam shape swap
-  const textCoverTimeout = useRef(null);
 
   // index to shape converter
   const visualShape = shapes[visualShapeIndex];
@@ -80,8 +55,6 @@ function App() {
 
     // clear an old timeout if it exists
     window.clearTimeout(contentSwapTimeout.current);
-    window.clearTimeout(textCoverTimeout.current);
-    setIsTextCoverVisible(true);
     setVisualShapeIndex(nextShapeIndex);
 
     // scroll to the shape
@@ -95,10 +68,6 @@ function App() {
       setContentShapeIndex(nextShapeIndex);
     }, 475);
 
-    // keep the cover on until the polygon has been stable for a moment
-    textCoverTimeout.current = window.setTimeout(() => {
-      setIsTextCoverVisible(false);
-    }, 700);
   }, [visualShapeIndex]);
 
   function showPreviousShape() {
@@ -132,20 +101,6 @@ function App() {
   useEffect(() => {
     return () => {
       window.clearTimeout(contentSwapTimeout.current);
-      window.clearTimeout(textCoverTimeout.current);
-    };
-  }, []);
-
-  useLayoutEffect(() => {
-    function updateGalleryScale() {
-      setGalleryScale(getGalleryScale());
-    }
-
-    updateGalleryScale();
-    window.addEventListener("resize", updateGalleryScale);
-
-    return () => {
-      window.removeEventListener("resize", updateGalleryScale);
     };
   }, []);
 
@@ -168,22 +123,11 @@ function App() {
 
   return (
     <main className="site-shell text-white">
-      <section
-        className="grid min-h-screen place-items-center px-6"
-        ref={heroRef}
-      >
-        {/* polygon gallery */}
-        <div
-          className="polygon-gallery-frame"
-          style={{
-            height: `${gallerySize.height * galleryScale}px`,
-            width: `${gallerySize.width * galleryScale}px`,
-          }}
-        >
-          <div
-            className="polygon-gallery"
-            style={{ transform: `scale(${galleryScale})` }}
-          >
+      <section className="hero-section" ref={heroRef}>
+        <div className="hero-stack">
+          <h1 className="hero-name">luke supan</h1>
+
+          <div className="shape-motion-row">
             <button
               aria-label="previous shape"
               className="shape-button shape-button-previous"
@@ -193,6 +137,11 @@ function App() {
               &lt;
             </button>
 
+            <div className={`shape-object shape-${visualShape}`} aria-hidden="true">
+              <div className="polygon-outline"></div>
+              <div className="polygon-fill"></div>
+            </div>
+
             <button
               aria-label="next shape"
               className="shape-button shape-button-next"
@@ -201,60 +150,34 @@ function App() {
             >
               &gt;
             </button>
-
-            {/* name */}
-            <div
-              className={`polygon-content relative z-10 ${
-                isTextCoverVisible ? "is-covered" : ""
-              }`}
-            >
-              <h1 className="polygon-name font-normal">luke supan</h1>
-
-              {/* links to my stuff*/}
-              <nav className="polygon-links flex flex-col items-center text-white/55">
-                <a
-                  className="transition hover:text-white"
-                  href="mailto:lukesupan@outlook.com"
-                  target="_blank"
-                >
-                  email
-                </a>
-                <a
-                  className="transition hover:text-white"
-                  href="https://github.com/LukeSupan"
-                  target="_blank"
-                >
-                  github
-                </a>
-                <a className="transition hover:text-white" href="#" target="_blank">
-                  linkedin
-                </a>
-                <a
-                  className="transition hover:text-white"
-                  href={resumePdf}
-                  target="_blank"
-                >
-                  resume
-                </a>
-              </nav>
-            </div>
-
-            {/* polygon */}
-            <div className={`polygon-mark shape-${visualShape}`} aria-hidden="true">
-              <div className="polygon-outline"></div>
-              <div className="polygon-fill"></div>
-            </div>
-
-            {/* fades over the words while the content is swapping */}
-            <div
-              className={`polygon-text-cover shape-${visualShape} ${
-                isTextCoverVisible ? "is-visible" : ""
-              }`}
-              aria-hidden="true"
-            >
-              <div className="polygon-text-cover-fill"></div>
-            </div>
           </div>
+
+          <nav className="hero-links">
+            <a
+              className="transition hover:text-white"
+              href="mailto:lukesupan@outlook.com"
+              target="_blank"
+            >
+              email
+            </a>
+            <a
+              className="transition hover:text-white"
+              href="https://github.com/LukeSupan"
+              target="_blank"
+            >
+              github
+            </a>
+            <a className="transition hover:text-white" href="#" target="_blank">
+              linkedin
+            </a>
+            <a
+              className="transition hover:text-white"
+              href={resumePdf}
+              target="_blank"
+            >
+              resume
+            </a>
+          </nav>
         </div>
       </section>
 
