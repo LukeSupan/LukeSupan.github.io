@@ -105,13 +105,13 @@ body {
 }
 
 .polygon-name {
-  font-size: 30px;
+  font-size: 36px;
 }
 
 .polygon-links {
   gap: 12px;
   margin-top: 32px;
-  font-size: 18px;
+  font-size: 21px;
 }
 
 .polygon-links-grid {
@@ -331,11 +331,11 @@ body {
 
   .shape-motion-row {
     width: 100%;
-    gap: 10px;
+    gap: 18px;
   }
 
   .shape-object {
-    width: min(56vw, 250px);
+    width: min(50vw, 235px);
   }
 
   .mobile-shape-button {
@@ -348,7 +348,7 @@ body {
 
   .hero-links {
     width: min(360px, 100%);
-    gap: 12px 18px;
+    gap: 20px 30px;
     font-size: 0.95rem;
   }
 

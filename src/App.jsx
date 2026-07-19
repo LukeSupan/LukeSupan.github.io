@@ -10,7 +10,8 @@ const gallerySize = {
   height: 720,
 };
 
-const gridSize = 64;
+const desktopGridSize = 64;
+const mobileGridSize = 82;
 
 const shapePages = {
   triangle: {
@@ -168,6 +169,8 @@ function App() {
         basePixelRatio.current;
       const pinchZoom = window.visualViewport?.scale || 1;
       const visibleScale = Math.max(browserZoom * pinchZoom, 0.1);
+      const gridSize =
+        window.innerWidth < 640 ? mobileGridSize : desktopGridSize;
 
       document.documentElement.style.setProperty(
         "--grid-size",
