@@ -108,6 +108,41 @@ button:focus-visible {
   right: -46px;
 }
 
+.shape-section-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  color: rgb(255 255 255 / 0.44);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  transition: opacity 420ms ease;
+}
+
+.shape-section-nav.is-changing {
+  opacity: 0.38;
+}
+
+.shape-section-nav button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  transition: color 150ms ease;
+}
+
+.shape-section-nav button:hover,
+.shape-section-nav button[aria-pressed="true"] {
+  color: #ffffff;
+}
+
+.shape-section-nav button[aria-pressed="true"] {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
 .polygon-content {
   transition: opacity 420ms ease;
 }
@@ -238,7 +273,7 @@ button:focus-visible {
   top: 0;
   z-index: 30;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 24px;
   margin-bottom: 38px;
@@ -255,6 +290,7 @@ button:focus-visible {
   display: flex;
   width: 104px;
   gap: 28px;
+  grid-column: 3;
   justify-self: end;
 }
 
@@ -274,15 +310,18 @@ button:focus-visible {
   color: #ffffff;
 }
 
-.detail-control-spacer {
-  display: block;
-  min-width: 24px;
+.detail-section-nav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .detail-heading {
   display: flex;
   align-items: center;
   gap: 14px;
+  grid-column: 1;
   justify-self: start;
   color: rgb(255 255 255 / 0.82);
   font-size: 1.04rem;
@@ -717,13 +756,12 @@ button:focus-visible {
     gap: 24px;
   }
 
-  .detail-button {
-    font-size: 2rem;
+  .detail-section-nav {
+    display: none;
   }
 
-  .detail-control-spacer {
-    display: block;
-    min-width: 8px;
+  .detail-button {
+    font-size: 2rem;
   }
 
   .detail-heading {
@@ -825,6 +863,7 @@ button:focus-visible {
   .mobile-hero-links,
   .desktop-shape-button,
   .mobile-shape-button,
+  .shape-section-nav,
   .detail-button,
   .detail-content,
   .detail-heading p {

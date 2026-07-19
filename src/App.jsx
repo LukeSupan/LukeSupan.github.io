@@ -46,6 +46,33 @@ function ShapeLinks({ className, links }) {
   );
 }
 
+function ShapeSectionNav({
+  className = "",
+  currentShape,
+  isTransitioning = false,
+  onSelect,
+}) {
+  return (
+    <nav
+      aria-label="section navigation"
+      className={`shape-section-nav ${className} ${
+        isTransitioning ? "is-changing" : ""
+      }`}
+    >
+      {shapes.map((shape, index) => (
+        <button
+          aria-pressed={currentShape === shape}
+          key={shape}
+          onClick={() => onSelect(index)}
+          type="button"
+        >
+          {shapePages[shape].eyebrow}
+        </button>
+      ))}
+    </nav>
+  );
+}
+
 function DetailMark({ shape }) {
   return (
     <span className={`detail-mark shape-${shape}`} aria-hidden="true">
@@ -256,6 +283,7 @@ function ShapeDetailSection({
   isTransitioning,
   onNext,
   onPrevious,
+  onSelectShape,
   sectionRef,
   shape,
   visualShape,
@@ -363,7 +391,12 @@ function ShapeDetailSection({
             <p className={isTransitioning ? "is-changing" : ""}>{page.eyebrow}</p>
           </div>
 
-          <span aria-hidden="true" className="detail-control-spacer"></span>
+          <ShapeSectionNav
+            className="detail-section-nav"
+            currentShape={visualShape}
+            isTransitioning={isTransitioning}
+            onSelect={onSelectShape}
+          />
 
           {detailControls}
         </header>
@@ -537,6 +570,19 @@ function App() {
   const changeShape = useCallback((getShapeIndex, options = {}) => {
     const nextShapeIndex = getShapeIndex(visualShapeIndex);
 
+    if (nextShapeIndex === visualShapeIndex) {
+      shouldScrollDetailAfterSwap.current = false;
+
+      if (options.scrollDetail) {
+        detailSectionRef.current?.scrollIntoView({
+          block: "start",
+          behavior: getPreferredScrollBehavior(),
+        });
+      }
+
+      return;
+    }
+
     // clear an old timeout if it exists
     window.clearTimeout(contentSwapTimeout.current);
     window.clearTimeout(textTransitionTimeout.current);
@@ -569,6 +615,10 @@ function App() {
 
   function showNextDetailShape() {
     changeShape(getNextShapeIndex, { scrollDetail: true });
+  }
+
+  function showDetailShapeByIndex(shapeIndex) {
+    changeShape(() => shapeIndex);
   }
 
   function handlePageTouchStart(event) {
@@ -836,6 +886,7 @@ function App() {
         isTransitioning={isTextTransitioning}
         onNext={showNextDetailShape}
         onPrevious={showPreviousDetailShape}
+        onSelectShape={showDetailShapeByIndex}
         sectionRef={detailSectionRef}
         shape={contentShape}
         visualShape={visualShape}
