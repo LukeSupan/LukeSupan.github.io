@@ -34,6 +34,17 @@ body {
   overflow-x: hidden;
 }
 
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 1px solid rgb(255 255 255 / 0.7);
+  outline-offset: 6px;
+}
+
 .site-shell {
   min-height: 100vh;
   background-color: #242424;
@@ -341,5 +352,17 @@ body {
     opacity: 0;
     filter: blur(4px);
     transform: translateY(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-polygon-gallery,
+  .polygon-content,
+  .polygon-fill,
+  .polygon-outline,
+  .mobile-hero-links,
+  .desktop-shape-button,
+  .mobile-shape-button {
+    transition-duration: 1ms;
   }
 }

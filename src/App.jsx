@@ -55,6 +55,31 @@ function getLinksForShape(shape) {
   ];
 }
 
+function ShapeLinks({ className, links }) {
+  return (
+    <nav className={className}>
+      {links.map((link) => {
+        const isPlaceholder = link.href === "#";
+        const opensNewTab =
+          !isPlaceholder && !link.href.startsWith("mailto:");
+
+        return (
+          <a
+            className="transition hover:text-white"
+            href={link.href}
+            key={link.label}
+            onClick={isPlaceholder ? (event) => event.preventDefault() : undefined}
+            rel={opensNewTab ? "noreferrer" : undefined}
+            target={opensNewTab ? "_blank" : undefined}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+    </nav>
+  );
+}
+
 function getPreviousShapeIndex(currentIndex) {
   return currentIndex === 0 ? shapes.length - 1 : currentIndex - 1;
 }
@@ -82,8 +107,8 @@ function App() {
   // polygons current ruleset for displaying content (changes after visual)
   const [contentShapeIndex, setContentShapeIndex] = useState(0);
 
-  // white polygon cover that hides the text during shape changes
-  const [isTextCoverVisible, setIsTextCoverVisible] = useState(false);
+  // hides text/links briefly while shape-specific content swaps
+  const [isTextTransitioning, setIsTextTransitioning] = useState(false);
 
   const [galleryScale, setGalleryScale] = useState(getGalleryScale);
 
@@ -96,12 +121,14 @@ function App() {
   const basePixelRatio = useRef(
     typeof window === "undefined" ? 1 : window.devicePixelRatio || 1,
   );
+  const galleryScaleFrame = useRef(null);
+  const gridSizeFrame = useRef(null);
 
   // store content swap timer so it can be cancelled if you shape swap again instantly
   const contentSwapTimeout = useRef(null);
 
-  // store text cover timer so it stays visible if you spam shape swap
-  const textCoverTimeout = useRef(null);
+  // store text transition timer so it stays consistent if you spam shape swap
+  const textTransitionTimeout = useRef(null);
 
   // index to shape converter
   const visualShape = shapes[visualShapeIndex];
@@ -115,8 +142,8 @@ function App() {
 
     // clear an old timeout if it exists
     window.clearTimeout(contentSwapTimeout.current);
-    window.clearTimeout(textCoverTimeout.current);
-    setIsTextCoverVisible(true);
+    window.clearTimeout(textTransitionTimeout.current);
+    setIsTextTransitioning(true);
     setVisualShapeIndex(nextShapeIndex);
 
     // scroll to the shape
@@ -130,9 +157,9 @@ function App() {
       setContentShapeIndex(nextShapeIndex);
     }, 475);
 
-    // keep the cover on until the polygon has been stable for a moment
-    textCoverTimeout.current = window.setTimeout(() => {
-      setIsTextCoverVisible(false);
+    // keep text hidden until the polygon has been stable for a moment
+    textTransitionTimeout.current = window.setTimeout(() => {
+      setIsTextTransitioning(false);
     }, 700);
   }, [visualShapeIndex]);
 
@@ -167,7 +194,9 @@ function App() {
   useEffect(() => {
     return () => {
       window.clearTimeout(contentSwapTimeout.current);
-      window.clearTimeout(textCoverTimeout.current);
+      window.clearTimeout(textTransitionTimeout.current);
+      window.cancelAnimationFrame(galleryScaleFrame.current);
+      window.cancelAnimationFrame(gridSizeFrame.current);
     };
   }, []);
 
@@ -187,27 +216,42 @@ function App() {
       );
     }
 
+    function queueGridSizeUpdate() {
+      window.cancelAnimationFrame(gridSizeFrame.current);
+      gridSizeFrame.current = window.requestAnimationFrame(updateGridSize);
+    }
+
     updateGridSize();
-    window.addEventListener("resize", updateGridSize);
-    window.visualViewport?.addEventListener("resize", updateGridSize);
+    window.addEventListener("resize", queueGridSizeUpdate);
+    window.visualViewport?.addEventListener("resize", queueGridSizeUpdate);
 
     return () => {
-      window.removeEventListener("resize", updateGridSize);
-      window.visualViewport?.removeEventListener("resize", updateGridSize);
+      window.removeEventListener("resize", queueGridSizeUpdate);
+      window.visualViewport?.removeEventListener("resize", queueGridSizeUpdate);
+      window.cancelAnimationFrame(gridSizeFrame.current);
       document.documentElement.style.removeProperty("--grid-size");
     };
   }, []);
 
   useLayoutEffect(() => {
     function updateGalleryScale() {
-      setGalleryScale(getGalleryScale());
+      const nextScale = getGalleryScale();
+      setGalleryScale((currentScale) =>
+        currentScale === nextScale ? currentScale : nextScale,
+      );
+    }
+
+    function queueGalleryScaleUpdate() {
+      window.cancelAnimationFrame(galleryScaleFrame.current);
+      galleryScaleFrame.current = window.requestAnimationFrame(updateGalleryScale);
     }
 
     updateGalleryScale();
-    window.addEventListener("resize", updateGalleryScale);
+    window.addEventListener("resize", queueGalleryScaleUpdate);
 
     return () => {
-      window.removeEventListener("resize", updateGalleryScale);
+      window.removeEventListener("resize", queueGalleryScaleUpdate);
+      window.cancelAnimationFrame(galleryScaleFrame.current);
     };
   }, []);
 
@@ -262,29 +306,19 @@ function App() {
 
             <div
               className={`polygon-content relative z-10 ${
-                isTextCoverVisible ? "is-covered" : ""
+                isTextTransitioning ? "is-covered" : ""
               }`}
             >
               <h1 className="polygon-name font-normal">luke supan</h1>
 
-              <nav
+              <ShapeLinks
                 className={`polygon-links text-white/55 ${
                   contentShape === "square"
                     ? "polygon-links-grid"
                     : "flex flex-col items-center"
                 }`}
-              >
-                {heroLinks.map((link) => (
-                  <a
-                    className="transition hover:text-white"
-                    href={link.href}
-                    key={link.label}
-                    target="_blank"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
+                links={heroLinks}
+              />
             </div>
 
             <div className={`polygon-mark shape-${visualShape}`} aria-hidden="true">
@@ -323,22 +357,12 @@ function App() {
             </button>
           </div>
 
-          <nav
+          <ShapeLinks
             className={`hero-links mobile-hero-links ${
-              isTextCoverVisible ? "is-changing" : ""
+              isTextTransitioning ? "is-changing" : ""
             }`}
-          >
-            {heroLinks.map((link) => (
-              <a
-                className="transition hover:text-white"
-                href={link.href}
-                key={link.label}
-                target="_blank"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+            links={heroLinks}
+          />
         </div>
       </section>
 
