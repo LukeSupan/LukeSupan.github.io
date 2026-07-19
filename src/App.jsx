@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import resumePdf from "./SupanResume.pdf";
+import {
+  aboutNotes,
+  galleryDrafts,
+  getLinksForShape,
+  projectDrafts,
+  shapePages,
+} from "./content";
 
 // three for now. honestly really just need two but you gotta have a square to have a pentagon
 // could shoot for up arrow down arrow but. eh. this is stylish
@@ -12,92 +18,6 @@ const gallerySize = {
 
 const desktopGridSize = 64;
 const mobileGridSize = 82;
-
-const shapePages = {
-  triangle: {
-    eyebrow: "about",
-    body: "a small home base for the work, experiments, and odd little interface ideas.",
-  },
-  square: {
-    eyebrow: "projects",
-    body: "four anchor projects, with room for the smaller things that come next.",
-  },
-  pentagon: {
-    eyebrow: "gallery",
-    body: "music, games, and the personal corners that make the portfolio feel lived in.",
-  },
-};
-
-const aboutNotes = [
-  ["base", "computer science, web interfaces, small useful tools"],
-  ["taste", "minimal pages, playful systems, clean interactions"],
-  ["status", "building the portfolio while the shape idea evolves"],
-];
-
-const projectDrafts = [
-  {
-    detail: "a small stats-first idea for reading progress at a glance.",
-    label: "power level",
-  },
-  {
-    detail: "classic arcade motion, tuned for a quiet portfolio corner.",
-    label: "pong",
-  },
-  {
-    detail: "a sharper project page for the thing with the strange name.",
-    label: "psycall",
-  },
-  {
-    detail: "this site, treated as an interface experiment instead of a resume shell.",
-    label: "portfolio",
-  },
-];
-
-const galleryDrafts = [
-  {
-    detail: "playlists, current rotation, or whatever has been looping lately.",
-    label: "spotify",
-  },
-  {
-    detail: "stats, profile, clips, or a small shrine to the strategy grind.",
-    label: "halo wars",
-  },
-  {
-    detail: "a drawer for links, images, and tiny finds that do not need a category.",
-    label: "neat",
-  },
-  {
-    detail: "games played, games waiting, and the quiet pressure of the backlog.",
-    label: "backloggd",
-  },
-];
-
-function getLinksForShape(shape) {
-  if (shape === "square") {
-    return [
-      { href: "#", label: "power level" },
-      { href: "#", label: "pong" },
-      { href: "#", label: "psycall" },
-      { href: "#", label: "portfolio" },
-    ];
-  }
-
-  if (shape === "pentagon") {
-    return [
-      { href: "#", label: "spotify" },
-      { href: "#", label: "halo wars" },
-      { href: "#", label: "neat" },
-      { href: "#", label: "backloggd" },
-    ];
-  }
-
-  return [
-    { href: "mailto:lukesupan@outlook.com", label: "email" },
-    { href: "https://github.com/LukeSupan", label: "github" },
-    { href: "#", label: "linkedin" },
-    { href: resumePdf, label: "resume" },
-  ];
-}
 
 function ShapeLinks({ className, links }) {
   return (
@@ -182,14 +102,11 @@ function ShapeDetailSection({
             <div className="about-layout">
               <p className="detail-statement">{page.body}</p>
 
-              <dl className="about-notes">
-                {aboutNotes.map(([label, value]) => (
-                  <div className="about-note" key={label}>
-                    <dt>{label}</dt>
-                    <dd>{value}</dd>
-                  </div>
+              <div className="about-notes">
+                {aboutNotes.map((note) => (
+                  <p key={note}>{note}</p>
                 ))}
-              </dl>
+              </div>
             </div>
           )}
 
@@ -198,16 +115,32 @@ function ShapeDetailSection({
               <p className="detail-statement">{page.body}</p>
 
               <div className="project-list">
-                {projectDrafts.map((project, index) => (
+                {projectDrafts.map((project) => (
                   <a
                     className="project-row"
-                    href="#"
+                    href={project.href}
                     key={project.label}
-                    onClick={(event) => event.preventDefault()}
+                    onClick={
+                      project.href === "#"
+                        ? (event) => event.preventDefault()
+                        : undefined
+                    }
+                    rel={project.href === "#" ? undefined : "noreferrer"}
+                    target={project.href === "#" ? undefined : "_blank"}
                   >
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <strong>{project.label}</strong>
-                    <em>{project.detail}</em>
+                    <div className="project-copy">
+                      <strong>{project.label}</strong>
+                      <small>
+                        {project.tech} - {project.date}
+                      </small>
+                      <p>{project.detail}</p>
+
+                      <ul className="project-points">
+                        {project.points.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    </div>
                   </a>
                 ))}
               </div>
@@ -291,29 +224,13 @@ function App() {
   // store text transition timer so it stays consistent if you spam shape swap
   const textTransitionTimeout = useRef(null);
 
-  // briefly blocks downward scroll while a shape swap is settling
-  const scrollDownLockTimeout = useRef(null);
-  const isScrollDownLocked = useRef(false);
-  const touchStartY = useRef(null);
-  const shouldSkipNextHeroScroll = useRef(false);
-  const preservedDetailScrollY = useRef(null);
-
   // index to shape converter
   const visualShape = shapes[visualShapeIndex];
   const contentShape = shapes[contentShapeIndex];
   const heroLinks = getLinksForShape(contentShape);
 
-  function lockScrollDown() {
-    window.clearTimeout(scrollDownLockTimeout.current);
-    isScrollDownLocked.current = true;
-
-    scrollDownLockTimeout.current = window.setTimeout(() => {
-      isScrollDownLocked.current = false;
-    }, 850);
-  }
-
   // change shape on button press
-  const changeShape = useCallback((getShapeIndex, scrollToHero = true) => {
+  const changeShape = useCallback((getShapeIndex) => {
     const nextShapeIndex = getShapeIndex(visualShapeIndex);
 
     // clear an old timeout if it exists
@@ -321,17 +238,6 @@ function App() {
     window.clearTimeout(textTransitionTimeout.current);
     setIsTextTransitioning(true);
     setVisualShapeIndex(nextShapeIndex);
-    shouldSkipNextHeroScroll.current = !scrollToHero;
-    preservedDetailScrollY.current = scrollToHero ? null : window.scrollY;
-    lockScrollDown();
-
-    if (scrollToHero) {
-      // scroll to the shape
-      heroRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
 
     // set timeout until we swap content. less jank
     contentSwapTimeout.current = window.setTimeout(() => {
@@ -344,12 +250,12 @@ function App() {
     }, 700);
   }, [visualShapeIndex]);
 
-  function showPreviousShape({ scrollToHero = true } = {}) {
-    changeShape(getPreviousShapeIndex, scrollToHero);
+  function showPreviousShape() {
+    changeShape(getPreviousShapeIndex);
   }
 
-  function showNextShape({ scrollToHero = true } = {}) {
-    changeShape(getNextShapeIndex, scrollToHero);
+  function showNextShape() {
+    changeShape(getNextShapeIndex);
   }
 
   // change shape with arrow keys on desktop
@@ -376,58 +282,8 @@ function App() {
     return () => {
       window.clearTimeout(contentSwapTimeout.current);
       window.clearTimeout(textTransitionTimeout.current);
-      window.clearTimeout(scrollDownLockTimeout.current);
       window.cancelAnimationFrame(galleryScaleFrame.current);
       window.cancelAnimationFrame(gridSizeFrame.current);
-    };
-  }, []);
-
-  useEffect(() => {
-    function isLockedDownScroll(scrollAmount) {
-      return isScrollDownLocked.current && scrollAmount > 0;
-    }
-
-    function handleWheel(event) {
-      if (isLockedDownScroll(event.deltaY)) {
-        event.preventDefault();
-      }
-    }
-
-    function handleTouchStart(event) {
-      touchStartY.current = event.touches[0]?.clientY ?? null;
-    }
-
-    function handleTouchMove(event) {
-      if (touchStartY.current === null) {
-        return;
-      }
-
-      const currentY = event.touches[0]?.clientY ?? touchStartY.current;
-      const scrollAmount = touchStartY.current - currentY;
-
-      if (isLockedDownScroll(scrollAmount)) {
-        event.preventDefault();
-      }
-    }
-
-    function handleScrollKey(event) {
-      const downScrollKeys = new Set(["ArrowDown", "PageDown", "End", " "]);
-
-      if (downScrollKeys.has(event.key) && isScrollDownLocked.current) {
-        event.preventDefault();
-      }
-    }
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("keydown", handleScrollKey);
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("keydown", handleScrollKey);
     };
   }, []);
 
@@ -500,21 +356,8 @@ function App() {
       return;
     }
 
-    if (preservedDetailScrollY.current !== null) {
-      const scrollY = preservedDetailScrollY.current;
-
-      preservedDetailScrollY.current = null;
-      shouldSkipNextHeroScroll.current = false;
-      window.scrollTo({ top: scrollY, left: window.scrollX });
-      return;
-    }
-
-    if (shouldSkipNextHeroScroll.current) {
-      shouldSkipNextHeroScroll.current = false;
-      return;
-    }
-
-    hero.scrollIntoView({ block: "start" });
+    // Shape changes now swap content in place. The only automatic scroll is the
+    // initial landing on the shape.
   }, [contentShape]);
 
   return (
@@ -614,8 +457,8 @@ function App() {
       <ShapeDetailSection
         isTransitioning={isTextTransitioning}
         links={heroLinks}
-        onNext={() => showNextShape({ scrollToHero: false })}
-        onPrevious={() => showPreviousShape({ scrollToHero: false })}
+        onNext={showNextShape}
+        onPrevious={showPreviousShape}
         shape={contentShape}
         visualShape={visualShape}
       />

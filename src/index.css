@@ -223,8 +223,9 @@ button:focus-visible {
 .detail-section {
   display: grid;
   min-height: 100vh;
-  padding: 96px 24px;
-  place-items: center;
+  padding: 64px 24px 120px;
+  align-items: start;
+  justify-items: center;
   color: rgb(255 255 255 / 0.62);
 }
 
@@ -234,17 +235,14 @@ button:focus-visible {
 
 .detail-topbar {
   position: sticky;
-  top: 0;
+  top: 28px;
   z-index: 30;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
-  margin-bottom: 42px;
-  padding: 18px 0;
-  background: #242424;
-  box-shadow: 0 0 0 100vmax #242424;
-  clip-path: inset(0 -100vmax);
+  margin-bottom: 38px;
+  padding: 0;
 }
 
 .detail-controls {
@@ -286,10 +284,7 @@ button:focus-visible {
 
 .detail-heading p,
 .detail-content {
-  transition:
-    opacity 260ms ease,
-    transform 260ms ease,
-    filter 260ms ease;
+  transition: opacity 420ms ease;
 }
 
 .detail-heading p {
@@ -299,8 +294,6 @@ button:focus-visible {
 .detail-heading p.is-changing,
 .detail-content.is-changing {
   opacity: 0;
-  filter: blur(4px);
-  transform: translateY(10px);
 }
 
 .detail-mark {
@@ -327,7 +320,7 @@ button:focus-visible {
 }
 
 .detail-statement {
-  max-width: 640px;
+  max-width: 100%;
   color: rgb(255 255 255 / 0.82);
   font-size: clamp(1.7rem, 5vw, 3.2rem);
   line-height: 1.18;
@@ -335,68 +328,72 @@ button:focus-visible {
 
 .about-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
-  gap: 64px;
-  align-items: start;
+  gap: 44px;
 }
 
 .about-notes {
-  margin: 48px 0 0;
-}
-
-.about-note {
   display: grid;
-  grid-template-columns: 82px minmax(0, 1fr);
-  gap: 24px;
-  padding: 18px 0;
-  border-top: 1px solid rgb(255 255 255 / 0.12);
+  gap: 18px;
+  max-width: 680px;
 }
 
-.about-note:last-child {
-  border-bottom: 1px solid rgb(255 255 255 / 0.12);
-}
-
-.about-note dt {
-  color: rgb(255 255 255 / 0.4);
-}
-
-.about-note dd {
+.about-notes p {
   margin: 0;
   line-height: 1.65;
 }
 
 .project-list {
-  margin-top: 56px;
+  display: grid;
+  gap: 48px;
+  margin-top: 48px;
 }
 
 .project-row {
-  display: grid;
-  grid-template-columns: 52px minmax(160px, 0.55fr) minmax(0, 1fr);
-  gap: 28px;
-  align-items: baseline;
-  padding: 24px 0;
-  border-top: 1px solid rgb(255 255 255 / 0.12);
+  display: block;
   color: inherit;
 }
 
-.project-row:last-child {
-  border-bottom: 1px solid rgb(255 255 255 / 0.12);
-}
-
-.project-row span,
-.project-row em {
+.project-copy small,
+.project-points {
   color: rgb(255 255 255 / 0.38);
   font-style: normal;
 }
 
 .project-row strong {
   color: rgb(255 255 255 / 0.82);
-  font-size: 1.18rem;
+  font-size: 1.28rem;
   font-weight: 400;
 }
 
-.project-row em {
+.project-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.project-copy p {
+  max-width: 620px;
+  margin: 0;
+  color: rgb(255 255 255 / 0.64);
   line-height: 1.65;
+}
+
+.project-copy small {
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.project-points {
+  display: grid;
+  gap: 8px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.55;
+}
+
+.project-points li::before {
+  content: "- ";
+  color: rgb(255 255 255 / 0.24);
 }
 
 .project-row:hover strong,
@@ -414,8 +411,6 @@ button:focus-visible {
 
 .gallery-item {
   min-height: 148px;
-  padding-top: 18px;
-  border-top: 1px solid rgb(255 255 255 / 0.12);
   color: inherit;
 }
 
@@ -560,27 +555,26 @@ button:focus-visible {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-items: center;
-    transition:
-      opacity 260ms ease,
-      transform 260ms ease,
-      filter 260ms ease;
+    transition: opacity 420ms ease;
   }
 
   .mobile-hero-links.is-changing {
     opacity: 0;
-    filter: blur(4px);
-    transform: translateY(10px);
   }
 
   .detail-section {
-    padding: 84px 18px;
+    padding: 64px 18px 96px;
   }
 
   .detail-topbar {
+    top: 0;
     grid-template-columns: auto 1fr auto;
     gap: 18px;
     margin-bottom: 34px;
     padding: 14px 0;
+    background: #242424;
+    box-shadow: 0 0 0 100vmax #242424;
+    clip-path: inset(0 -100vmax);
   }
 
   .detail-controls {
@@ -609,19 +603,8 @@ button:focus-visible {
     font-size: clamp(1.45rem, 8vw, 2.4rem);
   }
 
-  .about-layout,
-  .gallery-grid,
-  .project-row {
+  .gallery-grid {
     grid-template-columns: 1fr;
-  }
-
-  .about-layout {
-    gap: 0;
-  }
-
-  .about-note {
-    grid-template-columns: 72px minmax(0, 1fr);
-    gap: 18px;
   }
 
   .project-list,
@@ -630,8 +613,11 @@ button:focus-visible {
   }
 
   .project-row {
+    padding: 0;
+  }
+
+  .project-copy {
     gap: 12px;
-    padding: 22px 0;
   }
 
   .gallery-grid {
