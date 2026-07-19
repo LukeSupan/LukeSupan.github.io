@@ -469,6 +469,10 @@ function getGalleryScale() {
   );
 }
 
+function isMobileViewport() {
+  return window.matchMedia("(max-width: 639px)").matches;
+}
+
 function App() {
   // polygons current visual
   const [visualShapeIndex, setVisualShapeIndex] = useState(0);
@@ -483,6 +487,8 @@ function App() {
 
   // used to point at middle
   const heroRef = useRef(null);
+
+  const pageSwipeStart = useRef(null);
 
   // Tracks if the page already did its first automatic scroll to the middle.
   const hasScrolledToHeroOnLoad = useRef(false);
@@ -531,6 +537,56 @@ function App() {
 
   function showNextShape() {
     changeShape(getNextShapeIndex);
+  }
+
+  function handlePageTouchStart(event) {
+    if (!isMobileViewport() || document.querySelector(".lightbox")) {
+      return;
+    }
+
+    if (event.target.closest("a, button")) {
+      pageSwipeStart.current = null;
+      return;
+    }
+
+    const touch = event.touches[0];
+
+    pageSwipeStart.current = touch
+      ? {
+          x: touch.clientX,
+          y: touch.clientY,
+        }
+      : null;
+  }
+
+  function handlePageTouchEnd(event) {
+    if (!pageSwipeStart.current) {
+      return;
+    }
+
+    const touch = event.changedTouches[0];
+    const swipeStart = pageSwipeStart.current;
+    pageSwipeStart.current = null;
+
+    if (!touch || !isMobileViewport()) {
+      return;
+    }
+
+    const deltaX = swipeStart.x - touch.clientX;
+    const deltaY = swipeStart.y - touch.clientY;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+
+    if (absX < 56 || absX < absY * 1.35) {
+      return;
+    }
+
+    if (deltaX > 0) {
+      showNextShape();
+      return;
+    }
+
+    showPreviousShape();
   }
 
   // change shape with arrow keys on desktop
@@ -640,7 +696,11 @@ function App() {
   }, [contentShape]);
 
   return (
-    <main className="site-shell text-white">
+    <main
+      className="site-shell text-white"
+      onTouchEnd={handlePageTouchEnd}
+      onTouchStart={handlePageTouchStart}
+    >
       <section className="hero-section" ref={heroRef}>
         <div
           className="desktop-gallery-frame"
