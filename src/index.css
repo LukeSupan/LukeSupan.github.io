@@ -70,7 +70,7 @@ button:focus-visible {
   position: absolute;
   top: 0;
   left: 0;
-  contain: layout paint;
+  contain: layout;
   display: grid;
   width: 860px;
   height: 720px;
