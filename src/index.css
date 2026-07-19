@@ -459,7 +459,7 @@ button:focus-visible {
 }
 
 .project-row:hover strong,
-.gallery-item:hover span {
+.gallery-item a:hover {
   color: #ffffff;
 }
 
@@ -475,7 +475,7 @@ button:focus-visible {
   color: inherit;
 }
 
-.gallery-item span {
+.gallery-item a {
   color: rgb(255 255 255 / 0.82);
   font-size: 1.2rem;
   transition: color 150ms ease;

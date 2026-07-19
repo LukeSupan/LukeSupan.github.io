@@ -143,6 +143,14 @@ function ImageLightbox({ lightbox, onClose, onNext, onPrevious }) {
       if (event.key === "Escape") {
         onClose();
       }
+
+      if (event.key === "ArrowLeft") {
+        onPrevious();
+      }
+
+      if (event.key === "ArrowRight") {
+        onNext();
+      }
     }
 
     window.addEventListener("keydown", handleKeyDown);
@@ -150,7 +158,7 @@ function ImageLightbox({ lightbox, onClose, onNext, onPrevious }) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [lightbox, onClose]);
+  }, [lightbox, onClose, onNext, onPrevious]);
 
   if (!lightbox || !image) {
     return null;
@@ -213,11 +221,14 @@ function ImageLightbox({ lightbox, onClose, onNext, onPrevious }) {
 
       <figure
         className="lightbox-frame"
-        onClick={(event) => event.stopPropagation()}
         onTouchEnd={handleTouchEnd}
         onTouchStart={handleTouchStart}
       >
-        <img alt={image.alt} src={image.src} />
+        <img
+          alt={image.alt}
+          onClick={(event) => event.stopPropagation()}
+          src={image.src}
+        />
         <figcaption>
           <span>{image.alt}</span>
           <span>
@@ -245,6 +256,7 @@ function ShapeDetailSection({
   isTransitioning,
   onNext,
   onPrevious,
+  sectionRef,
   shape,
   visualShape,
 }) {
@@ -340,7 +352,7 @@ function ShapeDetailSection({
   }
 
   return (
-    <section className={`detail-section detail-${shape}`}>
+    <section className={`detail-section detail-${shape}`} ref={sectionRef}>
       <div className="detail-shell">
         <header
           className={`detail-topbar ${isTopbarStuck ? "is-stuck" : ""}`}
@@ -420,16 +432,19 @@ function ShapeDetailSection({
 
               <div className="gallery-grid">
                 {galleryDrafts.map((item) => (
-                  <a
+                  <article
                     className="gallery-item"
-                    href={item.href}
                     key={item.label}
-                    rel="noreferrer"
-                    target="_blank"
                   >
-                    <span>{item.label}</span>
+                    <a
+                      href={item.href}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      {item.label}
+                    </a>
                     <p>{item.detail}</p>
-                  </a>
+                  </article>
                 ))}
               </div>
 
@@ -473,6 +488,12 @@ function isMobileViewport() {
   return window.matchMedia("(max-width: 639px)").matches;
 }
 
+function getPreferredScrollBehavior() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
+}
+
 function App() {
   // polygons current visual
   const [visualShapeIndex, setVisualShapeIndex] = useState(0);
@@ -487,11 +508,13 @@ function App() {
 
   // used to point at middle
   const heroRef = useRef(null);
+  const detailSectionRef = useRef(null);
 
   const pageSwipeStart = useRef(null);
 
   // Tracks if the page already did its first automatic scroll to the middle.
   const hasScrolledToHeroOnLoad = useRef(false);
+  const shouldScrollDetailAfterSwap = useRef(false);
 
   const basePixelRatio = useRef(
     typeof window === "undefined" ? 1 : window.devicePixelRatio || 1,
@@ -511,12 +534,13 @@ function App() {
   const heroLinks = getLinksForShape(contentShape);
 
   // change shape on button press
-  const changeShape = useCallback((getShapeIndex) => {
+  const changeShape = useCallback((getShapeIndex, options = {}) => {
     const nextShapeIndex = getShapeIndex(visualShapeIndex);
 
     // clear an old timeout if it exists
     window.clearTimeout(contentSwapTimeout.current);
     window.clearTimeout(textTransitionTimeout.current);
+    shouldScrollDetailAfterSwap.current = Boolean(options.scrollDetail);
     setIsTextTransitioning(true);
     setVisualShapeIndex(nextShapeIndex);
 
@@ -537,6 +561,14 @@ function App() {
 
   function showNextShape() {
     changeShape(getNextShapeIndex);
+  }
+
+  function showPreviousDetailShape() {
+    changeShape(getPreviousShapeIndex, { scrollDetail: true });
+  }
+
+  function showNextDetailShape() {
+    changeShape(getNextShapeIndex, { scrollDetail: true });
   }
 
   function handlePageTouchStart(event) {
@@ -693,6 +725,13 @@ function App() {
 
     // Shape changes now swap content in place. The only automatic scroll is the
     // initial landing on the shape.
+    if (shouldScrollDetailAfterSwap.current) {
+      shouldScrollDetailAfterSwap.current = false;
+      detailSectionRef.current?.scrollIntoView({
+        block: "start",
+        behavior: getPreferredScrollBehavior(),
+      });
+    }
   }, [contentShape]);
 
   return (
@@ -795,8 +834,9 @@ function App() {
 
       <ShapeDetailSection
         isTransitioning={isTextTransitioning}
-        onNext={showNextShape}
-        onPrevious={showPreviousShape}
+        onNext={showNextDetailShape}
+        onPrevious={showPreviousDetailShape}
+        sectionRef={detailSectionRef}
         shape={contentShape}
         visualShape={visualShape}
       />

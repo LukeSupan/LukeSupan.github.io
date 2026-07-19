@@ -1,4 +1,4 @@
-import resumePdf from "./SupanResume.pdf";
+import resumePdf from "./assets/SupanResume.pdf";
 import beachLukeImage from "./assets/gallery/beachluke.jpg";
 import catArtImage from "./assets/gallery/Cat Art.jpg";
 import coasterImage from "./assets/gallery/coasterimage.png";
@@ -41,8 +41,8 @@ export const aboutNotes = [
 ];
 
 export const aboutImages = [
-  { alt: "team photo", orientation: "wide", src: teamImage },
-  { alt: "silksong second screenshot", orientation: "wide", src: silksongTwoImage },
+  { alt: "capstone team photo. nice memory.", orientation: "wide", src: teamImage },
+  { alt: "hornet looking at the light above. silksong", orientation: "wide", src: silksongTwoImage },
 ];
 
 export const projectDrafts = [
