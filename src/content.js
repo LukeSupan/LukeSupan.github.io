@@ -35,7 +35,7 @@ export const projectDrafts = [
       "uses claude to turn aggregate stats into rankings and readable analysis",
       "deployed with vercel, render, supabase auth, and postgres saves",
     ],
-    tech: "react - fastapi - postgres - claude api",
+    tech: "react, fastapi, postgres, claude api",
   },
   {
     date: "sep 2025 - may 2026",
@@ -49,7 +49,7 @@ export const projectDrafts = [
       "supported drafts, publishing, csv downloads, warnings, overrides, and selective reverts",
       "handled sponsor meetings, jira coordination, and team planning",
     ],
-    tech: "next.js - tailwind",
+    tech: "next.js, tailwind",
   },
   {
     date: "apr 2025",
@@ -63,7 +63,7 @@ export const projectDrafts = [
       "enemy ai uses raycasts to predict and intercept the ball",
       "ball movement was created by hand instead of relying on unity physics",
     ],
-    tech: "unity - c#",
+    tech: "unity, c#",
   },
   {
     date: "july 2026",
@@ -76,7 +76,7 @@ export const projectDrafts = [
       "maintained with each new project",
       "pretty fun to make. this isn't on my resume so these bullets aren't too serious",
     ],
-    tech: "react - tailwind - vite",
+    tech: "react, tailwind, vite",
   },
   {
     date: "mar 2026",
@@ -89,7 +89,7 @@ export const projectDrafts = [
       "organized research projects, field photography, resume content, and gis work",
       "kept the structure easy to update after launch",
     ],
-    tech: "react - tailwind",
+    tech: "react, tailwind",
   },
   {
     date: "jun 2025 - jul 2025",
@@ -102,7 +102,7 @@ export const projectDrafts = [
       "built dashboard visualizations with recharts",
       "first real experience with web data presentation/analysis (helpful for power level)",
     ],
-    tech: "mern - flutter - recharts",
+    tech: "mern, flutter, recharts",
   },
   {
     date: "pre 2025",
@@ -116,7 +116,7 @@ export const projectDrafts = [
       "bloggit and comet contacts: web apps with auth, roles, and api integration",
       "epoch: a top down roguelite, my first game in unity, made with a team"
     ],
-    tech: "php - mysql - unity - android - java - mern - lamp",
+    tech: "php, mysql, unity, android, java, mern, lamp",
   },
 ];
 
