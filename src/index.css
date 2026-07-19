@@ -40,6 +40,62 @@ body {
   background-size: 44px 44px;
 }
 
+.polygon-gallery-frame {
+  position: relative;
+  overflow: visible;
+}
+
+.polygon-gallery {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 860px;
+  height: 720px;
+  padding-top: 180px;
+  place-items: start center;
+  text-align: center;
+  transform-origin: top left;
+}
+
+.shape-button {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translateY(-50%);
+  color: rgb(255 255 255 / 0.45);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 30px;
+  line-height: 1;
+  transition: color 150ms ease;
+}
+
+.shape-button:hover {
+  color: #ffffff;
+}
+
+.shape-button-previous {
+  left: -46px;
+}
+
+.shape-button-next {
+  right: -46px;
+}
+
+@media (max-width: 639px) {
+  .shape-button-previous {
+    left: 8px;
+  }
+
+  .shape-button-next {
+    right: 8px;
+  }
+}
+
 /* box to container polygons */
 .polygon-mark {
   position: absolute;
@@ -53,6 +109,16 @@ body {
 /* words inside the polygon. fades out while the cover fades in */
 .polygon-content {
   transition: opacity 420ms ease;
+}
+
+.polygon-name {
+  font-size: 30px;
+}
+
+.polygon-links {
+  gap: 12px;
+  margin-top: 32px;
+  font-size: 18px;
 }
 
 .polygon-content.is-covered {
