@@ -27,6 +27,24 @@ const shapePages = {
   },
 };
 
+function getLinksForShape(shape) {
+  if (shape === "square") {
+    return [
+      { href: "#", label: "power level" },
+      { href: "#", label: "pong" },
+      { href: "#", label: "psycall" },
+      { href: "#", label: "portfolio" },
+    ];
+  }
+
+  return [
+    { href: "mailto:lukesupan@outlook.com", label: "email" },
+    { href: "https://github.com/LukeSupan", label: "github" },
+    { href: "#", label: "linkedin" },
+    { href: resumePdf, label: "resume" },
+  ];
+}
+
 function getPreviousShapeIndex(currentIndex) {
   return currentIndex === 0 ? shapes.length - 1 : currentIndex - 1;
 }
@@ -79,6 +97,7 @@ function App() {
   const visualShape = shapes[visualShapeIndex];
   const contentShape = shapes[contentShapeIndex];
   const pageContent = shapePages[contentShape];
+  const heroLinks = getLinksForShape(contentShape);
 
   // change shape on button press
   const changeShape = useCallback((getShapeIndex) => {
@@ -237,30 +256,16 @@ function App() {
               <h1 className="polygon-name font-normal">luke supan</h1>
 
               <nav className="polygon-links flex flex-col items-center text-white/55">
-                <a
-                  className="transition hover:text-white"
-                  href="mailto:lukesupan@outlook.com"
-                  target="_blank"
-                >
-                  email
-                </a>
-                <a
-                  className="transition hover:text-white"
-                  href="https://github.com/LukeSupan"
-                  target="_blank"
-                >
-                  github
-                </a>
-                <a className="transition hover:text-white" href="#" target="_blank">
-                  linkedin
-                </a>
-                <a
-                  className="transition hover:text-white"
-                  href={resumePdf}
-                  target="_blank"
-                >
-                  resume
-                </a>
+                {heroLinks.map((link) => (
+                  <a
+                    className="transition hover:text-white"
+                    href={link.href}
+                    key={link.label}
+                    target="_blank"
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </nav>
             </div>
 
@@ -309,30 +314,16 @@ function App() {
           </div>
 
           <nav className="hero-links">
-            <a
-              className="transition hover:text-white"
-              href="mailto:lukesupan@outlook.com"
-              target="_blank"
-            >
-              email
-            </a>
-            <a
-              className="transition hover:text-white"
-              href="https://github.com/LukeSupan"
-              target="_blank"
-            >
-              github
-            </a>
-            <a className="transition hover:text-white" href="#" target="_blank">
-              linkedin
-            </a>
-            <a
-              className="transition hover:text-white"
-              href={resumePdf}
-              target="_blank"
-            >
-              resume
-            </a>
+            {heroLinks.map((link) => (
+              <a
+                className="transition hover:text-white"
+                href={link.href}
+                key={link.label}
+                target="_blank"
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
         </div>
       </section>
