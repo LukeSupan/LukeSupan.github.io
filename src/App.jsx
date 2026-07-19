@@ -283,14 +283,6 @@ function App() {
               <div className="polygon-fill"></div>
             </div>
 
-            <div
-              className={`polygon-text-cover shape-${visualShape} ${
-                isTextCoverVisible ? "is-visible" : ""
-              }`}
-              aria-hidden="true"
-            >
-              <div className="polygon-text-cover-fill"></div>
-            </div>
           </div>
         </div>
 
