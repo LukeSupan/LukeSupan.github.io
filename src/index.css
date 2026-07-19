@@ -642,6 +642,8 @@ button:focus-visible {
     background-image:
       linear-gradient(rgb(255 255 255 / 0.014) 1px, transparent 1px),
       linear-gradient(90deg, rgb(255 255 255 / 0.014) 1px, transparent 1px);
+    font-weight: 600;
+    text-shadow: 0.22px 0 currentColor;
   }
 
   .hero-section {
@@ -708,9 +710,6 @@ button:focus-visible {
     gap: 18px;
     margin-bottom: 34px;
     padding: 14px 0;
-    background: #242424;
-    box-shadow: 0 0 0 100vmax #242424;
-    clip-path: inset(0 -100vmax);
   }
 
   .detail-controls {
