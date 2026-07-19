@@ -55,13 +55,14 @@ function DetailMark({ shape }) {
 
 function ShapeDetailSection({
   isTransitioning,
-  links,
   onNext,
   onPrevious,
   shape,
   visualShape,
 }) {
   const page = shapePages[shape];
+  const topbarRef = useRef(null);
+  const [isTopbarStuck, setIsTopbarStuck] = useState(false);
   const detailControls = (
     <div className="detail-controls" aria-label="section controls">
       <button
@@ -83,10 +84,35 @@ function ShapeDetailSection({
     </div>
   );
 
+  useEffect(() => {
+    function updateTopbarState() {
+      if (!topbarRef.current) {
+        return;
+      }
+
+      const topOffset = 0;
+      const topbarTop = topbarRef.current.getBoundingClientRect().top;
+
+      setIsTopbarStuck(topbarTop <= topOffset + 0.5);
+    }
+
+    updateTopbarState();
+    window.addEventListener("scroll", updateTopbarState, { passive: true });
+    window.addEventListener("resize", updateTopbarState);
+
+    return () => {
+      window.removeEventListener("scroll", updateTopbarState);
+      window.removeEventListener("resize", updateTopbarState);
+    };
+  }, []);
+
   return (
     <section className={`detail-section detail-${shape}`}>
       <div className="detail-shell">
-        <header className="detail-topbar">
+        <header
+          className={`detail-topbar ${isTopbarStuck ? "is-stuck" : ""}`}
+          ref={topbarRef}
+        >
           <div className="detail-heading">
             <DetailMark shape={visualShape} />
             <p className={isTransitioning ? "is-changing" : ""}>{page.eyebrow}</p>
@@ -164,8 +190,6 @@ function ShapeDetailSection({
                   </a>
                 ))}
               </div>
-
-              <ShapeLinks className="detail-links" links={links} />
             </>
           )}
         </div>
@@ -456,7 +480,6 @@ function App() {
 
       <ShapeDetailSection
         isTransitioning={isTextTransitioning}
-        links={heroLinks}
         onNext={showNextShape}
         onPrevious={showPreviousShape}
         shape={contentShape}

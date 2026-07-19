@@ -235,14 +235,20 @@ button:focus-visible {
 
 .detail-topbar {
   position: sticky;
-  top: 28px;
+  top: 0;
   z-index: 30;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
   margin-bottom: 38px;
-  padding: 0;
+  padding: 14px 0;
+}
+
+.detail-topbar.is-stuck {
+  background: #242424;
+  box-shadow: 0 0 0 100vmax #242424;
+  clip-path: inset(0 -100vmax);
 }
 
 .detail-controls {
@@ -279,7 +285,7 @@ button:focus-visible {
   gap: 14px;
   justify-self: start;
   color: rgb(255 255 255 / 0.82);
-  font-size: 0.92rem;
+  font-size: 1.04rem;
 }
 
 .detail-heading p,
@@ -322,7 +328,7 @@ button:focus-visible {
 .detail-statement {
   max-width: 100%;
   color: rgb(255 255 255 / 0.82);
-  font-size: clamp(1.7rem, 5vw, 3.2rem);
+  font-size: clamp(1.55rem, 4.2vw, 2.7rem);
   line-height: 1.18;
 }
 
@@ -339,6 +345,7 @@ button:focus-visible {
 
 .about-notes p {
   margin: 0;
+  font-size: 1.04rem;
   line-height: 1.65;
 }
 
@@ -374,11 +381,12 @@ button:focus-visible {
   max-width: 620px;
   margin: 0;
   color: rgb(255 255 255 / 0.64);
+  font-size: 1.04rem;
   line-height: 1.65;
 }
 
 .project-copy small {
-  font-size: 0.78rem;
+  font-size: 0.86rem;
   line-height: 1.5;
 }
 
@@ -387,6 +395,7 @@ button:focus-visible {
   gap: 8px;
   margin: 2px 0 0;
   padding: 0;
+  font-size: 1.02rem;
   list-style: none;
   line-height: 1.55;
 }
@@ -397,8 +406,7 @@ button:focus-visible {
 }
 
 .project-row:hover strong,
-.gallery-item:hover span,
-.detail-links a:hover {
+.gallery-item:hover span {
   color: #ffffff;
 }
 
@@ -416,21 +424,14 @@ button:focus-visible {
 
 .gallery-item span {
   color: rgb(255 255 255 / 0.82);
-  font-size: 1.12rem;
+  font-size: 1.2rem;
   transition: color 150ms ease;
 }
 
 .gallery-item p {
   margin: 22px 0 0;
+  font-size: 1.04rem;
   line-height: 1.65;
-}
-
-.detail-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px 28px;
-  margin-top: 54px;
-  color: rgb(255 255 255 / 0.38);
 }
 
 /* border/outer polygon */
@@ -593,6 +594,7 @@ button:focus-visible {
 
   .detail-heading {
     gap: 12px;
+    font-size: 1rem;
   }
 
   .detail-mark {
@@ -600,7 +602,7 @@ button:focus-visible {
   }
 
   .detail-statement {
-    font-size: clamp(1.45rem, 8vw, 2.4rem);
+    font-size: clamp(1.35rem, 7vw, 2.05rem);
   }
 
   .gallery-grid {
@@ -628,11 +630,6 @@ button:focus-visible {
     min-height: 0;
   }
 
-  .detail-links {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
