@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
+  aboutDesktopImages,
   aboutImages,
   aboutNotes,
   galleryDrafts,
@@ -237,12 +238,31 @@ function GalleryImages({ onOpen }) {
 function AboutImages({ onOpen }) {
   return (
     <div className="about-images">
-      {aboutImages.map((image, index) => (
+      <div className="about-images-mobile">
+        {aboutImages.map((image, index) => (
+          <button
+            aria-label={`open ${image.alt}`}
+            className={`image-open-button about-image about-image-${image.orientation}`}
+            key={image.src}
+            onClick={() => onOpen(aboutImages, index)}
+            type="button"
+          >
+            <img
+              alt={image.alt}
+              decoding="async"
+              loading="lazy"
+              src={image.src}
+            />
+          </button>
+        ))}
+      </div>
+
+      {aboutDesktopImages.map((image, index) => (
         <button
           aria-label={`open ${image.alt}`}
-          className={`image-open-button about-image about-image-${image.orientation}`}
+          className={`image-open-button about-image about-image-${image.orientation} about-image-desktop about-image-desktop-${image.desktopSlot}`}
           key={image.src}
-          onClick={() => onOpen(aboutImages, index)}
+          onClick={() => onOpen(aboutDesktopImages, index)}
           type="button"
         >
           <img

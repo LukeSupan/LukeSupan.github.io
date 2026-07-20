@@ -45,6 +45,21 @@ export const aboutImages = [
   { alt: "hornet looking at the light above. silksong", orientation: "wide", src: silksongTwoImage },
 ];
 
+export const aboutDesktopImages = [
+  {
+    alt: "halo ce cover art. so good.",
+    desktopSlot: "left",
+    orientation: "wide",
+    src: justStartedImage,
+  },
+  {
+    alt: "washington monument. very cool.",
+    desktopSlot: "right",
+    orientation: "wide",
+    src: washingtonImage,
+  },
+];
+
 export const projectDrafts = [
   {
     date: "feb 2026 - current",

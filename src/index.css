@@ -393,11 +393,19 @@ button:focus-visible {
   gap: 16px;
 }
 
+.about-images-mobile {
+  display: grid;
+  gap: 16px;
+}
+
+.about-image-desktop {
+  display: none;
+}
+
 .about-image img {
   display: block;
   width: 100%;
   border: 1px solid rgb(255 255 255 / 0.12);
-  background: #1b1b1b;
 }
 
 .about-image-portrait img {
@@ -632,7 +640,47 @@ button:focus-visible {
   }
 
   .detail-triangle .about-images {
+    display: contents;
+  }
+
+  .detail-triangle .about-images-mobile {
+    display: none;
+  }
+
+  .detail-triangle .about-image-desktop {
+    display: block;
+  }
+
+  .detail-triangle .about-image-desktop-left {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: -8px;
+  }
+
+  .detail-triangle .about-image-desktop-right {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    height: 670px;
     align-self: start;
+    object-fit: cover;
+    object-position: top;
+    clip-path: inset(0 0 5.5% 0);
+  }
+
+  .detail-triangle .about-image-desktop-left img {
+    height: 310px;
+  }
+
+  .detail-triangle .about-image-desktop-right img {
+    width: 100%;
+    height: 677px;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .detail-triangle .about-image-desktop img {
+    width: auto;
+    max-width: 100%;
   }
 
   .detail-pentagon .gallery-grid {
