@@ -171,7 +171,11 @@ function ProjectStory({ onOpen, pages, projectLabel }) {
         ))}
       </div>
 
-      <div className="project-story-page">
+      <div
+        className={`project-story-page ${
+          activePage.image ? "" : "project-story-page-text-only"
+        }`}
+      >
         {activePage.image && (
           <button
             aria-label={`open ${activePage.imageAlt}`}
@@ -520,33 +524,43 @@ function ShapeDetailSection({
               <div className="project-list">
                 {projectDrafts.map((project) => (
                   <article
-                    className="project-row"
+                    className={`project-row ${
+                      project.storyPages ? "project-row-featured" : ""
+                    } ${
+                      !project.images?.length && !project.storyPages
+                        ? "project-row-compact"
+                        : ""
+                    }`}
                     key={project.label}
                   >
                     <div className="project-copy">
-                      <a
-                        className="project-title-link"
-                        href={project.href}
-                        onClick={
-                          project.href === "#"
-                            ? (event) => event.preventDefault()
-                            : undefined
-                        }
-                        rel={project.href === "#" ? undefined : "noreferrer"}
-                        target={project.href === "#" ? undefined : "_blank"}
-                      >
-                        <strong>{project.label}</strong>
-                      </a>
-                      <small>
-                        {project.tech} - {project.date}
-                      </small>
-                      <p>{project.detail}</p>
+                      <div className="project-main-copy">
+                        <div className="project-summary">
+                        <a
+                          className="project-title-link"
+                          href={project.href}
+                          onClick={
+                            project.href === "#"
+                              ? (event) => event.preventDefault()
+                              : undefined
+                          }
+                          rel={project.href === "#" ? undefined : "noreferrer"}
+                          target={project.href === "#" ? undefined : "_blank"}
+                        >
+                          <strong>{project.label}</strong>
+                        </a>
+                        <small>
+                          {project.tech} - {project.date}
+                        </small>
+                        <p>{project.detail}</p>
+                        </div>
 
-                      <ul className="project-points">
-                        {project.points.map((point) => (
-                          <li key={point}>{point}</li>
-                        ))}
-                      </ul>
+                        <ul className="project-points">
+                          {project.points.map((point) => (
+                            <li key={point}>{point}</li>
+                          ))}
+                        </ul>
+                      </div>
 
                       <ProjectStory
                         onOpen={openLightbox}
