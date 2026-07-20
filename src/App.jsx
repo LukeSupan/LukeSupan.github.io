@@ -109,6 +109,103 @@ function ProjectImages({ images, onOpen }) {
   );
 }
 
+function ProjectStory({ onOpen, pages, projectLabel }) {
+  const [activePageIndex, setActivePageIndex] = useState(0);
+
+  if (!pages?.length) {
+    return null;
+  }
+
+  const activePage = pages[activePageIndex];
+
+  function showPreviousPage() {
+    setActivePageIndex((currentIndex) =>
+      currentIndex === 0 ? pages.length - 1 : currentIndex - 1,
+    );
+  }
+
+  function showNextPage() {
+    setActivePageIndex((currentIndex) =>
+      currentIndex === pages.length - 1 ? 0 : currentIndex + 1,
+    );
+  }
+
+  return (
+    <section className="project-story" aria-label={`${projectLabel} walkthrough`}>
+      <div className="project-story-top">
+        <div>
+          <small>
+            {activePageIndex + 1} / {pages.length}
+          </small>
+          <h3>{activePage.title}</h3>
+        </div>
+
+        <div className="project-story-controls" aria-label="story controls">
+          <button
+            aria-label="previous power level story page"
+            onClick={showPreviousPage}
+            type="button"
+          >
+            &lt;
+          </button>
+          <button
+            aria-label="next power level story page"
+            onClick={showNextPage}
+            type="button"
+          >
+            &gt;
+          </button>
+        </div>
+      </div>
+
+      <div className="project-story-tabs">
+        {pages.map((page, index) => (
+          <button
+            aria-pressed={activePageIndex === index}
+            key={page.label}
+            onClick={() => setActivePageIndex(index)}
+            type="button"
+          >
+            {page.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="project-story-page">
+        {activePage.image && (
+          <button
+            aria-label={`open ${activePage.imageAlt}`}
+            className="image-open-button project-story-image"
+            onClick={() =>
+              onOpen(
+                [{ alt: activePage.imageAlt ?? activePage.title, src: activePage.image }],
+                0,
+              )
+            }
+            type="button"
+          >
+            <img
+              alt={activePage.imageAlt ?? activePage.title}
+              decoding="async"
+              loading="lazy"
+              src={activePage.image}
+            />
+          </button>
+        )}
+
+        <div className="project-story-copy">
+          <p>{activePage.body}</p>
+          <ul>
+            {activePage.points.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function GalleryImages({ onOpen }) {
   return (
     <div className="gallery-photo-grid">
@@ -451,7 +548,15 @@ function ShapeDetailSection({
                         ))}
                       </ul>
 
-                      <ProjectImages images={project.images} onOpen={openLightbox} />
+                      <ProjectStory
+                        onOpen={openLightbox}
+                        pages={project.storyPages}
+                        projectLabel={project.label}
+                      />
+
+                      {!project.storyPages && (
+                        <ProjectImages images={project.images} onOpen={openLightbox} />
+                      )}
                     </div>
                   </article>
                 ))}

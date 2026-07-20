@@ -62,6 +62,58 @@ export const projectDrafts = [
       { alt: "power level rainbow six siege vegeta output", src: r6VegetaOutputImage },
       { alt: "power level scouter stats page", src: scouterImage },
     ],
+    storyPages: [
+      {
+        body:
+          "the base flow is meant to be fast: log in, choose a game type, paste a formatted result, save it, and immediately get back useful stats. the app stores player history, calculates team splits, win rates, role stats, matchup notes, and output that is readable without opening a spreadsheet.",
+        image: scouterImage,
+        imageAlt: "power level scouter stats page",
+        label: "intro",
+        points: [
+          "supabase auth keeps saves tied to a user",
+          "input formatting turns messy game results into structured records",
+          "the output focuses on stats that are fun to compare after playing",
+        ],
+        title: "from saved games to readable stats",
+      },
+      {
+        body:
+          "the vegeta output is where the app gets more personality. after the normal stats are calculated, power level builds a prompt from the saved match data and asks claude to turn the numbers into rankings, callouts, and a readable summary.",
+        image: r6VegetaOutputImage,
+        imageAlt: "power level rainbow six siege vegeta output",
+        label: "ai output",
+        points: [
+          "prompt context is assembled from aggregate player stats",
+          "the ai layer writes around real calculated data instead of guessing",
+          "the goal is analysis that feels closer to a post-game recap",
+        ],
+        title: "vegeta output and prompt creation",
+      },
+      {
+        body:
+          "detailed mode is for when the quick summary is not enough. this page can become the deeper stats view: sortable columns, more player-level breakdowns, role filters, team history, and whatever else makes the data easier to argue about.",
+        image: scouterImage,
+        imageAlt: "power level detailed stats view draft",
+        label: "detail mode",
+        points: [
+          "sortable tables for comparing players and teams",
+          "more granular breakdowns than the main summary",
+          "built for finding weird patterns in saved games",
+        ],
+        title: "detailed mode for deeper sorting",
+      },
+      {
+        body:
+          "the next piece is a halo wars 2 custom games scraper. it uses the haloapi to pull custom match data automatically, then formats the result for power level so i can play, scrape, and save without manually tracking everything during the game.",
+        label: "sneak peek",
+        points: [
+          "pulls halo wars 2 custom game data after the match",
+          "formats haloapi output into power level input",
+          "removes the manual tracking step while playing",
+        ],
+        title: "upcoming halo wars 2 scraper",
+      },
+    ],
     tech: "react, fastapi, postgres, claude api",
   },
   {
