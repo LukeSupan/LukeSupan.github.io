@@ -89,7 +89,7 @@ export const projectDrafts = [
           "input formatting turns messy game results into structured records",
           "the output focuses on stats that are fun to compare after playing",
         ],
-        title: "from saved games to readable stats",
+        title: "power level overview",
       },
       {
         body:
@@ -102,7 +102,7 @@ export const projectDrafts = [
           "the ai layer writes around real calculated data instead of guessing",
           "the goal is analysis that feels closer to a post-game recap",
         ],
-        title: "vegeta output and prompt creation",
+        title: "claude output as vegeta",
       },
       {
         body:
@@ -115,7 +115,7 @@ export const projectDrafts = [
           "more granular breakdowns than the main summary",
           "built for finding weird patterns in saved games",
         ],
-        title: "detailed mode for deeper sorting",
+        title: "detailed mode for deeper sorting and analysis",
       },
       {
         body:
@@ -126,7 +126,7 @@ export const projectDrafts = [
           "formats haloapi output into power level input",
           "removes the manual tracking step while playing",
         ],
-        title: "upcoming halo wars 2 scraper",
+        title: "halo wars 2 scraper (sister project)",
       },
     ],
     tech: "react, fastapi, postgres, claude api",
