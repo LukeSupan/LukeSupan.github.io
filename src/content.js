@@ -41,8 +41,16 @@ export const aboutNotes = [
 ];
 
 export const aboutImages = [
-  { alt: "capstone team photo. nice memory.", orientation: "wide", src: teamImage },
-  { alt: "hornet looking at the light above. silksong", orientation: "wide", src: silksongTwoImage },
+  {
+    alt: "capstone team photo. nice memory.",
+    orientation: "wide",
+    src: teamImage,
+  },
+  {
+    alt: "hornet looking at the light above. silksong",
+    orientation: "wide",
+    src: silksongTwoImage,
+  },
 ];
 
 export const aboutDesktopImages = [
@@ -64,7 +72,7 @@ export const projectDrafts = [
   {
     date: "feb 2026 - current",
     detail:
-      "my one-size-fits-all gaming stat tracker. it started as a python cli i made to find out who, among my friends, was the worst at overwatch. then turned into a deployed full-stack app that i now use to track all of my games (and ping pong)",
+      "my one-size-fits-all gaming stat tracker. it started as a python cli i made to find out who, among my friends, was the worst at overwatch. it then turned into a deployed full-stack app that i now use to track all of my games (and ping pong)",
     href: "https://power-level-scouter.vercel.app",
     label: "power level",
     points: [
@@ -74,59 +82,57 @@ export const projectDrafts = [
       "deployed with vercel, render, supabase auth, and postgres saves",
     ],
     images: [
-      { alt: "power level rainbow six siege vegeta output", src: r6VegetaOutputImage },
+      {
+        alt: "power level rainbow six siege vegeta output",
+        src: r6VegetaOutputImage,
+      },
       { alt: "power level scouter stats page", src: scouterImage },
     ],
     storyPages: [
       {
-        body:
-          "the base flow is meant to be fast: log in, choose a game type, paste a formatted result, save it, and immediately get back useful stats. the app stores player history, calculates team splits, win rates, role stats, matchup notes, and output that is readable without opening a spreadsheet.",
+        body: "the general idea of power level is you leave it open as you play, i personally use my second monitor but mobile is optimized for fast input. when you finish a game you quickly type up the results of the game as formatted input, then submit, and you'll see your updated stats. you can then run vegeta to get your personalized tier list and power levels.",
         image: scouterImage,
         imageAlt: "power level scouter stats page",
         label: "intro",
         points: [
           "supabase auth keeps saves tied to a user",
-          "input formatting turns messy game results into structured records",
-          "the output focuses on stats that are fun to compare after playing",
+          "user results are parsed and formed into readable stats which can be displayed in a simple or a detailed mode",
+          "the output focuses primarily on stats that are fun to compare after playing and can be used to suggest which players are best",
         ],
         title: "power level overview",
       },
       {
-        body:
-          "the vegeta output is where the app gets more personality. after the normal stats are calculated, power level builds a prompt from the saved match data and asks claude to turn the numbers into rankings, callouts, and a readable summary.",
+        body: "after the normal stats are calculated, they are read into the prompt for vegeta. power level has a lot of different possible statistics, and all are passed to give claude all information needed to make a tier list. i've managed to get the results pretty consistent (despite using the cheapest claude model of haiku).",
         image: r6VegetaOutputImage,
         imageAlt: "power level rainbow six siege vegeta output",
-        label: "ai output",
+        label: "vegeta",
         points: [
-          "prompt context is assembled from aggregate player stats",
-          "the ai layer writes around real calculated data instead of guessing",
-          "the goal is analysis that feels closer to a post-game recap",
+          "only metrics relevant to the current game type are used. if you are playing a game with roles but no kd. roles are used, kd will not be mentioned.",
+          "the goal is analysis that is entertaining to read. insults for the lower players and strong reactions to powerful players achieve this.",
         ],
         title: "claude output as vegeta",
       },
       {
-        body:
-          "detailed mode is for when the quick summary is not enough. this page can become the deeper stats view: sortable columns, more player-level breakdowns, role filters, team history, and whatever else makes the data easier to argue about.",
+        body: "this mode allows sorting by different statistics for both individual players and teams. it is essentially the main mode for manual analysis. the matchup board allows players to see who does well against who.",
         image: scouterImage,
         imageAlt: "power level detailed stats view draft",
-        label: "detail mode",
+        label: "detailed mode",
         points: [
-          "sortable tables for comparing players and teams",
-          "more granular breakdowns than the main summary",
-          "built for finding weird patterns in saved games",
+          "additional filters and sorting options beyond simple mode",
+          "bar graphs to show different stats at a glance",
+          "a graph for KD and kills/deaths per game is included",
         ],
-        title: "detailed mode for deeper sorting and analysis",
+        title: "additional sorting, filtering, and specific analysis",
       },
       {
-        body:
-          "the next piece is a halo wars 2 custom games scraper. it uses the haloapi to pull custom match data automatically, then formats the result for power level so i can play, scrape, and save without manually tracking everything during the game.",
-        label: "sneak peek",
+        body: "for certain games, apis exist that allow me to automate the input. halo wars 2 (and all halo games for that matter) use the haloapi. i created a python script to scrape all custom match data automatically, it then formats the result into formatted power level input.",
+        label: "additional tool",
         points: [
-          "pulls halo wars 2 custom game data after the match",
+          "pulls halo wars 2 custom game data when called",
           "formats haloapi output into power level input",
-          "removes the manual tracking step while playing",
+          "removes the manual tracking step while playing, removing human error during input",
         ],
-        title: "halo wars 2 scraper (sister project)",
+        title: "halo wars 2 scraper (sister tool)",
       },
     ],
     tech: "react, fastapi, postgres, claude api",
@@ -230,12 +236,14 @@ export const galleryImages = [
 
 export const galleryDrafts = [
   {
-    detail: "i have a requirement with music where i have to have some sort of connection to the song to listen to it consistently. this means most of the music here is from media ive consumed.",
+    detail:
+      "i have a requirement with music where i have to have some sort of connection to the song to listen to it consistently. this means most of the music here is from media ive consumed.",
     href: "https://open.spotify.com/playlist/3tyzSA0YmNqV6UESEqwIdZ?si=736238794d6d46de",
     label: "spotify",
   },
   {
-    detail: "this is my halowarpoint profile (note: i didnt make this. its just a tool i frequent). it uses the haloapi (which i also use frequently) to get a bunch of stats about my profile.",
+    detail:
+      "this is my halowarpoint profile (note: i didnt make this. its just a tool i frequent). it uses the haloapi (which i also use frequently) to get a bunch of stats about my profile.",
     href: "https://halowarpoint.com/service-record?gamerTag=holesec",
     label: "halo wars",
   },
@@ -245,7 +253,8 @@ export const galleryDrafts = [
     label: "neat",
   },
   {
-    detail: "i dont rank games much anymore, but ive ranked most of my favorites on here.",
+    detail:
+      "i dont rank games much anymore, but ive ranked most of my favorites on here.",
     href: "https://backloggd.com/u/holese/",
     label: "backloggd",
   },
