@@ -327,8 +327,19 @@ button:focus-visible {
   font-size: 1.04rem;
 }
 
+.detail-heading-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mobile-section-menu {
+  display: none;
+}
+
 .detail-heading p,
-.detail-content {
+.detail-content,
+.mobile-section-menu-toggle span:not(.mobile-section-menu-caret) {
   transition: opacity 420ms ease;
 }
 
@@ -337,6 +348,7 @@ button:focus-visible {
 }
 
 .detail-heading p.is-changing,
+.mobile-section-menu-toggle span.is-changing,
 .detail-content.is-changing {
   opacity: 0;
 }
@@ -1052,11 +1064,96 @@ button:focus-visible {
 
   .detail-button {
     font-size: 2rem;
+    width: 44px;
+    height: 44px;
   }
 
   .detail-heading {
+    position: relative;
     gap: 12px;
     font-size: 1rem;
+  }
+
+  .detail-heading-label {
+    display: none;
+  }
+
+  .mobile-section-menu {
+    position: relative;
+    display: block;
+  }
+
+  .mobile-section-menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: rgb(255 255 255 / 0.82);
+    cursor: pointer;
+    font: inherit;
+  }
+
+  .mobile-section-menu-caret {
+    color: rgb(255 255 255 / 0.42);
+    font-size: 0.78rem;
+    line-height: 1;
+    transform: translateY(1px);
+    transition:
+      color 150ms ease,
+      transform 150ms ease;
+  }
+
+  .mobile-section-menu.is-open .mobile-section-menu-caret {
+    color: rgb(255 255 255 / 0.72);
+    transform: translateY(1px) rotate(180deg);
+  }
+
+  .mobile-section-menu-list {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    z-index: 50;
+    display: none;
+    min-width: 132px;
+    padding: 10px 0;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    background: #242424;
+    box-shadow: 0 18px 22px rgb(0 0 0 / 0.16);
+  }
+
+  .mobile-section-menu.is-open .mobile-section-menu-list {
+    display: grid;
+    gap: 2px;
+  }
+
+  .mobile-section-menu-list button {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    padding: 0 4px;
+    border: 0;
+    background: transparent;
+    color: rgb(255 255 255 / 0.5);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    text-align: left;
+    transition: color 150ms ease;
+  }
+
+  .mobile-section-menu-list button:hover,
+  .mobile-section-menu-list button[aria-pressed="true"] {
+    color: #ffffff;
+  }
+
+  .mobile-section-menu-list button[aria-pressed="true"] {
+    text-decoration: underline;
+    text-underline-offset: 5px;
   }
 
   .detail-mark {
@@ -1260,7 +1357,10 @@ button:focus-visible {
   .project-story-tabs button,
   .detail-button,
   .detail-content,
-  .detail-heading p {
+  .detail-heading p,
+  .mobile-section-menu-caret,
+  .mobile-section-menu-list button,
+  .mobile-section-menu-toggle span:not(.mobile-section-menu-caret) {
     transition-duration: 1ms;
   }
 }

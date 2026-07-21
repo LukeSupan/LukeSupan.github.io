@@ -90,6 +90,48 @@ function DetailMark({ shape }) {
   );
 }
 
+function MobileSectionMenu({
+  currentShape,
+  isOpen,
+  isTransitioning,
+  onSelect,
+  onToggle,
+  visualShape,
+}) {
+  return (
+    <div className={`mobile-section-menu ${isOpen ? "is-open" : ""}`}>
+      <button
+        aria-expanded={isOpen}
+        aria-label="open section menu"
+        className="mobile-section-menu-toggle"
+        onClick={onToggle}
+        type="button"
+      >
+        <DetailMark shape={visualShape} />
+        <span className={isTransitioning ? "is-changing" : ""}>
+          {shapePages[currentShape].eyebrow}
+        </span>
+        <span className="mobile-section-menu-caret" aria-hidden="true">
+          v
+        </span>
+      </button>
+
+      <nav className="mobile-section-menu-list" aria-label="section navigation">
+        {shapes.map((shape, index) => (
+          <button
+            aria-pressed={currentShape === shape}
+            key={shape}
+            onClick={() => onSelect(index)}
+            type="button"
+          >
+            {shapePages[shape].eyebrow}
+          </button>
+        ))}
+      </nav>
+    </div>
+  );
+}
+
 function ProjectImages({ images, onOpen }) {
   if (!images?.length) {
     return null;
@@ -448,6 +490,7 @@ function ShapeDetailSection({
   const topbarRef = useRef(null);
   const usesMobileDetailLayout = useMediaQuery("(max-width: 639px)");
   const [isTopbarStuck, setIsTopbarStuck] = useState(false);
+  const [isMobileSectionMenuOpen, setIsMobileSectionMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState(null);
   const detailControls = (
     <div className="detail-controls" aria-label="section controls">
@@ -491,6 +534,28 @@ function ShapeDetailSection({
       window.removeEventListener("resize", updateTopbarState);
     };
   }, []);
+
+  useEffect(() => {
+    setIsMobileSectionMenuOpen(false);
+  }, [shape]);
+
+  useEffect(() => {
+    if (!isMobileSectionMenuOpen) {
+      return;
+    }
+
+    function closeMobileSectionMenu(event) {
+      if (event.key === "Escape") {
+        setIsMobileSectionMenuOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", closeMobileSectionMenu);
+
+    return () => {
+      window.removeEventListener("keydown", closeMobileSectionMenu);
+    };
+  }, [isMobileSectionMenuOpen]);
 
   function openLightbox(images, index) {
     if (window.matchMedia("(max-width: 639px)").matches) {
@@ -536,6 +601,11 @@ function ShapeDetailSection({
     });
   }
 
+  function selectMobileSection(shapeIndex) {
+    setIsMobileSectionMenuOpen(false);
+    onSelectShape(shapeIndex);
+  }
+
   return (
     <section className={`detail-section detail-${shape}`} ref={sectionRef}>
       <div className="detail-shell">
@@ -544,10 +614,23 @@ function ShapeDetailSection({
           ref={topbarRef}
         >
           <div className="detail-heading">
-            <DetailMark shape={visualShape} />
-            <p className={isTransitioning ? "is-changing" : ""}>
-              {page.eyebrow}
-            </p>
+            <div className="detail-heading-label">
+              <DetailMark shape={visualShape} />
+              <p className={isTransitioning ? "is-changing" : ""}>
+                {page.eyebrow}
+              </p>
+            </div>
+
+            <MobileSectionMenu
+              currentShape={shape}
+              isOpen={isMobileSectionMenuOpen}
+              isTransitioning={isTransitioning}
+              onSelect={selectMobileSection}
+              onToggle={() =>
+                setIsMobileSectionMenuOpen((isCurrentlyOpen) => !isCurrentlyOpen)
+              }
+              visualShape={visualShape}
+            />
           </div>
 
           <ShapeSectionNav
