@@ -17,6 +17,8 @@ import pongTitleImage from "./assets/projects/pongTitle.png";
 import psycallRotationPageImage from "./assets/projects/psycallRotationPage.png";
 import r6VegetaOutputImage from "./assets/projects/r6VegetaOutput.png";
 import scouterImage from "./assets/projects/scouter.png";
+import haloWarsTrackerImage from "./assets/projects/halowars2tracker.png";
+import detailedModeImage from "./assets/projects/detailedMode.png";
 
 export const shapePages = {
   triangle: {
@@ -114,7 +116,7 @@ export const projectDrafts = [
       },
       {
         body: "this mode allows sorting by different statistics for both individual players and teams. it is essentially the main mode for manual analysis. the matchup board allows players to see who does well against who.",
-        image: scouterImage,
+        image: detailedModeImage,
         imageAlt: "power level detailed stats view draft",
         label: "detailed mode",
         points: [
@@ -125,7 +127,8 @@ export const projectDrafts = [
         title: "additional sorting, filtering, and specific analysis",
       },
       {
-        body: "for certain games, apis exist that allow me to automate the input. halo wars 2 (and all halo games for that matter) use the haloapi. i created a python script to scrape all custom match data automatically, it then formats the result into formatted power level input.",
+        body: "for certain games, apis exist that allow me to automate the input. halo wars 2 (and all halo games for that matter) use the haloapi. i created a python script to scrape all custom match data automatically, it then formats the result into formatted power level input. the screenshot here is other output that the script creates.",
+        image: haloWarsTrackerImage,
         label: "additional tool",
         points: [
           "pulls halo wars 2 custom game data when called",
@@ -153,6 +156,47 @@ export const projectDrafts = [
       { alt: "psycall configure tab", src: configureTabImage },
       { alt: "psycall pgy4 dashboard", src: pgy4DashboardImage },
       { alt: "psycall rotation page", src: psycallRotationPageImage },
+    ],
+    storyPages: [
+      {
+        body:
+          "psycall was my senior capstone project for hca healthcare. the main goal was to make the pgy3 to pgy4 resident scheduling process easier to manage than the old manual email workflow. this overview is the general landing point for checking schedule state, resident information, and the pieces admins need before publishing.",
+        image: pgy4DashboardImage,
+        imageAlt: "psycall pgy4 dashboard",
+        label: "overview",
+        points: [
+          "built for psychiatry resident rotation scheduling",
+          "replaced a manual process for roughly 96 monthly resident rotations",
+          "made schedule status easier for admins to review before finalizing",
+        ],
+        title: "psycall overview",
+      },
+      {
+        body:
+          "the configure tab was where admins could set up the schedule before working through assignments. this part of the app helped keep the workflow flexible, because different rotation periods could need different rules, settings, or available options before residents were placed.",
+        image: configureTabImage,
+        imageAlt: "psycall configure tab",
+        label: "configure",
+        points: [
+          "supported the setup phase before schedule editing",
+          "kept configuration separate from the resident rotation table",
+          "helped admins prepare the schedule before making final assignments",
+        ],
+        title: "configuration before scheduling",
+      },
+      {
+        body:
+          "the rotation page was the core staged editing surface. this is where the schedule could be adjusted, checked for issues, and prepared before publishing. i worked on the controlled schedule table pattern so edits, warnings, overrides, and reversions could stay manageable.",
+        image: psycallRotationPageImage,
+        imageAlt: "psycall rotation page",
+        label: "staging",
+        points: [
+          "staged schedule edits before publishing",
+          "displayed warnings and supported manual administrator overrides",
+          "used a reusable controlled table pattern that another team also adopted",
+        ],
+        title: "staging rotations before publish",
+      },
     ],
     tech: "next.js, tailwind",
   },
