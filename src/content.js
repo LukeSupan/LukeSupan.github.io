@@ -175,19 +175,6 @@ export const projectDrafts = [
     tech: "unity, c#",
   },
   {
-    date: "july 2026",
-    detail:
-      "this site right now. i kept trying to think of a cool gimmick, thought of the shapes idea, so i remade the site.",
-    href: "https://github.com/LukeSupan/LukeSupan",
-    label: "portfolio",
-    points: [
-      "shape navigation with very distinct mobile and desktop layouts",
-      "maintained with each new project",
-      "pretty fun to make. this isn't on my resume so these bullets aren't too serious",
-    ],
-    tech: "react, tailwind, vite",
-  },
-  {
     date: "mar 2026",
     detail:
       "a static portfolio for a uf geology and geography student applying to grad programs. it isn't my typical design for a site which is extreme minimalism and dark patterns. so it was a good break from my usual.",
