@@ -23,7 +23,7 @@ import detailedModeImage from "./assets/projects/detailedMode.png";
 export const shapePages = {
   triangle: {
     eyebrow: "about",
-    body: "i'm luke, a recent CS grad from UCF looking for a SWE role that will help me grow as an engineer",
+    body: "i'm luke, a recent CS grad from UCF working primarily with React, FastAPI, Postgres, frequently with the Claude API",
   },
   square: {
     eyebrow: "projects",
@@ -37,8 +37,8 @@ export const shapePages = {
 
 export const aboutNotes = [
   "ucf computer science, magna cum laude",
-  "my primary stack: react, fastapi, postgres, tailwind, claudeapi",
-  "current goals: swe roles based in florida, roblox dev in the future",
+  "my primary stack: React, FastAPI, Postgres, Tailwind, Claude API",
+  "current goals: SWE roles based in Florida",
   "active project: a custom games scraper for halo wars 2 to work with power level (my personal favorite project)",
 ];
 
@@ -78,10 +78,10 @@ export const projectDrafts = [
     href: "https://power-level-scouter.vercel.app",
     label: "power level",
     points: [
-      "now tracks 500+ games across it's current 8 game types",
+      "now tracks 500+ games across its current 8 game types",
       "parses team splits, roles, matchups, win rates, and player breakdowns",
-      "uses claude to turn aggregate stats into rankings and readable analysis",
-      "deployed with vercel, render, supabase auth, and postgres saves",
+      "uses Claude to turn aggregate stats into rankings and readable analysis",
+      "deployed with Vercel, Render, Supabase auth, and Postgres saves",
     ],
     images: [
       {
@@ -104,7 +104,7 @@ export const projectDrafts = [
         title: "power level overview",
       },
       {
-        body: "after the normal stats are calculated, they are read into the prompt for vegeta. power level has a lot of different possible statistics, and all are passed to give claude all information needed to make a tier list. i've managed to get the results pretty consistent (despite using the cheapest claude model of haiku).",
+        body: "after the normal stats are calculated, they are read into the prompt for vegeta. power level has a lot of different possible statistics, and all are passed to give Claude all information needed to make a tier list. i've managed to get the results pretty consistent (despite using the cheapest Claude model of Haiku).",
         image: r6VegetaOutputImage,
         imageAlt: "power level rainbow six siege vegeta output",
         label: "vegeta",
@@ -127,18 +127,18 @@ export const projectDrafts = [
         title: "additional sorting, filtering, and specific analysis",
       },
       {
-        body: "for certain games, apis exist that allow me to automate the input. halo wars 2 (and all halo games for that matter) use the haloapi. i created a python script to scrape all custom match data automatically, it then formats the result into formatted power level input. the screenshot here is other output that the script creates.",
+        body: "for certain games, APIs exist that allow me to automate the input. halo wars 2 (and all halo games for that matter) use the Halo API. i created a python script to scrape all custom match data automatically, it then formats the result into formatted power level input. the screenshot here is other output that the script creates.",
         image: haloWarsTrackerImage,
         label: "additional tool",
         points: [
           "pulls halo wars 2 custom game data when called",
-          "formats haloapi output into power level input",
+          "formats Halo API output into power level input",
           "removes the manual tracking step while playing, removing human error during input",
         ],
         title: "halo wars 2 scraper (sister tool)",
       },
     ],
-    tech: "react, fastapi, postgres, claude api",
+    tech: "React, FastAPI, Postgres, Claude API",
   },
   {
     date: "sep 2025 - may 2026",
@@ -194,7 +194,7 @@ export const projectDrafts = [
         title: "rotation staging",
       },
     ],
-    tech: "next.js, tailwind",
+    tech: "Next.js, Tailwind",
   },
   {
     date: "apr 2025",
@@ -212,12 +212,12 @@ export const projectDrafts = [
       { alt: "pong gameplay", src: pongGameplayImage },
       { alt: "pong title screen", src: pongTitleImage },
     ],
-    tech: "unity, c#",
+    tech: "Unity, C#",
   },
   {
     date: "mar 2026",
     detail:
-      "a static portfolio for a uf geology and geography student applying to grad programs. it isn't my typical design for a site which is extreme minimalism and dark patterns. so it was a good break from my usual.",
+      "a static portfolio for a UF geology and geography student applying to grad programs. it isn't my typical design for a site, which is extreme minimalism and dark patterns, so it was a good break from my usual.",
     href: "https://codyhunter-ufl.github.io",
     label: "cody e-portfolio",
     points: [
@@ -229,7 +229,7 @@ export const projectDrafts = [
       { alt: "cody e-portfolio project figure", src: eportFigureImage },
       { alt: "cody e-portfolio home page", src: eportHomeImage },
     ],
-    tech: "react, tailwind",
+    tech: "React, Tailwind",
   },
   {
     date: "pre 2025",
@@ -245,7 +245,7 @@ export const projectDrafts = [
       "screenbuddy: built dashboard visualizations with recharts",
       "epoch: a top down roguelite, my first game in unity, made with a team",
     ],
-    tech: "php, mysql, unity, android, java, mern, flutter, lamp",
+    tech: "PHP, MySQL, Unity, Android, Java, MERN, Flutter, LAMP",
   },
 ];
 
@@ -264,13 +264,13 @@ export const galleryImages = [
 export const galleryDrafts = [
   {
     detail:
-      "i have a requirement with music where i have to have some sort of connection to the song to listen to it consistently. this means most of the music here is from media ive consumed.",
+      "i have a requirement with music where i have to have some sort of connection to the song to listen to it consistently. this means most of the music here is from media i've consumed.",
     href: "https://open.spotify.com/playlist/3tyzSA0YmNqV6UESEqwIdZ?si=736238794d6d46de",
     label: "spotify",
   },
   {
     detail:
-      "this is my halowarpoint profile (note: i didnt make this. its just a tool i frequent). it uses the haloapi (which i also use frequently) to get a bunch of stats about my profile.",
+      "this is my halowarpoint profile (note: i didn't make this. it's just a tool i frequent). it uses the Halo API (which i also use frequently) to get a bunch of stats about my profile.",
     href: "https://halowarpoint.com/service-record?gamerTag=holesec",
     label: "halo wars",
   },
@@ -281,7 +281,7 @@ export const galleryDrafts = [
   },
   {
     detail:
-      "i dont rank games much anymore, but ive ranked most of my favorites on here.",
+      "i don't rank games much anymore, but i've ranked most of my favorites on here.",
     href: "https://backloggd.com/u/holese/",
     label: "backloggd",
   },

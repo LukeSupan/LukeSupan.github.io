@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   aboutDesktopImages,
   aboutImages,
@@ -27,15 +33,16 @@ function ShapeLinks({ className, links }) {
     <nav className={className}>
       {links.map((link) => {
         const isPlaceholder = link.href === "#";
-        const opensNewTab =
-          !isPlaceholder && !link.href.startsWith("mailto:");
+        const opensNewTab = !isPlaceholder && !link.href.startsWith("mailto:");
 
         return (
           <a
             className="transition hover:text-white"
             href={link.href}
             key={link.label}
-            onClick={isPlaceholder ? (event) => event.preventDefault() : undefined}
+            onClick={
+              isPlaceholder ? (event) => event.preventDefault() : undefined
+            }
             rel={opensNewTab ? "noreferrer" : undefined}
             target={opensNewTab ? "_blank" : undefined}
           >
@@ -132,7 +139,10 @@ function ProjectStory({ onOpen, pages, projectLabel }) {
   }
 
   return (
-    <section className="project-story" aria-label={`${projectLabel} walkthrough`}>
+    <section
+      className="project-story"
+      aria-label={`${projectLabel} walkthrough`}
+    >
       <div className="project-story-top">
         <div>
           <small>
@@ -183,7 +193,12 @@ function ProjectStory({ onOpen, pages, projectLabel }) {
             className="image-open-button project-story-image"
             onClick={() =>
               onOpen(
-                [{ alt: activePage.imageAlt ?? activePage.title, src: activePage.image }],
+                [
+                  {
+                    alt: activePage.imageAlt ?? activePage.title,
+                    src: activePage.image,
+                  },
+                ],
                 0,
               )
             }
@@ -529,7 +544,9 @@ function ShapeDetailSection({
         >
           <div className="detail-heading">
             <DetailMark shape={visualShape} />
-            <p className={isTransitioning ? "is-changing" : ""}>{page.eyebrow}</p>
+            <p className={isTransitioning ? "is-changing" : ""}>
+              {page.eyebrow}
+            </p>
           </div>
 
           <ShapeSectionNav
@@ -542,7 +559,9 @@ function ShapeDetailSection({
           {detailControls}
         </header>
 
-        <div className={`detail-content ${isTransitioning ? "is-changing" : ""}`}>
+        <div
+          className={`detail-content ${isTransitioning ? "is-changing" : ""}`}
+        >
           {shape === "triangle" && (
             <div className="about-layout">
               <p className="detail-statement">{page.body}</p>
@@ -576,23 +595,25 @@ function ShapeDetailSection({
                     <div className="project-copy">
                       <div className="project-main-copy">
                         <div className="project-summary">
-                        <a
-                          className="project-title-link"
-                          href={project.href}
-                          onClick={
-                            project.href === "#"
-                              ? (event) => event.preventDefault()
-                              : undefined
-                          }
-                          rel={project.href === "#" ? undefined : "noreferrer"}
-                          target={project.href === "#" ? undefined : "_blank"}
-                        >
-                          <strong>{project.label}</strong>
-                        </a>
-                        <small>
-                          {project.tech} - {project.date}
-                        </small>
-                        <p>{project.detail}</p>
+                          <a
+                            className="project-title-link"
+                            href={project.href}
+                            onClick={
+                              project.href === "#"
+                                ? (event) => event.preventDefault()
+                                : undefined
+                            }
+                            rel={
+                              project.href === "#" ? undefined : "noreferrer"
+                            }
+                            target={project.href === "#" ? undefined : "_blank"}
+                          >
+                            <strong>{project.label}</strong>
+                          </a>
+                          <small>
+                            {project.tech} - {project.date}
+                          </small>
+                          <p>{project.detail}</p>
                         </div>
 
                         <ul className="project-points">
@@ -609,7 +630,10 @@ function ShapeDetailSection({
                       />
 
                       {!project.storyPages && (
-                        <ProjectImages images={project.images} onOpen={openLightbox} />
+                        <ProjectImages
+                          images={project.images}
+                          onOpen={openLightbox}
+                        />
                       )}
                     </div>
                   </article>
@@ -624,15 +648,8 @@ function ShapeDetailSection({
 
               <div className="gallery-grid">
                 {galleryDrafts.map((item) => (
-                  <article
-                    className="gallery-item"
-                    key={item.label}
-                  >
-                    <a
-                      href={item.href}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
+                  <article className="gallery-item" key={item.label}>
+                    <a href={item.href} rel="noreferrer" target="_blank">
                       {item.label}
                     </a>
                     <p>{item.detail}</p>
@@ -726,39 +743,42 @@ function App() {
   const heroLinks = getLinksForShape(contentShape);
 
   // change shape on button press
-  const changeShape = useCallback((getShapeIndex, options = {}) => {
-    const nextShapeIndex = getShapeIndex(visualShapeIndex);
+  const changeShape = useCallback(
+    (getShapeIndex, options = {}) => {
+      const nextShapeIndex = getShapeIndex(visualShapeIndex);
 
-    if (nextShapeIndex === visualShapeIndex) {
-      shouldScrollDetailAfterSwap.current = false;
+      if (nextShapeIndex === visualShapeIndex) {
+        shouldScrollDetailAfterSwap.current = false;
 
-      if (options.scrollDetail) {
-        detailSectionRef.current?.scrollIntoView({
-          block: "start",
-          behavior: getPreferredScrollBehavior(),
-        });
+        if (options.scrollDetail) {
+          detailSectionRef.current?.scrollIntoView({
+            block: "start",
+            behavior: getPreferredScrollBehavior(),
+          });
+        }
+
+        return;
       }
 
-      return;
-    }
+      // clear an old timeout if it exists
+      window.clearTimeout(contentSwapTimeout.current);
+      window.clearTimeout(textTransitionTimeout.current);
+      shouldScrollDetailAfterSwap.current = Boolean(options.scrollDetail);
+      setIsTextTransitioning(true);
+      setVisualShapeIndex(nextShapeIndex);
 
-    // clear an old timeout if it exists
-    window.clearTimeout(contentSwapTimeout.current);
-    window.clearTimeout(textTransitionTimeout.current);
-    shouldScrollDetailAfterSwap.current = Boolean(options.scrollDetail);
-    setIsTextTransitioning(true);
-    setVisualShapeIndex(nextShapeIndex);
+      // set timeout until we swap content. less jank
+      contentSwapTimeout.current = window.setTimeout(() => {
+        setContentShapeIndex(nextShapeIndex);
+      }, 475);
 
-    // set timeout until we swap content. less jank
-    contentSwapTimeout.current = window.setTimeout(() => {
-      setContentShapeIndex(nextShapeIndex);
-    }, 475);
-
-    // keep text hidden until the polygon has been stable for a moment
-    textTransitionTimeout.current = window.setTimeout(() => {
-      setIsTextTransitioning(false);
-    }, 700);
-  }, [visualShapeIndex]);
+      // keep text hidden until the polygon has been stable for a moment
+      textTransitionTimeout.current = window.setTimeout(() => {
+        setIsTextTransitioning(false);
+      }, 700);
+    },
+    [visualShapeIndex],
+  );
 
   function showPreviousShape() {
     changeShape(getPreviousShapeIndex);
@@ -906,7 +926,8 @@ function App() {
 
     function queueGalleryScaleUpdate() {
       window.cancelAnimationFrame(galleryScaleFrame.current);
-      galleryScaleFrame.current = window.requestAnimationFrame(updateGalleryScale);
+      galleryScaleFrame.current =
+        window.requestAnimationFrame(updateGalleryScale);
     }
 
     updateGalleryScale();
@@ -996,11 +1017,13 @@ function App() {
               />
             </div>
 
-            <div className={`polygon-mark shape-${visualShape}`} aria-hidden="true">
+            <div
+              className={`polygon-mark shape-${visualShape}`}
+              aria-hidden="true"
+            >
               <div className="polygon-outline"></div>
               <div className="polygon-fill"></div>
             </div>
-
           </div>
         </div>
 
@@ -1017,7 +1040,10 @@ function App() {
               &lt;
             </button>
 
-            <div className={`shape-object shape-${visualShape}`} aria-hidden="true">
+            <div
+              className={`shape-object shape-${visualShape}`}
+              aria-hidden="true"
+            >
               <div className="polygon-outline"></div>
               <div className="polygon-fill"></div>
             </div>
