@@ -159,8 +159,7 @@ export const projectDrafts = [
     ],
     storyPages: [
       {
-        body:
-          "psycall was my senior capstone project for hca healthcare. the main goal was to make the pgy3 to pgy4 resident scheduling process easier to manage than the old manual email workflow. this overview is the general landing point for checking schedule state, resident information, and the pieces admins need before publishing.",
+        body: "psycall was my senior capstone project for hca healthcare. the main goal was to make the pgy3 to pgy4 resident scheduling process easier to manage than the old manual email workflow. this overview is the general landing point for checking schedule state before publishing.",
         image: pgy4DashboardImage,
         imageAlt: "psycall pgy4 dashboard",
         label: "overview",
@@ -168,34 +167,31 @@ export const projectDrafts = [
           "built for psychiatry resident rotation scheduling",
           "replaced a manual process for roughly 96 monthly resident rotations",
           "made schedule status easier for admins to review before finalizing",
+          "made rotation requests more transparent for residents",
         ],
         title: "psycall overview",
       },
       {
-        body:
-          "the configure tab was where admins could set up the schedule before working through assignments. this part of the app helped keep the workflow flexible, because different rotation periods could need different rules, settings, or available options before residents were placed.",
+        body: "the configure tab was where admins could set the dates for the rotation request form that the residents fill out. it would also allow admins to set certain residents as chiefs, this changes the rules for the generation of the schedule.",
         image: configureTabImage,
         imageAlt: "psycall configure tab",
         label: "configure",
         points: [
-          "supported the setup phase before schedule editing",
-          "kept configuration separate from the resident rotation table",
-          "helped admins prepare the schedule before making final assignments",
+          "allows configuration of the rotation form for residents by the admin",
+          "adjusts rules for the rotation schedule generation algorithm.",
         ],
         title: "configuration before scheduling",
       },
       {
-        body:
-          "the rotation page was the core staged editing surface. this is where the schedule could be adjusted, checked for issues, and prepared before publishing. i worked on the controlled schedule table pattern so edits, warnings, overrides, and reversions could stay manageable.",
+        body: "the rotation page was the core staged editing surface. this is where the schedule could be adjusted, checked for issues (which can be overridden by admins), and prepared before publishing. i worked on the controlled schedule table pattern so edits, warnings, overrides, and reversions could stay manageable.",
         image: psycallRotationPageImage,
         imageAlt: "psycall rotation page",
         label: "staging",
         points: [
           "staged schedule edits before publishing",
           "displayed warnings and supported manual administrator overrides",
-          "used a reusable controlled table pattern that another team also adopted",
         ],
-        title: "staging rotations before publish",
+        title: "rotation staging",
       },
     ],
     tech: "next.js, tailwind",
