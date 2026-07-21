@@ -235,34 +235,54 @@ function GalleryImages({ onOpen }) {
   );
 }
 
+function useMediaQuery(query) {
+  const [matchesQuery, setMatchesQuery] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return window.matchMedia(query).matches;
+  });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(query);
+
+    function updateMatchesQuery() {
+      setMatchesQuery(mediaQuery.matches);
+    }
+
+    updateMatchesQuery();
+    mediaQuery.addEventListener("change", updateMatchesQuery);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateMatchesQuery);
+    };
+  }, [query]);
+
+  return matchesQuery;
+}
+
 function AboutImages({ onOpen }) {
+  const usesDesktopAboutLayout = useMediaQuery("(min-width: 900px)");
+  const usesDesktopAboutPhotos = useMediaQuery(
+    "(min-width: 900px) and (hover: hover) and (pointer: fine)",
+  );
+  const images = usesDesktopAboutPhotos ? aboutDesktopImages : aboutImages;
+
   return (
     <div className="about-images">
-      <div className="about-images-mobile">
-        {aboutImages.map((image, index) => (
-          <button
-            aria-label={`open ${image.alt}`}
-            className={`image-open-button about-image about-image-${image.orientation}`}
-            key={image.src}
-            onClick={() => onOpen(aboutImages, index)}
-            type="button"
-          >
-            <img
-              alt={image.alt}
-              decoding="async"
-              loading="lazy"
-              src={image.src}
-            />
-          </button>
-        ))}
-      </div>
-
-      {aboutDesktopImages.map((image, index) => (
+      {images.map((image, index) => (
         <button
           aria-label={`open ${image.alt}`}
-          className={`image-open-button about-image about-image-${image.orientation} about-image-desktop about-image-desktop-${image.desktopSlot}`}
+          className={`image-open-button about-image about-image-${image.orientation} ${
+            usesDesktopAboutLayout
+              ? `about-image-desktop about-image-desktop-${
+                  image.desktopSlot ?? (index === 0 ? "left" : "right")
+                }`
+              : ""
+          }`}
           key={image.src}
-          onClick={() => onOpen(aboutDesktopImages, index)}
+          onClick={() => onOpen(images, index)}
           type="button"
         >
           <img
