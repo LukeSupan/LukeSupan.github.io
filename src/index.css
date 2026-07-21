@@ -1030,14 +1030,14 @@ button:focus-visible {
   }
 
   .detail-section {
-    padding: 64px 18px 96px;
+    padding: 56px 16px 84px;
   }
 
   .detail-topbar {
     top: 0;
     grid-template-columns: auto 1fr auto;
     gap: 18px;
-    margin-bottom: 34px;
+    margin-bottom: 28px;
     padding: 14px 0;
   }
 
@@ -1064,7 +1064,21 @@ button:focus-visible {
   }
 
   .detail-statement {
-    font-size: clamp(1.35rem, 7vw, 2.05rem);
+    font-size: clamp(1.24rem, 6.2vw, 1.72rem);
+    line-height: 1.28;
+  }
+
+  .about-layout {
+    gap: 30px;
+  }
+
+  .about-notes {
+    gap: 12px;
+  }
+
+  .about-notes p {
+    font-size: 0.92rem;
+    line-height: 1.55;
   }
 
   .about-images {
@@ -1086,15 +1100,48 @@ button:focus-visible {
 
   .project-list,
   .gallery-grid {
-    margin-top: 44px;
+    margin-top: 34px;
   }
 
   .project-row {
     padding: 0;
   }
 
+  .project-list {
+    gap: 40px;
+  }
+
   .project-copy {
-    gap: 12px;
+    gap: 10px;
+  }
+
+  .project-main-copy,
+  .project-summary {
+    gap: 9px;
+  }
+
+  .project-row strong {
+    font-size: 1.12rem;
+  }
+
+  .project-copy small {
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .project-copy p {
+    font-size: 0.92rem;
+    line-height: 1.54;
+  }
+
+  .project-points {
+    gap: 5px;
+    font-size: 0.86rem;
+    line-height: 1.42;
+  }
+
+  .project-points li:nth-child(n + 3) {
+    display: none;
   }
 
   .project-images {
@@ -1102,9 +1149,29 @@ button:focus-visible {
     gap: 10px;
   }
 
+  .project-story-disclosure {
+    margin-top: 12px;
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  .project-story-disclosure summary {
+    width: fit-content;
+    padding-top: 14px;
+    color: rgb(255 255 255 / 0.56);
+    cursor: pointer;
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .project-story-disclosure summary:hover {
+    color: #ffffff;
+  }
+
   .project-story {
     gap: 14px;
-    margin-top: 16px;
+    margin-top: 14px;
+    padding-top: 0;
+    border-top: 0;
   }
 
   .project-story-top {
@@ -1116,6 +1183,17 @@ button:focus-visible {
     gap: 14px;
   }
 
+  .project-story-copy p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .project-story-copy ul {
+    gap: 5px;
+    font-size: 0.82rem;
+    line-height: 1.42;
+  }
+
   .project-story-image img {
     max-height: 240px;
   }
@@ -1125,12 +1203,18 @@ button:focus-visible {
   }
 
   .gallery-grid {
-    gap: 28px;
+    gap: 22px;
+  }
+
+  .gallery-item p {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .gallery-photo-grid {
     columns: 1;
-    margin-top: 44px;
+    margin-top: 34px;
   }
 
   .gallery-item {

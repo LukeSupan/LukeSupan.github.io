@@ -77,6 +77,8 @@ export const projectDrafts = [
       "my one-size-fits-all gaming stat tracker. it started as a python cli i made to find out who, among my friends, was the worst at overwatch. it then turned into a deployed full-stack app that i now use to track all of my games (and ping pong)",
     href: "https://power-level-scouter.vercel.app",
     label: "power level",
+    mobileDetail:
+      "full-stack stats tracker with auth, parsing, aggregation, and AI summaries.",
     points: [
       "now tracks 500+ games across its current 8 game types",
       "parses team splits, roles, matchups, win rates, and player breakdowns",
@@ -146,6 +148,8 @@ export const projectDrafts = [
       "senior capstone for hca healthcare. i led a six-person agile team and built a flexible scheduling interface for psychiatry residents moving from pgy3 to pgy4. i worked primarily as frontend but helped out full stack.",
     href: "https://github.com/lbrown169/Medical-Resident-Scheduling",
     label: "psycall",
+    mobileDetail:
+      "senior capstone scheduler for HCA Healthcare, focused on staged resident rotation editing and admin review.",
     points: [
       "replaced a manual email-based process for roughly 96 yearly rotation assignments",
       "built a reusable controlled schedule table that another team also adopted",
@@ -202,6 +206,8 @@ export const projectDrafts = [
       "a feature-complete pong recreation in unity. has controller support and ball movement i scripted myself to avoid using unity physics. live now on itch.io. also relatively difficult.",
     href: "https://holeset.itch.io/pong-by-holeset",
     label: "pong",
+    mobileDetail:
+      "feature-complete Unity Pong remake with browser play, controller support, and custom ball movement.",
     points: [
       "shipped as a playable browser build on itch.io",
       "includes local multiplayer, controller support, scoring, and match resets",
@@ -220,6 +226,8 @@ export const projectDrafts = [
       "a static portfolio for a UF geology and geography student applying to grad programs. it isn't my typical design for a site, which is extreme minimalism and dark patterns, so it was a good break from my usual.",
     href: "https://codyhunter-ufl.github.io",
     label: "cody e-portfolio",
+    mobileDetail:
+      "client portfolio built in React/Tailwind with reusable project data and post-launch updates.",
     points: [
       "gathered requirements, mocked the layout, and built the site from scratch",
       "organized research projects, field photography, resume content, and gis work",
@@ -237,6 +245,8 @@ export const projectDrafts = [
       "a couple other projects i worked on throughout my time at ucf. good stepping stones to get to bigger and better things.",
     href: "https://github.com/LukeSupan",
     label: "other stuff",
+    mobileDetail:
+      "earlier coursework and team projects across web apps, Android, Unity, PHP/MySQL, and MERN.",
     points: [
       "halo stat tracker: php and mysql stats app",
       "minesweeper: android java clone with resizable boards",

@@ -446,6 +446,7 @@ function ShapeDetailSection({
 }) {
   const page = shapePages[shape];
   const topbarRef = useRef(null);
+  const usesMobileDetailLayout = useMediaQuery("(max-width: 639px)");
   const [isTopbarStuck, setIsTopbarStuck] = useState(false);
   const [lightbox, setLightbox] = useState(null);
   const detailControls = (
@@ -613,7 +614,11 @@ function ShapeDetailSection({
                           <small>
                             {project.tech} - {project.date}
                           </small>
-                          <p>{project.detail}</p>
+                          <p>
+                            {usesMobileDetailLayout && project.mobileDetail
+                              ? project.mobileDetail
+                              : project.detail}
+                          </p>
                         </div>
 
                         <ul className="project-points">
@@ -623,11 +628,22 @@ function ShapeDetailSection({
                         </ul>
                       </div>
 
-                      <ProjectStory
-                        onOpen={openLightbox}
-                        pages={project.storyPages}
-                        projectLabel={project.label}
-                      />
+                      {project.storyPages && usesMobileDetailLayout ? (
+                        <details className="project-story-disclosure">
+                          <summary>walkthrough</summary>
+                          <ProjectStory
+                            onOpen={openLightbox}
+                            pages={project.storyPages}
+                            projectLabel={project.label}
+                          />
+                        </details>
+                      ) : (
+                        <ProjectStory
+                          onOpen={openLightbox}
+                          pages={project.storyPages}
+                          projectLabel={project.label}
+                        />
+                      )}
 
                       {!project.storyPages && (
                         <ProjectImages
