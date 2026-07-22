@@ -899,6 +899,13 @@ function App() {
     changeShape(() => shapeIndex);
   }
 
+  function scrollToDetailSection() {
+    detailSectionRef.current?.scrollIntoView({
+      block: "start",
+      behavior: getPreferredScrollBehavior(),
+    });
+  }
+
   function handlePageTouchStart(event) {
     if (!isMobileViewport() || document.querySelector(".lightbox")) {
       return;
@@ -1099,6 +1106,15 @@ function App() {
               &gt;
             </button>
 
+            <button
+              aria-label="scroll to details"
+              className="desktop-shape-button desktop-shape-button-down"
+              onClick={scrollToDetailSection}
+              type="button"
+            >
+              &gt;
+            </button>
+
             <div
               className={`polygon-content relative z-10 ${
                 isTextTransitioning ? "is-covered" : ""
@@ -1156,6 +1172,15 @@ function App() {
               &gt;
             </button>
           </div>
+
+          <button
+            aria-label="scroll to details"
+            className="mobile-shape-button mobile-shape-button-down"
+            onClick={scrollToDetailSection}
+            type="button"
+          >
+            &gt;
+          </button>
 
           <ShapeLinks
             className={`hero-links mobile-hero-links ${

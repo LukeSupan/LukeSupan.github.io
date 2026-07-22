@@ -108,6 +108,13 @@ button:focus-visible {
   right: -46px;
 }
 
+.desktop-shape-button-down {
+  top: auto;
+  bottom: -46px;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}
+
 .shape-section-nav {
   display: flex;
   align-items: center;
@@ -244,6 +251,12 @@ button:focus-visible {
 .mobile-shape-button:hover {
   border-color: rgb(255 255 255 / 0.24);
   color: #ffffff;
+}
+
+.mobile-shape-button-down {
+  margin-top: -12px;
+  margin-bottom: -12px;
+  transform: rotate(90deg);
 }
 
 .hero-links {
@@ -1024,6 +1037,11 @@ button:focus-visible {
     border: 0;
     background: transparent;
     font-size: 2.1rem;
+  }
+
+  .mobile-shape-button-down {
+    margin-top: -10px;
+    margin-bottom: -10px;
   }
 
   .hero-links {
