@@ -396,6 +396,7 @@ button:focus-visible {
 
 .about-notes p {
   margin: 0;
+  color: rgb(255 255 255 / 0.72);
   font-size: 1.04rem;
   line-height: 1.65;
 }
@@ -446,7 +447,7 @@ button:focus-visible {
 
 .project-copy small,
 .project-points {
-  color: rgb(255 255 255 / 0.38);
+  color: rgb(255 255 255 / 0.5);
   font-style: normal;
 }
 
@@ -475,7 +476,7 @@ button:focus-visible {
 .project-copy p {
   max-width: 620px;
   margin: 0;
-  color: rgb(255 255 255 / 0.64);
+  color: rgb(255 255 255 / 0.74);
   font-size: 1.04rem;
   line-height: 1.65;
 }
@@ -607,7 +608,7 @@ button:focus-visible {
 
 .project-story-copy p {
   margin: 0;
-  color: rgb(255 255 255 / 0.64);
+  color: rgb(255 255 255 / 0.74);
   font-size: 0.98rem;
   line-height: 1.62;
 }
@@ -617,7 +618,7 @@ button:focus-visible {
   gap: 7px;
   margin: 0;
   padding: 0;
-  color: rgb(255 255 255 / 0.42);
+  color: rgb(255 255 255 / 0.54);
   font-size: 0.92rem;
   line-height: 1.5;
   list-style: none;
@@ -823,6 +824,7 @@ button:focus-visible {
 
 .gallery-item p {
   margin: 22px 0 0;
+  color: rgb(255 255 255 / 0.72);
   font-size: 1.04rem;
   line-height: 1.65;
   pointer-events: none;

@@ -23,7 +23,7 @@ import detailedModeImage from "./assets/projects/detailedMode.png";
 export const shapePages = {
   triangle: {
     eyebrow: "about",
-    body: "i'm luke, a recent CS grad from UCF working primarily with React, FastAPI, Postgres, frequently with the Claude API",
+    body: "i'm luke, a recent CS grad from UCF working primarily with React, FastAPI, Postgres, frequently with the Anthropic Claude API",
   },
   square: {
     eyebrow: "projects",
@@ -37,7 +37,7 @@ export const shapePages = {
 
 export const aboutNotes = [
   "ucf computer science, magna cum laude",
-  "my primary stack: React, FastAPI, Postgres, Tailwind, Claude API",
+  "my primary stack: React, FastAPI, Postgres, Tailwind, Anthropic Claude API",
   "current goals: SWE roles based in Florida",
   "active project: a custom games scraper for halo wars 2 to work with power level (my personal favorite project)",
 ];
@@ -140,7 +140,7 @@ export const projectDrafts = [
         title: "halo wars 2 scraper (sister tool)",
       },
     ],
-    tech: "React, FastAPI, Postgres, Claude API",
+    tech: "React, FastAPI, Postgres, Anthropic Claude API",
   },
   {
     date: "sep 2025 - may 2026",
