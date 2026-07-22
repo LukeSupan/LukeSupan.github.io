@@ -1,3 +1,3 @@
 # lukesupan.com
 
-portfolio site with shapes. nice shames
+portfolio site with shapes. nice shapes

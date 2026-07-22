@@ -306,7 +306,6 @@ export function getLinksForShape(shape) {
         href: "https://github.com/lbrown169/Medical-Resident-Scheduling",
         label: "psycall",
       },
-      { href: "https://github.com/LukeSupan/LukeSupan", label: "portfolio" },
     ];
   }
 
