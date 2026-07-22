@@ -302,6 +302,7 @@ export function getLinksForShape(shape) {
     return [
       { href: "https://power-level-scouter.vercel.app", label: "power level" },
       { href: "https://holeset.itch.io/pong-by-holeset", label: "pong" },
+      { href: "https://codyhunter-ufl.github.io", label: "portfolio" },
       {
         href: "https://github.com/lbrown169/Medical-Resident-Scheduling",
         label: "psycall",
